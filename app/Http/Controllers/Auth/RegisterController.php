@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -47,10 +48,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
-            'mobile' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            //'mobile' => 'required|string|max:255',
+            //'email' => 'required|string|email|max:255|unique:users',
+            //'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -62,13 +64,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'mobile' => $data['mobile'],
-            'email' => $data['email'],
-            'user_type' => '2',
-            'user_status' => '0',
-            'name' => $data['name'],
-            'password' => bcrypt($data['password']),
-        ]);
+
+        if($data['form_type'] == 'artist_form')
+        {
+            dd(123);
+            $languages = (explode(",",$data['language']));
+            $available_to_work = (explode(",",$data['available_to_work']));
+            dd($available_to_work);
+        }
+        if($data['form_type'] == 'recruiter_form')
+        {
+
+            return User::create([
+                'represent' => $data['represent'],
+                'looking_for' => $data['i_am_looking'],
+                'company_name' => $data['company_name'],
+                'city' => $data['city'],
+                'mobile' => $data['mobile'],
+                'email' => $data['email'],
+                'user_type' => '3',
+                'user_status' => '1',
+                'name' => $data['name'],
+                'password' => bcrypt($data['password']),
+            ]);
+        }
+        //dd($data['language']);
+
     }
 }

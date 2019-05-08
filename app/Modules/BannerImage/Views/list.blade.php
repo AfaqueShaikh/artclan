@@ -51,7 +51,19 @@ $(document).ready(function () {
         serverSide: true,
         ajax: "{{ url('/admin/banner/data') }}",
         columns: [
-            {data: 'banner_image', name: 'banner_image'},
+            /*{data: 'banner_image', name: 'banner_image'},*/
+            {data: "banner_image",
+                render: function (data, type, row) {
+                    if (type === 'display') {
+
+                        return '<img border="0" width="100" class="img-rounded" align="center" src="{{url("storage/app/public/banner_images/")}}/'+row.banner_image+'">';
+                    }
+                    return data;
+                },
+                className: "dt-body-center",
+                orderable: false,
+                'defaultContent':'-'
+            },
             {data: "update",
                 render: function (data, type, row) {
                     if (type === 'display') {

@@ -44,13 +44,13 @@ class BannerImageController extends Controller
     {
         $banner_images = BannerImage::all();
         //dd($banner_images);
-        
+
 
         return Datatables::of($banner_images)
-           /*->addColumn('banner_image', function($image) {
-            $url = asset("storage/app/public/banner_images/".$image->banner_image);
-                 return '<img src='.$url.' border="0" width="100" class="img-rounded" align="center" />';
-            })*/
+            /*->addColumn('banner_image', function($image) {
+             $url = asset("storage/app/public/banner_images/".$image->banner_image);
+                  return '<img src='.$url.' border="0" width="100" class="img-rounded" align="center" />';
+             })*/
             ->make(true);
     }
 
@@ -61,7 +61,7 @@ class BannerImageController extends Controller
             return view('BannerImage::create');
         }
         else {
-           
+
             /*$image = Image::make($request->csv[0]->getRealPath());
             $image_two = Image::make($request->csv[0]->getRealPath());
 
@@ -104,40 +104,46 @@ class BannerImageController extends Controller
 //                    }
 //                }
 //            }
-                $validator = Validator::make($request->all(), [
-                    'banner_image' => 'required',
-                ]);
-                if ($validator->fails()) {
-                    return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
-                }
-
-                $data = [];
-                if ($request->hasFile('banner_image')) {
-                    $extension = $request->file('banner_image')->getClientOriginalExtension();
-                    $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
-                    Storage::put('public/banner_images/' . $new_file_name, file_get_contents($request->file('banner_image')->getRealPath()));
-                    if (!is_dir(storage_path('app/public/banner_images/thumbnails/'))) {
-                        Storage::makeDirectory('public/banner_images/thumbnails/');
-                    }
-                    // make thumbnail
-                    $thumbnail = Image::make(storage_path('app/public/banner_images/' . $new_file_name));
-                    $thumbnail->resize($this->thumbnail_size["width"], $this->thumbnail_size["height"]);
-                    $thumbnail->save(storage_path('app/public/banner_images/thumbnails/' . $new_file_name));
-                    $insert_image = new BannerImage();
-                    $insert_image->banner_image = $new_file_name;
-                    $insert_image->save();
-                    return redirect('/admin/banner/list')->with('success', 'Banner Image Added Successfully!');
-                    
-                }
-                else
-                {
-                    return redirect('/admin/banner/list')->with('error', 'Something Went Wrong!');
-                }
-                
-                
+            $validator = Validator::make($request->all(), [
+                'banner_image' => 'required',
+                'button_position' => 'required',
+                'button_text' => 'required',
+                'button_url' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
             }
+
+            $data = [];
+            if ($request->hasFile('banner_image')) {
+                $extension = $request->file('banner_image')->getClientOriginalExtension();
+                $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
+                Storage::put('public/banner_images/' . $new_file_name, file_get_contents($request->file('banner_image')->getRealPath()));
+                if (!is_dir(storage_path('app/public/banner_images/thumbnails/'))) {
+                    Storage::makeDirectory('public/banner_images/thumbnails/');
+                }
+                // make thumbnail
+                $thumbnail = Image::make(storage_path('app/public/banner_images/' . $new_file_name));
+                $thumbnail->resize($this->thumbnail_size["width"], $this->thumbnail_size["height"]);
+                $thumbnail->save(storage_path('app/public/banner_images/thumbnails/' . $new_file_name));
+                $insert_image = new BannerImage();
+                $insert_image->banner_image = $new_file_name;
+                $insert_image->button_position = $request->button_position;
+                $insert_image->button_text = $request->button_text;
+                $insert_image->button_url = $request->button_url;
+                $insert_image->save();
+                return redirect('/admin/banner/list')->with('success', 'Banner Image Added Successfully!');
+
+            }
+            else
+            {
+                return redirect('/admin/banner/list')->with('error', 'Something Went Wrong!');
+            }
+
+
+        }
 
     }
 
@@ -151,7 +157,10 @@ class BannerImageController extends Controller
         else
         {
             $validator = Validator::make($request->all(), [
-                'banner_image' => 'required',
+                /*'banner_image' => 'required',*/
+                'button_position' => 'required',
+                'button_text' => 'required',
+                'button_url' => 'required',
             ]);
             if ($validator->fails()) {
                 return redirect()->back()
@@ -160,28 +169,32 @@ class BannerImageController extends Controller
             }
             if ($request->hasFile('banner_image')) {
                 $delete_image = $banner_image->banner_image;
-                    $this->removeBannerImageFromStrorage($delete_image);
-                    $extension = $request->file('banner_image')->getClientOriginalExtension();
-                    $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
-                    Storage::put('public/banner_images/' . $new_file_name, file_get_contents($request->file('banner_image')->getRealPath()));
-                    if (!is_dir(storage_path('app/public/banner_images/thumbnails/'))) {
-                        Storage::makeDirectory('public/banner_images/thumbnails/');
-                    }
-                    // make thumbnail
-                    $thumbnail = Image::make(storage_path('app/public/banner_images/' . $new_file_name));
-                    $thumbnail->resize($this->thumbnail_size["width"], $this->thumbnail_size["height"]);
-                    $thumbnail->save(storage_path('app/public/banner_images/thumbnails/' . $new_file_name));
-                    
-                    $banner_image->banner_image = $new_file_name;
-                    $banner_image->save();
-                    return redirect('/admin/banner/list')->with('success', 'Banner Image Updated Successfully!');
-                    
+                $this->removeBannerImageFromStrorage($delete_image);
+                $extension = $request->file('banner_image')->getClientOriginalExtension();
+                $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
+                Storage::put('public/banner_images/' . $new_file_name, file_get_contents($request->file('banner_image')->getRealPath()));
+                if (!is_dir(storage_path('app/public/banner_images/thumbnails/'))) {
+                    Storage::makeDirectory('public/banner_images/thumbnails/');
                 }
-                else
-                {
-                    return redirect('/admin/banner/list')->with('error', 'Something Went Wrong!');
-                }
-            
+                // make thumbnail
+                $thumbnail = Image::make(storage_path('app/public/banner_images/' . $new_file_name));
+                $thumbnail->resize($this->thumbnail_size["width"], $this->thumbnail_size["height"]);
+                $thumbnail->save(storage_path('app/public/banner_images/thumbnails/' . $new_file_name));
+
+                $banner_image->banner_image = $new_file_name;
+            }
+            $banner_image->button_position = $request->button_position;
+            $banner_image->button_text = $request->button_text;
+            $banner_image->button_url = $request->button_url;
+            if($banner_image->save())
+            {
+                return redirect('/admin/banner/list')->with('success', 'Banner Image Updated Successfully!');
+            }
+            else
+            {
+                return redirect('/admin/banner/list')->with('error', 'Something Went Wrong!');
+            }
+
         }
     }
 
@@ -194,7 +207,7 @@ class BannerImageController extends Controller
         return redirect('/admin/banner/list')->with('success','Country Delete Successfully!');
     }
 
-     private function removeBannerImageFromStrorage($file_name) {
+    private function removeBannerImageFromStrorage($file_name) {
         if (Storage::exists('public/banner_images/' . $file_name)) {
             Storage::delete('public/banner_images/' . $file_name);
 

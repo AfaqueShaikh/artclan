@@ -11,14 +11,19 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::get('admin/logout', function(){
     Auth::logout();
     return redirect('/admin/login')->with('success','Logout Successful');
 });
+
+Route::get('/','HomeController@showLandingPage');
+
+Route::get('artist/signup','HomeController@showArtistLogin');
+Route::get('/get/location','HomeController@getLocation');
 
 Auth::routes();
 

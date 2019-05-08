@@ -1,95 +1,629 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+    <!-------------Banner------------>
+    <section class="banner">
+        <div id="banner-slider" class="owl-carousel">
+            @foreach($banner_images as $banner_image)
+                <div class="item" style="background-image: url('{{url('/storage/app/public/banner_images/'.$banner_image->banner_image)}}')">
+                    <div class="banner-caption">
+                        <h2>20 years of quality! service in <span class="cng-clr">KITGREEN</span></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <button class="btn custom-btn" type="submit"><span>GET A QUOTE NOW</span></button>
+                    </div>
                 </div>
-            @endif
+            @endforeach
+        </div>
+    </section>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+    <!-----Registration both user------->
+    <section class="bothUsers">
+        <div class="clearfix">
+            <a href="javascript:void(0);" class="quickRegister artistRegister">REGISTER AS ARTIST</a>
+            <a href="javascript:void(0);" class="quickRegister requiterRegister">REGISTER AS RECRUITER</a>
+        </div>
+    </section>
+
+    <!---------Platinum artist-------->
+    <section class="platinumArtist">
+        <div class="home-heading">
+            <h3 class="text-center">
+                ARTIST'S
+                <span class="cng-clr">OF THE DAY</span>
+            </h3>
+        </div>
+        <div class="artistGallery">
+            <div id="artistSlider" class="owl-carousel artistSlideList">
+                <div class="item">
+                    <ul class="artGallery clearfix">
+                        <li>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist2.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="item">
+                    <ul class="artGallery clearfix">
+                        <li>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist2.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <ul class="artGallery clearfix">
+                        <li>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist2.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <ul class="artGallery clearfix">
+                        <li>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist2.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <ul class="artGallery clearfix">
+                        <li>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist2.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <ul class="artGallery clearfix">
+                        <li>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="artPortfolio">
+                                <div class="artImage relative">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{url('public/image/artist2.jpg')}}" alt="Artist Image"/>
+                                    </a>
+                                    <p class="artDetailsCat">
+                                        Stylist / Delhi NCR
+                                    </p>
+                                </div>
+                                <div class="artInfo text-center">
+                                    <h3 class="artName">
+                                        <a href="javascript:void(0);">Richa</a>
+                                    </h3>
+                                </div>
+                                <div class="social-left actorSocial">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </section>
+
+    <!------------Testimonials-------->
+    <section class="productGallery">
+        <div class="home-heading">
+            <h3 class="text-center">
+                {{--Our--}}
+                <span class="cng-clr">Artist's Testimonial</span>
+            </h3>
+        </div>
+        <div class="client-right">
+            <div id="clientSay" class="client-says owl-carousel">
+                @foreach($testimonials as $testimonial)
+                    <div class="item" >
+                        <div class="client-block">
+                            <div class="clearfix">
+                                <div class="client-image pull-left">
+                                    <img src="{{url('storage/app/public/testimonial/'.$testimonial->image)}}">
+                                </div>
+                                <div class="client-posts pull-left">
+                                    <h3>John Doe</h3>
+                                    <p>Actor</p>
+                                </div>
+                            </div>
+                            <div class="client-tell">
+                                {{ $testimonial->description  }}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                {{--<div class="item" >
+                    <div class="client-block">
+                        <div class="clearfix">
+                            <div class="client-image pull-left">
+                                <img src="{{url('public/image/testi_img.png')}}">
+                            </div>
+                            <div class="client-posts pull-left">
+                                <h3>John Doe</h3>
+                                <p>Actor</p>
+                            </div>
+                        </div>
+                        <div class="client-tell">
+                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software.
+                        </div>
+                    </div>
+                </div>--}}
+            </div>
+        </div>
+    </section>
+
+    <!---------featured partner------------->
+    <section class="featuredPartner" style="background-image: url('{{url('public/image/featureBg.jpg')}}');">
+        <div class="home-heading">
+            <h3 class="text-center">
+                Featured
+                <span class="cng-clr">Partner's</span>
+            </h3>
+        </div>
+        <div id="partnerSlider" class="owl-carousel">
+            @foreach($featured_partners as $featured_partner)
+                <div class="item">
+                    <div class="partnerImage">
+                        <img src="{{url('storage/app/public/featured_partners/'.$featured_partner->image)}}"/>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </section>
+
+    <!---------quick help------------------->
+    <div class="quickHelp">
+        <a href="#." data-toggle="modal" data-target="#chatModal">
+            <i class="fa fa-headphones"></i>
+        </a>
+    </div>
+
+@endsection
+
+@section('jcontent')
+    <script>
+        $(function () {
+            console.log(123);
+        })
+    </script>
+
+@endsection

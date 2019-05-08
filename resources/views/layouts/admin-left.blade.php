@@ -167,7 +167,7 @@ switch ($segment_value)
                             <a href="{{url('/admin/artist/list')}}"><i class="fa fa-envelope"></i> Manage Artist Category </a>
                         </li>
                     @endif
-                    
+
                     @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.states'))
                         <li class="@if($segment_value === 'state') current-page @endif">
                             <a href="{{url('/admin/state/list')}}"><i class="fa fa-lock"></i> Manage States </a>
@@ -181,9 +181,9 @@ switch ($segment_value)
                     @endif
 
                     @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.talukas'))
-<!--                        <li class="@if($segment_value === 'taluka') current-page @endif">
+                        <li class="@if($segment_value === 'taluka') current-page @endif">
                             <a href="{{url('/admin/taluka/list')}}"><i class="fa fa-lock"></i> Manage Talukas </a>
-                        </li>-->
+                        </li>
                     @endif
 
                     @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.emailtemplate'))

@@ -1,130 +1,134 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    @yield('title')
-
-    <!-- Styles -->
-    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
-     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-	
-    <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <title>Art Clans</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">  -->
+    <link rel="icon" type="image/png" href="{{url('public/image/favicon.png')}}"/>
+    <link href="{{url('public/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/owl.carousel.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/owl.theme.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/jquery.mCustomScrollbar.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/animated.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/main.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/responsive.css')}}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+@include('layouts.header')
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
+@yield('content')
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+@include('layouts.footer')
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <div class="dropdown show">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Dropdown link
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                  <a class="dropdown-item" href="#">Action</a>
-                                  <a class="dropdown-item" href="#">Another action</a>
-                                  <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        @yield('content')
-    </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="../vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="../vendors/Flot/jquery.flot.js"></script>
-    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="../vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="../vendors/moment/min/moment.min.js"></script>
-    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+<!--Script Section-->
+<script src="{{url('public/js/jquery.js')}}"></script>
+<script src="{{url('public/js/bootstrap.min.js')}}"></script>
+<script src="{{url('public/js/owl.carousel.min.js')}}"></script>
+<script src="{{url('public/js/wow.js')}}"></script>
+<script src="{{url('public/js/jquery-ui.min.js')}}"></script>
+<script src="{{url('public/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script src="{{url('public/js/jquery.mixitup.min.js')}}"></script>
+<script type="text/javascript">
+    $(function () {
+        var filterList = {
+            init: function () {
+                // MixItUp plugin
+                // http://mixitup.io
+                $('#portfoliolist').mixItUp({
+                    selectors: {
+                        target: '.portfolio',
+                        filter: '.filter'
+                    },
+                    load: {
+                        filter: '.all'
+                    }
+                });
+            }
+        };
+        // Run the show!
+        filterList.init();
+    });
+</script>
+<script src="{{url('public/js/custom.js')}}"></script>
 </body>
+<!-- Contact Us Modal -->
+<div class="modal" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm contactus-wrapper" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Let us know your requirement</h4>
+            </div>
+            <div class="modal-body">
+                {{--<ul class="list-unstyled contact-info">
+                    <li>
+                        <span>Email</span> <a href="mailto:info@123.coms">info@artclan.com</a>
+                    </li>
+                    <li><span>Timings</span> 9:30 am to 7:00 pm</li>
+                </ul>--}}
+                {{--<h4 class="contact-heading">Request call back</h4>--}}
+                <form>
+                    <div class="form-group">
+                       <select class="form-control" id="category" name="category">
+                           <option value="">-- Select Category --</option>
+                           <option value="4">Writer</option>
+                           <option value="5">Painter</option>
+                           <option value="6">Singer</option>
+                           <option value="7">Dancer</option>
+                           <option value="8">Costume Designer</option>
+                           <option value="9">Makeup Artist</option>
+                           <option value="10">Photographer</option>
+                           <option value="11">Film Maker</option>
+                           <option value="12">Actor</option>
+                           <option value="13">Fashion Model</option>
+                       </select>
+                    </div>
+                    <div class="form-group">
+                        {{--<input type="text" class="form-control" placeholder="Full Name">--}}
+                        <textarea class="form-control" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email ID">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="Phone number">
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-lg">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-md signUpPopUp" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0px;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <button class="btn custom-btn" type="button">
+                    <span>REGISTER AS ARTIST</span>
+                </button>
+                <button class="btn custom-btn" type="button">
+                    <span>HIRE ARTIST</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@yield('jcontent')
+
 </html>
