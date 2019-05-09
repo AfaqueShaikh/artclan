@@ -11,4 +11,9 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::get('/admin/user/update/{id}', 'UserController@update')->middleware('permission:update.users');
     Route::post('/admin/user/update/{id}', 'UserController@update')->middleware('permission:update.users');
     Route::delete('/admin/user/delete/{id}', 'UserController@delete')->middleware('permission:delete.users');
+    
+    
+    //frontend code
+    
+    Route::get('/dashboard', 'UserController@dashboard');
 });

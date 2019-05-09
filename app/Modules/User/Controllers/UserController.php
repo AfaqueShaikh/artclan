@@ -23,6 +23,21 @@ class UserController extends Controller
 //        $this->middleware('auth');
     }
 
+    
+    
+     /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
+    {
+        
+        $userData = User::find(13);
+        
+        
+        return view('User::artist-dashboard');
+    }
     /**
      * Show the application dashboard.
      *
