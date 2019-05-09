@@ -25,6 +25,9 @@ h1, h2, h3, h4, h5, h6, p {
 .relative {
   position: relative;
 }
+.pdTop {
+  padding-top: 0 !important;
+}
 section {
 	position: relative; 
 	overflow: hidden;
@@ -369,7 +372,7 @@ li.calling-link {
   background: #F13338;
   cursor: pointer;
 }
-.sticky-header .menus a {
+.sticky-header .menus a, .dashboardPage .menus a {
   color: #808080; 
 }
 /*--------slide menu---------*/
@@ -579,12 +582,15 @@ li.calling-link {
 }
 .login-screen {
   background: #fff none repeat scroll 0 0;
-  height: 100%;
   left: 0;
   position: fixed;
   max-height: 100%;
-  width: 30%;
+  width: 70%;
   z-index: 2;
+  margin: 0px auto;
+  right: 0;
+  top: 50px;
+  bottom: 50px;
 }
 .login-here .login-screen form {
   left: 0;
@@ -594,6 +600,9 @@ li.calling-link {
   transform: translateY(-50%);-moz-transform: translateY(-50%);-ms-transform: translateY(-50%);-o-transform: translateY(-50%);-webkit-transform: translateY(-50%);*/
   width: 100%;
 }
+.registerHead {
+  padding: 30px 30px 0 30px;
+}
 .login-here .login-screen h3 {
   color: #333333;
   font-size: 39px;
@@ -601,24 +610,28 @@ li.calling-link {
   padding-bottom: 30px;
 }
 .login-here .login-screen h3 span {
-  color: #1087ed;
+  color: #F13338;
 }
 .form-control {
   background-color: #fff;
   border-radius: 0;
-  border-width: 0 0 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: ;
   box-shadow: none;
   color: #555555;
-  height: 50px;
-  padding: 0;
+  height: 40px;
+  padding: 6 12px;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
+}
+.input-group-addon {
+  border-radius: 0;
 }
 label.name-label {
-  color: #999999;
-  font-size: 18px;
+  color: #353535;
+  font-size: 14px;
+  font-weight: 400;
 }
 .form-control:focus {
   box-shadow: none;
@@ -976,7 +989,7 @@ p.artDetailsCat {
   display: inline-block;
 }
 a.cng-clr{
-  color: #1087ed;
+  color: #F13338;
   display: inline-block;
 }
 .home-sub-heading {
@@ -1724,6 +1737,91 @@ input.form-control.password::after {
   top: 0;
   color: #1087ed;
 }
+/*---------------steps code here-------------*/
+.steps {
+  margin: 0 0 50px;
+}
+.steps li {
+  float: left;
+  width: 25%;
+  text-align: center;
+  position: relative;
+}
+.steps li::before {
+  position: absolute;
+  top: 20px;
+  right: -90px;
+  width: 100%;
+  height: 1px;
+  background: #353535;
+  content: "";
+  z-index: -1;
+}
+.steps li:last-child::before {
+  content: none; 
+}
+.steps li i {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background: #e5e5e5;
+  color: #353535;
+  border: 1px solid #353535;
+}
+.clrRed {
+  color: #F13338;
+}
+.name-label.wid50 {
+  width: 44%;
+  float: left;
+  display: inline-block;
+}
+.BrowseProfileImage {
+    position: relative;
+}
+/*-----------category list-----------*/
+.catetoryUl li {
+  float: left;
+  width: 20%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.catetoryUl li i {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  background: #e5e5e5;
+  color: #F13338;
+  border: 1px solid #e5e5e5;
+}
+.catetoryUl p {
+  margin-top: 5px;
+  font-size: 12px;
+}
+.BrowseProfileImage {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0px auto;
+  overflow: hidden;
+  margin-top:10px;
+}
+.BrowseProfileImage img {
+  width: 100px;
+}
+.BrowseProfileImage input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
+}
 /*-----------------CMS banner-----------------*/
 .cmsBanner {
   height: 200px;
@@ -2006,4 +2104,201 @@ input.form-control.password::after {
   position: relative;
   top: 50px;
   margin: 0 5px;
+}
+/*-----------------dashboard star here---------------*/
+body.dashboardPage {
+  margin-top: 90px;
+}
+.dashboardSection {
+  padding: 50px 0 50px 0;
+}
+.dashboardWelcome {
+  background: #f1f1f1;
+  color: #2A2A2A;
+  font-size: 30px;
+  font-weight: 300;
+  padding: 30px 0;
+}
+.dashboardInnerSection {
+  padding: 50px 0;
+}
+.profilerImage {
+  float: left;
+  width: 50%;
+}
+.profilerImage img {
+  width: 100%;
+}
+.profilerInformation {
+  width: 50%;
+  float: left;
+  background: #2A2A2A;
+  min-height: 570px;
+}
+.profilerName {
+  padding: 15px;
+  color: #fff;
+  background: #F13338;
+}
+.profilerName h3 {
+  font-size: 30px;
+  font-weight: 300;
+}
+.profilerName p {
+  font-size: 14px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+.profilerViews li {
+  font-size: 20px;
+  color: #fff;
+  padding: 6px 80px 6px 15px;
+  border-bottom: 1px solid #505050;
+  font-weight: 200;
+  position: relative;
+  cursor: pointer;
+}
+.viewCount {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  font-weight: 400;
+  font-size: 14px;
+  font-style: italic;
+  -webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);-ms-transform: translateY(-50%);-o-transform: translateY(-50%);transform: translateY(-50%);  
+}
+#shareLink .modal-body {
+  padding-bottom: 50px;
+}
+#shareLink .modal-content {
+  border-radius: 0 !important;
+}
+/*------------person life history----------*/
+.personLifeSchedule {
+  padding: 50px 0;
+  background: #fafafa;
+}
+p.tagHead {
+  font-size: 22px;
+  font-weight: 300;
+}
+.searchByTag p.desp {
+  margin:15px 0 5px;
+}
+a.tagsBtn {
+  display: block;
+  border-radius: 3px;
+  border: 1px dashed #F13338;
+  text-align: center;
+  padding: 10px 15px;
+  color: #F13338;
+}
+.personLifeHistory {
+  padding: 50px 0 0;
+}
+.personLifeHistory .nav-tabs li a {
+  font-size: 40px;
+  font-weight: 200;
+  color: #808080;
+}
+.personLifeHistory .nav-tabs li.active a {
+  color: #fff;
+  background:#F13338;
+  border-color: #F13338;
+}
+.tab-content {
+  padding: 30px 0;
+}
+.uploadBlock {
+  padding: 10px;
+  font-size: 24px;
+  background: #e5e5e5;
+  font-weight: 300;
+  position: relative;
+}
+.addButtons {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);-moz-transform: translateY(-50%);-ms-transform: translateY(-50%);-webkit-transform: translateY(-50%);-o-transform: translateY(-50%);
+  right: 10px;
+}
+.listUpload {
+  margin: 0 -15px;
+  padding: 20px 0;
+}
+.uploadingHolder {
+  margin-bottom: 30px;
+}
+ul.listUpload li {
+  width: 20%;
+  float: left;
+  padding: 0 15px;
+  margin-bottom: 15px;
+}
+ul.listUpload li img {
+  width: 100%;
+}
+.uplName {
+  text-align: center;
+  padding: 5px 0;
+}
+.deleteBtn {
+  color: #fff;
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  background: #f13338;
+  line-height: 25px;
+  cursor: pointer;
+}
+.fileInput {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+.smallText {
+  font-size:12px;
+  color: green;
+}
+.eduDetails {
+  padding: 15px;
+}
+.headingLable {
+  margin-right: 15px;
+  width: 30%;
+}
+.profilerImage .uploadImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 0;
+  background: #F13338;
+  color: #fff;
+}
+.uploadInp {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.pdfIcon img {
+  cursor: pointer;
+  width: 100%;
 }
