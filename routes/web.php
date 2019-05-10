@@ -22,6 +22,16 @@ Route::get('admin/logout', function(){
 
 Route::get('/','HomeController@showLandingPage');
 
+Route::get('/artist/registration','HomeController@showArtistRegistrationForm');
+Route::get('/recruiter/registration','HomeController@showRecruiterRegistrationForm');
+
+Route::post('/register/artist','HomeController@registerArtist');
+Route::post('/register/recruiter','HomeController@registerRecruiter');
+
+Route::get('/artist/listing','HomeController@viewArtistListingPage');
+
+Route::get('/artist/detail','HomeController@viewArtistDetailPage');
+
 Route::get('artist/signup','HomeController@showArtistLogin');
 Route::get('/get/location','HomeController@getLocation');
 
