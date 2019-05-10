@@ -145,7 +145,7 @@
 								Education 
 								<span class="addButtons" data-toggle="modal" data-target="#uploadEducation1"><i class="fa fa-plus"></i></span>
 							</div>
-                                                     @foreach($userData->userEducation as $education)
+                                                     @foreach($userData->userEducations as $education)
 							<div class="eduDetails">
 								<div class="row">
 									<div class="col-sm-6 clearfix">
