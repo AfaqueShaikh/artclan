@@ -11,10 +11,12 @@
 						<input type="file" class="uploadInp">
 					</span>
 				</div>
+                            
+                            
 				<div class="profilerInformation">
 					<div class="profilerName">
-						<h3>Harshad</h3>
-						<p>Modal / Pune</p>	
+						<h3>{{$userData->name}}</h3>
+						<p>{{$user_types[$userData->user_type]}} / {{$userData->city}}</p>	
 					</div>
 					<ul class="profilerViews">
 						<li>
@@ -52,11 +54,20 @@
 							</div>	
 							<div class="uploadedListing">
 								<ul class="listUpload clearfix">
+                                                                    
+                                                                    @foreach($userData->userVideos as $video)
 									<li class="relative">
-										<img src="{{url('public/image/artist1.jpg')}}">
+										
+                                                                               
+                                                                            <iframe width="204" height="222" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="{{$video->video_url}}"></iframe>
 										<span class="deleteBtn"><i class="fa fa-trash"></i></span>
-										<p class="uplName">Video1</p>
+										<p class="uplName">{{$video->title}}</p>
 									</li>
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        @endforeach
 								</ul>
 							</div>	
 						</div>	
@@ -67,11 +78,13 @@
 							</div>	
 							<div class="uploadedListing">
 								<ul class="listUpload clearfix">
+                                                                    @foreach($userData->userPhotos as $photo)
 									<li class="relative">
-										<img src="{{url('public/image/artist1.jpg')}}">
+										<img src="{{url('storage/app/public/user_photos/'.$photo->photo)}}">
 										<span class="deleteBtn"><i class="fa fa-trash"></i></span>
-										<p class="uplName">Photo1</p>
+										
 									</li>
+                                                                        @endforeach
 								</ul>
 							</div>	
 						</div>	
@@ -82,13 +95,17 @@
 							</div>	
 							<div class="uploadedListing">
 								<ul class="listUpload clearfix">
+                                                                    
+                                                                      @foreach($userData->userDocuments as $document)
 									<li class="relative">
 										<div class="pdfIcon">
-											<img src="{{url('public/image/pdf-icon.png')}}">
+                                                                                    <a href='{{url('storage/app/public/user_documents/'.$document->file_name)}}' download="{{$document->file_name}}"><img src="{{url('public/image/pdf-icon.png')}}"></a>
 										</div>
 										<span class="deleteBtn"><i class="fa fa-trash"></i></span>
-										<p class="uplName">Document1</p>
+										<p class="uplName">{{$document->title}}</p>
 									</li>
+                                                                        
+                                                                        @endforeach
 								</ul>
 							</div>	
 						</div>				
@@ -210,4 +227,409 @@
 			</div>	
 		</div>	
 	</section>
+@endsection
+
+
+@section('modal_section')
+<div class="modal" id="shareLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="footer-social menuSocials text-center">
+					<ul>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="fa fa-facebook">	Facebook</i>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="fa fa-twitter"> Twitter</i>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="fa fa-instagram"> Instagram</i>
+							</a>
+						</li>
+
+						<li>
+							<a href="javascript:void(0);">
+								<i class="fa fa-linkedin"> LinkedIn</i>
+							</a>
+						 </li>
+					</ul>
+				</div>
+				<label>Copy link to share</label>
+				<div class="form-group input-group">
+				  <span class="input-group-addon" id="basic-addon1">
+				  	<i class="fa fa-link"></i>
+				  </span>
+				  <input type="text" class="form-control" placeholder="copy link" value="https://www.youtube.com/watch?v=Ix2fG8qAlbc" aria-describedby="basic-addon1">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!---------upload video-------->
+<div class="modal" id="uploadVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">
+                            
+                            <form action='{{url('user/videos/create')}}' method="post">
+				<div class="form-group">
+					<label>Video title</label>
+                                        <input type="text" name='video_title' class="form-control" required="" placeholder="Video Title">
+				</div>
+				<div class="form-group">
+					<label>YouTube video link</label>
+                                        <input type="url" name='video_url' required="" class="form-control" placeholder="Youtube Video Link">
+				</div>
+				<div class="form-group text-center">
+					<button class="btn custom-btn" type="submit">
+						<span>Submit</span>
+					</button>
+				</div>
+                            </form>
+			</div>			
+		</div>
+	</div>
+</div>
+<!---------photo video-------->
+<div class="modal" id="uploadphoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">
+                            <form action='{{url('user/photos/create')}}' enctype="multipart/form-data" method="post">
+				<div class="form-group">
+					<label>Add Photo</label>
+					<p>(Maximum photo upload size is 10MB. The width and height of the image should be at least 350px)</p>
+				</div>
+				<div class="form-group text-center">					
+					
+                                    <input type="file" name="photo" required="" >
+				
+					<button class="btn custom-btn" type="submit">
+						<span>Submit</span>
+						
+					</button>
+				</div>
+                              </form>
+			</div>
+		</div>
+	</div>
+</div>
+<!---------document video-------->
+<div class="modal" id="uploadDocument" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">
+                                 <form action='{{url('user/documents/create')}}' enctype="multipart/form-data" method="post">
+                                     <div class="form-group">
+					<label>Title</label>
+                                        <input type="text" name='title' class="form-control" required="" placeholder="Title">
+				</div>
+				<div class="form-group">
+					<label>Add Document</label>
+					
+				</div>
+				<div class="form-group text-center">					
+					
+					
+                                    <input type="file" name="document" required="" >
+					
+					
+				</div>
+				<div class="form-group text-center">					
+					<button class="btn custom-btn" type="submit">
+						<span>Submit</span>
+					</button>
+				</div>
+                                 </form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-----------edit about info--------->
+<!---------upload video-------->
+<div class="modal" id="editAbout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">				
+				<div class="form-group">
+					<label>About Us</label>
+					<input type="text" class="form-control" placeholder="Add your title here">
+				</div>
+				<div class="form-group text-center">
+					<button class="btn custom-btn" type="button">
+						<span>Submit</span>
+					</button>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+<div class="modal" id="uploadEducation1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">				
+				<div class="eduDetails">
+					<div class="eduDetails">
+						<div class="form-group">
+							<label>Cource Name</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Institute Name</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Start Date</label>
+							<input type="date" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>End Date</label>
+							<input type="date" class="form-control">
+						</div>
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button class="btn custom-btn" type="button">
+						<span>Submit</span>
+					</button>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+<div class="modal" id="uploadLang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">				
+				<div class="eduDetails">
+					<div class="eduDetails">
+						<div class="form-group">
+							<label>Experties</label>
+							<select name="" class="form-control">
+								<option value="">Actor</option>
+								<option value="">Writer</option>
+								<option value="">Singer</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Language</label>
+							<select name="" class="form-control">
+								<option value="">Actor</option>
+								<option value="">Writer</option>
+								<option value="">Singer</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button class="btn custom-btn" type="button">
+						<span>Submit</span>
+					</button>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+<div class="modal" id="availableCity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">				
+				<div class="eduDetails">
+					<div class="eduDetails">
+						<div class="form-group">
+							<label>Available in </label>
+							<select name="" class="form-control">
+								<option value="">Delhi</option>
+								<option value="">Pune</option>
+								<option value="">Mumbai</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Availability</label>
+							<select name="" class="form-control">
+								<option value="">Full Time</option>
+								<option value="">Short Time</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button class="btn custom-btn" type="button">
+						<span>Submit</span>
+					</button>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+<div class="modal" id="PhysicalStats" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">				
+				<div class="eduDetails">
+					<div class="eduDetails">
+						<div class="form-group">
+							<label>Hair length </label>
+							<select class="form-control" name="attributes[]" id="attributes[]" class="input-common-style">		 
+									<option value="">Select</option>
+									<option value="440_439">Long</option>
+					
+									<option value="441_439">Medium</option>
+					
+									<option value="442_439">Short</option>
+					
+									<option value="443_439">Pixie</option>
+					
+									<option value="444_439">Bald</option>					
+				 
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Hair length </label>
+							<select class="form-control" name="attributes[]" id="attributes[]" class="input-common-style">		 
+									<option value="">Select</option>
+									<option value="440_439">Long</option>
+					
+									<option value="441_439">Medium</option>
+					
+									<option value="442_439">Short</option>
+					
+									<option value="443_439">Pixie</option>
+					
+									<option value="444_439">Bald</option>					
+				 
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Hair length </label>
+							<select class="form-control" name="attributes[]" id="attributes[]" class="input-common-style">		 
+									<option value="">Select</option>
+									<option value="440_439">Long</option>
+					
+									<option value="441_439">Medium</option>
+					
+									<option value="442_439">Short</option>
+					
+									<option value="443_439">Pixie</option>
+					
+									<option value="444_439">Bald</option>					
+				 
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Hair length </label>
+							<select class="form-control" name="attributes[]" id="attributes[]" class="input-common-style">		 
+									<option value="">Select</option>
+									<option value="440_439">Long</option>
+					
+									<option value="441_439">Medium</option>
+					
+									<option value="442_439">Short</option>
+					
+									<option value="443_439">Pixie</option>
+					
+									<option value="444_439">Bald</option>					
+				 
+							</select>
+						</div>	
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button class="btn custom-btn" type="button">
+						<span>Submit</span>
+					</button>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+<div class="modal" id="addExpe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">				
+				<div class="eduDetails">
+					<div class="eduDetails">
+						<div class="form-group">
+							<label>Project Name</label>
+							<input type="text" class="form-control" name="">
+						</div>
+						<div class="form-group">
+							<label>Role</label>
+							<input type="text" class="form-control" name="">
+						</div>
+						<div class="form-group">
+							<label>Start Date</label>
+							<input type="date" class="form-control" name="">
+						</div>
+						<div class="form-group">
+							<label>End Date</label>
+							<input type="date" class="form-control" name="">
+						</div>	
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<button class="btn custom-btn" type="button">
+						<span>Submit</span>
+					</button>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
 @endsection

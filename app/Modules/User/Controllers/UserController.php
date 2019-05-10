@@ -10,6 +10,7 @@ use Mail;
 use Validator;
 use DataTables;
 use Image;
+use Storage;
 
 class UserController extends Controller
 {
@@ -32,11 +33,74 @@ class UserController extends Controller
      */
     public function dashboard()
     {
+         Auth::loginUsingId(13);
+         
+         
+        $userData = Auth::user();
         
-        $userData = User::find(13);
         
+        $user_types[1] = "admin"; 
+        $user_types[2] = "sub_admin"; 
+        $user_types[3] = "user"; 
+        $user_types[4] = "writer"; 
+        $user_types[5] = "painter"; 
+        $user_types[6] = "singer"; 
+        $user_types[7] = "dancer"; 
+        $user_types[8] = "costume_designer"; 
+        $user_types[9] = "makeup_artist"; 
+        $user_types[10] = "Photographer"; 
+        $user_types[11] = "Film Maker"; 
+        $user_types[12] = "Actor"; 
+        $user_types[13] = "Fashion Model"; 
+        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types]);
+    }
+    
+    /**
+     /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createVideos(Request $request)
+    {
+       $obj = new \App\Modules\User\Models\UserVideo();
+       $obj->user_id = Auth::user()->id;
+       $obj->title = $request->video_title;
+       $obj->video_url = $request->video_url;
+       $obj->save();
+       
+       return redirect(url('dashboard'));
+    }
+    public function createPhotos(Request $request)
+    {
         
-        return view('User::artist-dashboard');
+         
+                $extension = $request->file('photo')->getClientOriginalExtension();
+                $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
+                Storage::put('public/user_photos/' . $new_file_name, file_get_contents($request->file('photo')->getRealPath()));
+               
+          
+       $obj = new \App\Modules\User\Models\UserPhoto();
+       $obj->user_id = Auth::user()->id;
+       
+       $obj->photo = $new_file_name;
+       $obj->save();
+       
+       return redirect(url('dashboard'));
+    }
+    public function createDocument(Request $request)
+    {
+                $extension = $request->file('document')->getClientOriginalExtension();
+                $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
+                Storage::put('public/user_documents/' . $new_file_name, file_get_contents($request->file('document')->getRealPath()));
+       $obj = new \App\Modules\User\Models\UserDocument();
+       $obj->user_id = Auth::user()->id;
+       
+       $obj->file_name = $new_file_name;
+       $obj->title = $request->title;
+       $obj->save();
+       
+       return redirect(url('dashboard'));
     }
     /**
      * Show the application dashboard.
