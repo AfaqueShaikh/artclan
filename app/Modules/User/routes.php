@@ -16,4 +16,7 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     //frontend code
     
     Route::get('/dashboard', 'UserController@dashboard');
+    Route::post('/user/videos/create', 'UserController@createVideos');
+    Route::post('/user/photos/create', 'UserController@createPhotos');
+    Route::post('/user/documents/create', 'UserController@createDocument');
 });
