@@ -23,4 +23,6 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::post('/user/profile-picture/update', 'UserController@updateProfilePicture');
     Route::post('/user/about-me/update', 'UserController@updateAboutMe');
     Route::post('/user/education/create', 'UserController@createEducation');
+    Route::post('/user/work-preference/update', 'UserController@updateWorkPreference');
+    Route::post('/user/experience/create', 'UserController@createExperience');
 });
