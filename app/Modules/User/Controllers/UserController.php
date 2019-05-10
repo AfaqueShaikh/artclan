@@ -12,6 +12,7 @@ use DataTables;
 use Image;
 use Storage;
 
+
 class UserController extends Controller
 {
     /**
@@ -50,7 +51,12 @@ class UserController extends Controller
         $user_types[12] = "Actor"; 
         $user_types[13] = "Fashion Model"; 
         
-        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types]);
+        
+        
+        $cities = \App\Modules\District\Models\District::all();
+        
+        
+        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities]);
     }
     
     /**
@@ -69,10 +75,9 @@ class UserController extends Controller
        
        return redirect(url('dashboard'));
     }
+    
     public function createPhotos(Request $request)
     {
-        
-         
                 $extension = $request->file('photo')->getClientOriginalExtension();
                 $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
                 Storage::put('public/user_photos/' . $new_file_name, file_get_contents($request->file('photo')->getRealPath()));
@@ -105,15 +110,19 @@ class UserController extends Controller
     
     public function updateAboutMe(Request $request)
     {
-  
        Auth::user()->name = $request->name;
        Auth::user()->city = $request->city;
        Auth::user()->language = implode(',', $request->language);       
        Auth::user()->about_me = $request->about_me;
        Auth::user()->save();
-
-       
-       
+       return redirect(url('dashboard'));
+    }
+    
+    public function updateWorkPreference(Request $request)
+    {
+       Auth::user()->work_preference = $request->work_preference;
+       Auth::user()->location_preference = $request->location_preference;
+       Auth::user()->save();
        return redirect(url('dashboard'));
     }
     
@@ -126,6 +135,18 @@ class UserController extends Controller
       $obj->from = $request->from;
       $obj->to = $request->to;
       $obj->user_id = Auth::user()->id;
+      $obj->save();
+       return redirect(url('dashboard'));
+    }
+    
+    public function createExperience(Request $request)
+    {
+ 
+      $obj = new \App\Modules\User\Models\Experience();
+      $obj->title = $request->title;
+      $obj->about_your_work = $request->about_work;
+      $obj->user_id = Auth::user()->id;
+
       $obj->save();
        return redirect(url('dashboard'));
     }

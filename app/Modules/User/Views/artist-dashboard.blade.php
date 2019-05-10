@@ -170,27 +170,20 @@
 						</div>						
 						<div class="uploadingHolder">
 							<div class="uploadBlock">
-								Education 
-								<span class="addButtons" data-toggle="modal" data-target="#uploadEducation1"><i class="fa fa-plus"></i></span>
+								Work & Location Preference
+								<span class="addButtons" data-toggle="modal" data-target="#availableCity"><i class="fa fa-pencil"></i></span>
 							</div>
 							<div class="eduDetails">
 								<div class="row">
 									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Course Name1</label>
-										<p class="pull-left">Web designing</p>
+										<label class="headingLable pull-left">Work Preference</label>
+										<p class="pull-left">{{Auth::user()->work_preference}}</p>
 									</div>
 									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Institute Name</label>
-										<p class="pull-left">Web designing</p>
+										<label class="headingLable pull-left">Location Preference</label>
+										<p class="pull-left">{{Auth::user()->location_preference}}</p>
 									</div>
-									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Start Date</label>
-										<p class="pull-left">08.05.2019</p>
-									</div>
-									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">End Date</label>
-										<p class="pull-left">10.05.2019</p>
-									</div>
+									
 								</div>
 							</div>
 						</div>						
@@ -208,34 +201,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="uploadingHolder">
-							<div class="uploadBlock">
-								Skill 
-								<span class="addButtons" data-toggle="modal" data-target="#uploadLang"><i class="fa fa-plus"></i></span>
-							</div>
-							<div class="eduDetails">
-								<div class="row">
-									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Language</label>
-										<p class="pull-left">Hindi, English, Marathi</p>
-									</div>
-								</div>
-							</div>
-						</div>						
-						<div class="uploadingHolder">
-							<div class="uploadBlock">
-								Skill 
-								<span class="addButtons" data-toggle="modal" data-target="#availableCity"><i class="fa fa-plus"></i></span>
-							</div>
-							<div class="eduDetails">
-								<div class="row">
-									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Language</label>
-										<p class="pull-left">Hindi, English, Marathi</p>
-									</div>
-								</div>
-							</div>
-						</div>
+					
 					</div>
 					<div role="tabpanel" class="tab-pane" id="Exp">
 						<div class="uploadingHolder">
@@ -243,32 +209,26 @@
 								Add Experience 
 								<span class="addButtons" data-toggle="modal" data-target="#addExpe"><i class="fa fa-plus"></i></span>
 							</div>
+                                                    
+                                                    
+                                                     @foreach($userData->userExp as $exp)
 							<div class="eduDetails">
 								<div class="row">
 									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Project Name</label>
-										<p class="pull-left">Web designing</p>
+										<label class="headingLable pull-left">Experience Title</label>
+										<p class="pull-left">{{$exp->title}}</p>
 									</div>
-									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Role</label>
-										<p class="pull-left">Web designing</p>
-									</div>
-									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Start Date</label>
-										<p class="pull-left">08.05.2019</p>
-									</div>
-									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">End Date</label>
-										<p class="pull-left">10.05.2019</p>
-									</div>
+									
+								
 									<div class="col-sm-12 clearfix">
-										<label class="headingLable pull-left">Description</label>
+										<label class="headingLable pull-left">About Your Work</label>
 										<p class="pull-left">
-											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+											{{$exp->about_your_work}}
 										</p>
 									</div>
 								</div>
 							</div>
+                                                     @endforeach
 						</div>
 					</div>
 				</div>
@@ -582,31 +542,35 @@
 					<img src="{{url('public/image/close.png')}}"/></span>
 				</button>
 			</div>
-			<div class="modal-body">				
+			<div class="modal-body">
+                            
+                            <form action="{{url('user/work-preference/update')}}" method="post">
 				<div class="eduDetails">
 					<div class="eduDetails">
 						<div class="form-group">
-							<label>Available in </label>
-							<select name="" class="form-control">
-								<option value="">Delhi</option>
-								<option value="">Pune</option>
-								<option value="">Mumbai</option>
+							<label>Location Preference</label>
+                                                        <select name="location_preference" required="" class="form-control">
+                                                            @foreach($cities as $city)
+								<option value="{{$city->name}}" @if(Auth::user()->location_preference == $city->name) selected @endif>{{$city->name}}</option>
+								@endforeach
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Availability</label>
-							<select name="" class="form-control">
-								<option value="">Full Time</option>
-								<option value="">Short Time</option>
+							<label>Work Preference</label>
+                                                        <select name="work_preference" required="" class="form-control">
+								<option value="Part Time" @if(Auth::user()->work_preference == 'Part Time') selected @endif>Part Time</option>
+								<option value="Full Time" @if(Auth::user()->work_preference == 'Full Time') selected @endif>Full Time</option>
 							</select>
 						</div>
 					</div>
 				</div>
+                          
 				<div class="form-group text-center">
-					<button class="btn custom-btn" type="button">
+					<button class="btn custom-btn" type="submit">
 						<span>Submit</span>
 					</button>
 				</div>
+                                  </form>
 			</div>			
 		</div>
 	</div>
@@ -706,31 +670,26 @@
 				</button>
 			</div>
 			<div class="modal-body">				
+                            <form action="{{url('user/experience/create')}}" method="post">
 				<div class="eduDetails">
 					<div class="eduDetails">
 						<div class="form-group">
-							<label>Project Name</label>
-							<input type="text" class="form-control" name="">
+							<label>Project Title</label>
+                                                        <input type="text" required="" class="form-control" name="title">
 						</div>
 						<div class="form-group">
-							<label>Role</label>
-							<input type="text" class="form-control" name="">
+							<label>About Your Work</label>
+                                                        <textarea name="about_work" required="" class="form-control" ></textarea>
 						</div>
-						<div class="form-group">
-							<label>Start Date</label>
-							<input type="date" class="form-control" name="">
-						</div>
-						<div class="form-group">
-							<label>End Date</label>
-							<input type="date" class="form-control" name="">
-						</div>	
+						
 					</div>
 				</div>
 				<div class="form-group text-center">
-					<button class="btn custom-btn" type="button">
+					<button class="btn custom-btn" type="submit">
 						<span>Submit</span>
 					</button>
 				</div>
+                            </form>
 			</div>			
 		</div>
 	</div>

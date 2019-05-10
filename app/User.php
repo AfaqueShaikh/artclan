@@ -50,6 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Modules\User\Models\Education');
     }
+      public function userExp()
+    {
+        return $this->hasMany('\App\Modules\User\Models\Experience');
+    }
     
     public function artistOfTheDay()
     {
