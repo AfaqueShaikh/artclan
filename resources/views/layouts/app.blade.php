@@ -34,6 +34,8 @@
 <script src="{{url('public/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 <script src="{{url('public/js/jquery.mixitup.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="{{url('public/js/validation.js')}}"></script>
+<script src="{{url('public/js/jquery.validate.js')}}"></script>
 <script type="text/javascript">
     $(function () {
         var filterList = {
@@ -138,31 +140,44 @@
 					<img src="{{url('public/image/close.png')}}"/></span>
                 </button>
             </div>
+
             <div class="modal-body">
+                <form id="login_form" action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label class="name-label">Email Id</label>
-                                    <input type="text" class="form-control" name="" placeholder="Email Id">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email Id">
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                    @endif
                                 </div>
+                                {{ csrf_field() }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <label class="name-label">Password</label>
-                                    <input type="password" class="form-control" name="" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <button class="btn custom-btn minBtn" type="button">
-                                        <span>REGISTER AS ARTIST</span>
-                                    </button>
+                                    <input type="submit" class="btn custom-btn minBtn" value="Login">
+                                        {{--<span>REGISTER AS ARTIST</span>--}}
+
                                 </div>
                                 <div class="form-group text-center">
                                     <a href="javascript:void(0);" class="clrRed">Forgot password?</a>
@@ -190,7 +205,9 @@
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
+
             <div class="modal-footer text-center">
                 <button class="btn custom-btn" type="button">
                     <span>REGISTER AS ARTIST</span>

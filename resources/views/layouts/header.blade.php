@@ -64,7 +64,7 @@
                                 <a href="{{url('/artist/listing')}}" class="rollLink">Film Maker</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Actor</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(12))}}"class="rollLink">Actor</a>
                             </li>
                             <li>
                                 <a href="{{url('/artist/listing')}}" class="rollLink">Fashion Model</a>

@@ -37,7 +37,8 @@ use AuthenticatesUsers;
      */
     public function __construct() {
 //        dd(4);
-        $this->middleware('guest')->except('logout');
+
+        /*$this->middleware('guest')->except('logout');*/
     }
 
     public function redirectToProvider($provider) {

@@ -622,7 +622,29 @@
 @section('jcontent')
     <script>
         $(function () {
-            console.log(123);
+
+            $('#Login_form').validate({
+
+                errorClass:'text-danger',
+                rules:{
+                    email:{
+                        required:true,
+                    },
+                    password:{
+                        required:true,
+                    }
+
+                } ,
+                messages:{
+                    email:{
+                        required:'Please Enter Your Email',
+                    },
+                    password:{
+                        required:'Please Enter Your Password',
+                    }
+                }
+
+            });
         })
     </script>
 

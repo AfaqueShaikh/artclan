@@ -30,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //dd("here");
         
 
         if(Auth::user()->user_type==1)
@@ -38,12 +39,14 @@ class HomeController extends Controller
         }
         else
         {
-            if(Auth::user()->user_type==2)
+            if(Auth::user()->user_type != 3 && !Auth::user()->user_type != 1 )
             {
-                return redirect('/customer/dashboard');
+
+
+                return redirect('/dashboard');
             }
             else {
-                return redirect('/login')->with('error','Something went wrong');
+                return redirect('/')->with('error','Something went wrong');
             }
         }
         
@@ -97,9 +100,24 @@ class HomeController extends Controller
 
     }
 
-    public function viewArtistListingPage()
+    public function viewArtistListingPage(Request $request)
     {
-        return view('listing-page');
+        $user_types[1] = "admin";
+        $user_types[2] = "sub_admin";
+        $user_types[3] = "user";
+        $user_types[4] = "writer";
+        $user_types[5] = "painter";
+        $user_types[6] = "singer";
+        $user_types[7] = "dancer";
+        $user_types[8] = "costume_designer";
+        $user_types[9] = "makeup_artist";
+        $user_types[10] = "Photographer";
+        $user_types[11] = "Film Maker";
+        $user_types[12] = "Actor";
+        $user_types[13] = "Fashion Model";
+        $user_type = base64_decode(request()->segment(3));
+        $user_details = User::where('user_type',$user_type)->get();
+        return view('listing-page',compact('user_details','user_types'));
     }
 
     public function viewArtistDetailPage()

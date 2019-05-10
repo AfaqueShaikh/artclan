@@ -24,7 +24,12 @@ class UserController extends Controller
 //        $this->middleware('auth');
     }
 
-    
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
     
      /**
      * Show the application dashboard.
@@ -33,7 +38,7 @@ class UserController extends Controller
      */
     public function dashboard()
     {
-         Auth::loginUsingId(13);
+        /* Auth::loginUsingId(13);*/
          
         $userData = Auth::user();
         $user_types[1] = "admin"; 
@@ -48,7 +53,7 @@ class UserController extends Controller
         $user_types[10] = "Photographer"; 
         $user_types[11] = "Film Maker"; 
         $user_types[12] = "Actor"; 
-        $user_types[13] = "Fashion Model"; 
+        $user_types[13] = "Fashion Model";
         
         return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types]);
     }

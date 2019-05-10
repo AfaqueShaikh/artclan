@@ -193,7 +193,56 @@
                     </div>
                     <div class="dashboardartistGallery">
                         <ul class="artGallery clearfix">
-                            <li>
+                            @foreach($user_details as $user_detail)
+
+                                <li>
+                                    <div class="artPortfolio">
+                                        <div class="artImage relative">
+                                            <a href="javascript:void(0);">
+                                                @if(isset($user_detail->profile_img))
+                                                <img src="{{url('storage/app/public/user_profile/'.$user_detail->profile_img)}}" alt="Artist Image"/>
+                                                    @else
+                                                    <img src="{{url('public/image/noimagefound.png')}}" width="128px" height="128px" alt="Artist Image"/>
+                                                @endif
+                                            </a>
+                                            <p class="artDetailsCat">
+                                                {{$user_types[$user_detail->user_type]}} / {{$user_detail->city}}
+                                            </p>
+                                        </div>
+                                        <div class="artInfo text-center">
+                                            <h3 class="artName">
+                                                <a href="javascript:void(0);">{{$user_detail->name}}</a>
+                                            </h3>
+                                        </div>
+                                        <div class="social-left actorSocial">
+                                            <ul class="clearfix">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa fa-instagram"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa fa-linkedin"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                @endforeach
+                            {{--<li>
                                 <div class="artPortfolio">
                                     <div class="artImage relative">
                                         <a href="javascript:void(0);">
@@ -274,8 +323,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
+                            </li>--}}
+                            {{--<li>
                                 <div class="artPortfolio">
                                     <div class="artImage relative">
                                         <a href="javascript:void(0);">
@@ -356,8 +405,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
+                            </li>--}}
+                            {{--<li>
                                 <div class="artPortfolio">
                                     <div class="artImage relative">
                                         <a href="javascript:void(0);">
@@ -438,8 +487,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
+                            </li>--}}
+                            {{--<li>
                                 <div class="artPortfolio">
                                     <div class="artImage relative">
                                         <a href="javascript:void(0);">
@@ -520,8 +569,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
+                            </li>--}}
+                            {{--<li>
                                 <div class="artPortfolio">
                                     <div class="artImage relative">
                                         <a href="javascript:void(0);">
@@ -602,7 +651,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </li>
+                            </li>--}}
                         </ul>
                     </div>
                 </div>

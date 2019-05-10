@@ -5,7 +5,12 @@
 		<div class="container">
 			<div class="dashPrifilerInfo clearfix">
 				<div class="profilerImage relative">
+					@if(isset(Auth::user()->profile_img))
                                     <img src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" height="570">
+						@else
+						<img src="{{url('public/image/noimagefound.png')}}" height="570">
+					@endif
+
 					<span class="uploadImage" onclick='$("#uploadProfilePicture").modal("show")'>
 						<i class="fa fa-camera"></i>
 						
