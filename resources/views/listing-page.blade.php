@@ -198,11 +198,11 @@
                                 <li>
                                     <div class="artPortfolio">
                                         <div class="artImage relative">
-                                            <a href="javascript:void(0);">
+                                            <a href="{{url('/artist/detail/'.$user_detail->id)}}">
                                                 @if(isset($user_detail->profile_img))
-                                                <img src="{{url('storage/app/public/user_profile/'.$user_detail->profile_img)}}" alt="Artist Image"/>
+                                                <img  src="{{url('storage/app/public/user_profile/'.$user_detail->profile_img)}}" alt="Artist Image"/>
                                                     @else
-                                                    <img src="{{url('public/image/noimagefound.png')}}" width="128px" height="128px" alt="Artist Image"/>
+                                                    <img  src="{{url('public/image/noimagefound.png')}}" width="128px" height="128px" alt="Artist Image"/>
                                                 @endif
                                             </a>
                                             <p class="artDetailsCat">

@@ -30,7 +30,7 @@ Route::post('/register/recruiter','HomeController@registerRecruiter');
 
 Route::get('/artist/listing/{user_type}','HomeController@viewArtistListingPage');
 
-Route::get('/artist/detail','HomeController@viewArtistDetailPage');
+Route::get('/artist/detail/{id}','HomeController@viewArtistDetailPage');
 
 Route::get('artist/signup','HomeController@showArtistLogin');
 Route::get('/get/location','HomeController@getLocation');

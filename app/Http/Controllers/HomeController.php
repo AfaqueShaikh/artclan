@@ -122,6 +122,7 @@ class HomeController extends Controller
 
     public function viewArtistDetailPage()
     {
+
         return view('listing-detail-page');
     }
 
