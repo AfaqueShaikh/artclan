@@ -2302,3 +2302,25 @@ ul.listUpload li img {
   cursor: pointer;
   width: 100%;
 }
+/*-------------Dashboard Gallery-----------*/
+.dashboardartistGallery .artGallery {
+  margin:0 -15px;
+}
+.filtersBlock {
+  margin-bottom: 30px;
+}
+.dashboardartistGallery .artGallery li {
+  width: 20%;
+}
+.searchFilter {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 100%;
+  color: #fff;
+  background: #F13338;
+  border-radius: 0;
+  padding: 0;
+  text-align: center;
+}

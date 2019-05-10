@@ -74,7 +74,7 @@ class RegisterController extends Controller
         }
         if($data['form_type'] == 'recruiter_form')
         {
-
+            dd(456);
             return User::create([
                 'represent' => $data['represent'],
                 'looking_for' => $data['i_am_looking'],
