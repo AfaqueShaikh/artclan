@@ -35,10 +35,7 @@ class UserController extends Controller
     {
          Auth::loginUsingId(13);
          
-         
         $userData = Auth::user();
-        
-        
         $user_types[1] = "admin"; 
         $user_types[2] = "sub_admin"; 
         $user_types[3] = "user"; 
@@ -52,6 +49,7 @@ class UserController extends Controller
         $user_types[11] = "Film Maker"; 
         $user_types[12] = "Actor"; 
         $user_types[13] = "Fashion Model"; 
+        
         return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types]);
     }
     
@@ -86,6 +84,49 @@ class UserController extends Controller
        $obj->photo = $new_file_name;
        $obj->save();
        
+       return redirect(url('dashboard'));
+    }
+    public function updateProfilePicture(Request $request)
+    {
+        
+       
+                $extension = $request->file('photo')->getClientOriginalExtension();
+                $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
+                Storage::put('public/user_profile/' . $new_file_name, file_get_contents($request->file('photo')->getRealPath()));
+               
+          
+       
+       Auth::user()->profile_img = $new_file_name;
+       Auth::user()->save();
+
+       
+       return redirect(url('dashboard'));
+    }
+    
+    public function updateAboutMe(Request $request)
+    {
+  
+       Auth::user()->name = $request->name;
+       Auth::user()->city = $request->city;
+       Auth::user()->language = implode(',', $request->language);       
+       Auth::user()->about_me = $request->about_me;
+       Auth::user()->save();
+
+       
+       
+       return redirect(url('dashboard'));
+    }
+    
+    public function createEducation(Request $request)
+    {
+ 
+      $obj = new \App\Modules\User\Models\Education();
+      $obj->education_name = $request->education_name;
+      $obj->institute = $request->institute;
+      $obj->from = $request->from;
+      $obj->to = $request->to;
+      $obj->user_id = Auth::user()->id;
+      $obj->save();
        return redirect(url('dashboard'));
     }
     public function createDocument(Request $request)

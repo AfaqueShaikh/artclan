@@ -19,4 +19,7 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::post('/user/videos/create', 'UserController@createVideos');
     Route::post('/user/photos/create', 'UserController@createPhotos');
     Route::post('/user/documents/create', 'UserController@createDocument');
+    Route::post('/user/profile-picture/update', 'UserController@updateProfilePicture');
+    Route::post('/user/about-me/update', 'UserController@updateAboutMe');
+    Route::post('/user/education/create', 'UserController@createEducation');
 });

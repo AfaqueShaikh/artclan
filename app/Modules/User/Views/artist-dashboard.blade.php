@@ -5,10 +5,10 @@
 		<div class="container">
 			<div class="dashPrifilerInfo clearfix">
 				<div class="profilerImage relative">
-					<img src="{{url('public/image/artist2.jpg')}}">
-					<span class="uploadImage">
+                                    <img src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" height="570">
+					<span class="uploadImage" onclick='$("#uploadProfilePicture").modal("show")'>
 						<i class="fa fa-camera"></i>
-						<input type="file" class="uploadInp">
+						
 					</span>
 				</div>
                             
@@ -41,7 +41,7 @@
 			</div>
 			<div class="personLifeHistory">
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#gallery" aria-controls="home" role="tab" data-toggle="tab">Gallery</a></li>
+					<li role="presentation" class="active"><a href="#gallery" aria-controls="home" role="tab" data-toggle="tab">My Art Gallery</a></li>
 					<li role="presentation"><a href="#bio" aria-controls="profile" role="tab" data-toggle="tab">Bio</a></li>
 					<li role="presentation"><a href="#Exp" aria-controls="messages" role="tab" data-toggle="tab">Experience</a></li>
 				</ul>
@@ -116,10 +116,58 @@
 								About me
 								<span class="addButtons" data-toggle="modal" data-target="#editAbout"><i class="fa fa-edit"></i></span>
 							</div>
-							<div class="insertedData">
-
+		<div class="eduDetails">
+								<div class="row">
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Name</label>
+										<p class="pull-left">{{Auth::user()->name}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Residing City</label>
+										<p class="pull-left">{{Auth::user()->city}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Language known</label>
+										<p class="pull-left">{{Auth::user()->language}}</p>
+									</div>
+									
+								</div>
+                    <div class="row">
+                        <div class="col-sm-12 clearfix">
+										<label class="headingLable pull-left">Know Me</label>
+										<p class="pull-left">{{Auth::user()->about_me}}</p>
+									</div>
+                    </div>
 							</div>
 						</div>
+						<div class="uploadingHolder">
+							<div class="uploadBlock">
+								Education 
+								<span class="addButtons" data-toggle="modal" data-target="#uploadEducation1"><i class="fa fa-plus"></i></span>
+							</div>
+                                                     @foreach($userData->userEducation as $education)
+							<div class="eduDetails">
+								<div class="row">
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Education Name</label>
+										<p class="pull-left">{{$education->education_name}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Institute </label>
+										<p class="pull-left">{{$education->institute}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">From</label>
+										<p class="pull-left">{{$education->from}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">To</label>
+										<p class="pull-left">{{$education->to}}</p>
+									</div>
+								</div>
+							</div>
+                                                     @endforeach
+						</div>						
 						<div class="uploadingHolder">
 							<div class="uploadBlock">
 								Education 
@@ -128,7 +176,7 @@
 							<div class="eduDetails">
 								<div class="row">
 									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Course Name</label>
+										<label class="headingLable pull-left">Course Name1</label>
 										<p class="pull-left">Web designing</p>
 									</div>
 									<div class="col-sm-6 clearfix">
@@ -335,6 +383,33 @@
 		</div>
 	</div>
 </div>
+<div class="modal" id="uploadProfilePicture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-md signUpPopUp" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="border-bottom: 0px;">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+				</button>
+			</div>
+			<div class="modal-body">
+                            <form action='{{url('user/profile-picture/update')}}' enctype="multipart/form-data" method="post">
+				<div class="form-group">
+					<label>Add Profile Picture</label>
+					
+				</div>
+				<div class="form-group text-center">					
+					
+                                    <input type="file" name="photo" required="" >
+				
+					<button class="btn custom-btn" type="submit">
+						<span>Submit</span>
+					</button>
+				</div>
+                              </form>
+			</div>
+		</div>
+	</div>
+</div>
 <!---------document video-------->
 <div class="modal" id="uploadDocument" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog modal-md signUpPopUp" role="document">
@@ -381,16 +456,41 @@
 					<img src="{{url('public/image/close.png')}}"/></span>
 				</button>
 			</div>
-			<div class="modal-body">				
-				<div class="form-group">
-					<label>About Us</label>
-					<input type="text" class="form-control" placeholder="Add your title here">
+				<div class="modal-body">
+                                    <form action="{{url('user/about-me/update')}}" method="post">
+				<div class="eduDetails">
+					<div class="eduDetails">
+						<div class="form-group">
+							<label>Name</label>
+                                                        <input type="text" value="{{Auth::user()->name}}" name="name" required="" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Residing City</label>
+                                                        <input type="text" name="city" required=""  value="{{Auth::user()->city}}"class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Language known</label>
+                                                        <select name="language[]" class="form-control" multiple="" required="">
+								<option value="English" @if(str_contains('English', explode(',', Auth::user()->language))) selected @endif>English</option>
+								<option value="Hindi" @if(str_contains('Hindi', explode(',', Auth::user()->language))) selected @endif>Hindi</option>
+								<option value="Marathi" @if(str_contains('Marathi', explode(',', Auth::user()->language))) selected @endif>Marathi</option>
+								<option value="Bengali" @if(str_contains('Bengali', explode(',', Auth::user()->language))) selected @endif>Bengali</option>
+								
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Know Me</label>
+							
+                                                        <textarea class="form-control" required="" name="about_me">{{Auth::user()->about_me}}</textarea>
+						</div>
+					</div>
 				</div>
 				<div class="form-group text-center">
-					<button class="btn custom-btn" type="button">
+					<button class="btn custom-btn" type="submit">
 						<span>Submit</span>
 					</button>
 				</div>
+                                        </form>
 			</div>			
 		</div>
 	</div>
@@ -403,32 +503,35 @@
 					<img src="{{url('public/image/close.png')}}"/></span>
 				</button>
 			</div>
-			<div class="modal-body">				
+			<div class="modal-body">
+                            
+                            <form action="{{url('user/education/create')}}" method="post">
 				<div class="eduDetails">
 					<div class="eduDetails">
 						<div class="form-group">
-							<label>Cource Name</label>
-							<input type="text" class="form-control">
+							<label>Education Name</label>
+							<input type="text" name='education_name' required class="form-control">
 						</div>
 						<div class="form-group">
 							<label>Institute Name</label>
-							<input type="text" class="form-control">
+                                                        <input type="text" name='institute' required="" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>Start Date</label>
-							<input type="date" class="form-control">
+                                                        <input type="date" name="from" required="" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>End Date</label>
-							<input type="date" class="form-control">
+                                                        <input type="date" name="to" required="" class="form-control">
 						</div>
 					</div>
 				</div>
 				<div class="form-group text-center">
-					<button class="btn custom-btn" type="button">
+					<button class="btn custom-btn" type="submit">
 						<span>Submit</span>
 					</button>
 				</div>
+                                </form>
 			</div>			
 		</div>
 	</div>

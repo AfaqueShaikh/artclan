@@ -41,9 +41,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Modules\User\Models\UserPhoto');
     }
-    public function userDocuments()
+      public function userDocuments()
     {
         return $this->hasMany('\App\Modules\User\Models\UserDocument');
+    }
+    
+      public function userEducations()
+    {
+        return $this->hasMany('\App\Modules\User\Models\Education');
     }
     
     public function artistOfTheDay()
