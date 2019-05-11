@@ -274,7 +274,7 @@
                                                 <div class="pdfIcon">
                                                     <a href='{{url('storage/app/public/user_documents/'.$document->file_name)}}' download="{{$document->file_name}}"><img src="{{url('public/image/pdf-icon.png')}}"></a>
                                                 </div>
-                                                <span class="deleteBtn"><i class="fa fa-trash"></i></span>
+                                                {{--<span class="deleteBtn"><i class="fa fa-trash"></i></span>--}}
                                                 <p class="uplName">{{$document->title}}</p>
                                             </li>
                                         @endforeach
