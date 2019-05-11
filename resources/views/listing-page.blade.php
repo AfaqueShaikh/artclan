@@ -198,7 +198,7 @@
                                 <li>
                                     <div class="artPortfolio">
                                         <div class="artImage relative">
-                                            <a href="{{url('/artist/detail/'.$user_detail->id)}}">
+                                            <a href="{{url('/artist/detail/'.base64_encode($user_detail->id))}}">
                                                 @if(isset($user_detail->profile_img))
                                                 <img  src="{{url('storage/app/public/user_profile/'.$user_detail->profile_img)}}" alt="Artist Image"/>
                                                     @else

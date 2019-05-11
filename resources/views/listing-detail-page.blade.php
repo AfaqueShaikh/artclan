@@ -151,22 +151,27 @@
         </div>
     </header>
     <section class="dashboardWelcome">
-        <div class="container">Welcome Harshad</div>
+        <div class="container">Welcome {{$user_details->name}}</div>
     </section>
     <section class="dashboardSection">
         <div class="container">
             <div class="dashPrifilerInfo clearfix">
                 <div class="profilerImage relative">
-                    <img src="{{url('public/image/artist2.jpg')}}">
-                    <span class="uploadImage">
+                    @if(isset($user_details->profile_img))
+                        <img  src="{{url('storage/app/public/user_profile/'.$user_details->profile_img)}}" alt="Artist Image"/>
+                    @else
+                        <img  src="{{url('public/image/noimagefound.png')}}"  alt="Artist Image"/>
+                    @endif
+                    {{--<img src="{{url('public/image/artist2.jpg')}}">--}}
+                    {{--<span class="uploadImage">
 						<i class="fa fa-camera"></i>
 						<input type="file" class="uploadInp">
-					</span>
+					</span>--}}
                 </div>
                 <div class="profilerInformation">
                     <div class="profilerName">
-                        <h3>Harshad</h3>
-                        <p>Modal / Pune</p>
+                        <h3>{{$user_details->name}}</h3>
+                        <p>{{$user_types[$user_details->user_type]}} / {{$user_details->city}}</p>
                     </div>
                     <ul class="profilerViews">
                         <li>
@@ -198,13 +203,31 @@
                             </div>
                             <div class="uploadedListing">
                                 <ul class="listUpload clearfix">
-                                    <li class="relative">
+                                    {{--<li class="relative">
                                         <img src="img/artist1.jpg">
                                         <span class="deleteBtn"><i class="fa fa-trash"></i></span>
                                         <p class="uplName">Video1</p>
-                                    </li>
+                                    </li>--}}
+                                    @if(isset($user_details->userVideos) && count($user_details->userVideos) > 0)
+                                        @foreach($user_details->userVideos as $video)
+                                            <li class="relative">
+                                                <iframe width="204" height="222" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="{{$video->video_url}}"></iframe>
+                                                <span class="deleteBtn"><i class="fa fa-trash"></i></span>
+                                                <p class="uplName">{{$video->title}}</p>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <div class="eduDetails">
+                                            <div class="row">
+                                                <div class="col-sm-6 clearfix">
+                                                    <p class="">Not updated by the artist yet.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </ul>
                             </div>
+
                         </div>
                         <div class="uploadingHolder">
                             <div class="uploadBlock">
@@ -212,10 +235,26 @@
                             </div>
                             <div class="uploadedListing">
                                 <ul class="listUpload clearfix">
-                                    <li class="relative">
+                                    {{--<li class="relative">
                                         <img src="{{url('public/image/artist2.jpg')}}">
                                         <p class="uplName">Photo1</p>
-                                    </li>
+                                    </li>--}}
+                                    @if(isset($user_details->userPhotos) && count($user_details->userPhotos) > 0)
+                                        @foreach($user_details->userPhotos as $photo)
+                                            <li class="relative">
+                                                <img src="{{url('storage/app/public/user_photos/'.$photo->photo)}}">
+                                                <span class="deleteBtn"><i class="fa fa-trash"></i></span>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <div class="eduDetails">
+                                            <div class="row">
+                                                <div class="col-sm-6 clearfix">
+                                                    <p class="">Not updated by the artist yet.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -227,27 +266,81 @@
                                 <!-- <span class="addButtons" data-toggle="modal" data-target="#editAbout"><i class="fa fa-edit"></i></span> -->
                             </div>
                             <div class="insertedData">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
-                            </div>
-                        </div>
-                        <div class="uploadingHolder">
-                            <div class="uploadBlock">
-                                Physical Stats
-                                <span class="addButtons" data-toggle="modal" data-target="#PhysicalStats"><i class="fa fa-plus"></i></span>
-                            </div>
-                            <div class="eduDetails">
+                                {{--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>--}}
                                 <div class="row">
                                     <div class="col-sm-6 clearfix">
-                                        <p class="">Not updated by the artist yet.</p>
+                                        <label class="headingLable pull-left">Name:</label>
+                                        <p class="pull-left">{{$user_details->name}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Residing City:</label>
+                                        <p class="pull-left">{{$user_details->city}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Language known:</label>
+                                        <p class="pull-left">{{$user_details->language}}</p>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Know Me:</label>
+                                        <p class="pull-left">{{$user_details->about_me}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="uploadingHolder">
                             <div class="uploadBlock">
+                                Education
+                                <span class="addButtons" data-toggle="modal" data-target="#PhysicalStats">{{--<i class="fa fa-plus"></i>--}}</span>
+                            </div>
+                            {{--<div class="eduDetails">
+                                <div class="row">
+                                    <div class="col-sm-6 clearfix">
+                                        <p class="">Not updated by the artist yet.</p>
+                                    </div>
+                                </div>
+                            </div>--}}
+                            @if(isset($user_details->userEducations) && count($user_details->userEducations) > 0)
+                                @foreach($user_details->userEducations as $education)
+                                    <div class="eduDetails">
+                                        <div class="row">
+                                            <div class="col-sm-6 clearfix">
+                                                <label class="headingLable pull-left">Education Name:</label>
+                                                <p class="pull-left">{{$education->education_name}}</p>
+                                            </div>
+                                            <div class="col-sm-6 clearfix">
+                                                <label class="headingLable pull-left">Institute: </label>
+                                                <p class="pull-left">{{$education->institute}}</p>
+                                            </div>
+                                            <div class="col-sm-6 clearfix">
+                                                <label class="headingLable pull-left">From:</label>
+                                                <p class="pull-left">{{$education->from}}</p>
+                                            </div>
+                                            <div class="col-sm-6 clearfix">
+                                                <label class="headingLable pull-left">To:</label>
+                                                <p class="pull-left">{{$education->to}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="eduDetails">
+                                    <div class="row">
+                                        <div class="col-sm-6 clearfix">
+                                            <p class="">Not updated by the artist yet.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                        </div>
+                        <div class="uploadingHolder">
+                            <div class="uploadBlock">
                                 Skill
-                                <span class="addButtons" data-toggle="modal" data-target="#uploadLang"><i class="fa fa-plus"></i></span>
+                                <span class="addButtons" data-toggle="modal" data-target="#uploadLang">{{--<i class="fa fa-plus"></i>--}}</span>
                             </div>
                             <div class="eduDetails">
                                 <div class="row">
@@ -260,14 +353,25 @@
                         </div>
                         <div class="uploadingHolder">
                             <div class="uploadBlock">
-                                Work preference
-                                <span class="addButtons" data-toggle="modal" data-target="#availableCity"><i class="fa fa-plus"></i></span>
+                                Work & Location Preference
+                                <span class="addButtons" data-toggle="modal" data-target="#availableCity">{{--<i class="fa fa-plus"></i>--}}</span>
                             </div>
                             <div class="eduDetails">
                                 <div class="row">
-                                    <div class="col-sm-6 clearfix">
-                                        <p class="">Not updated by the artist yet.</p>
-                                    </div>
+                                    @if(isset($user_details->work_preference))
+                                        <div class="col-sm-6 clearfix">
+                                            <label class="headingLable pull-left">Work Preference:</label>
+                                            <p class="pull-left">{{$user_details->work_preference}}</p>
+                                        </div>
+                                        <div class="col-sm-6 clearfix">
+                                            <label class="headingLable pull-left">Location Preference:</label>
+                                            <p class="pull-left">{{$user_details->location_preference}}</p>
+                                        </div>
+                                    @else
+                                        <div class="col-sm-6 clearfix">
+                                            <p class="">Not updated by the artist yet.</p>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -275,9 +379,9 @@
                     <div role="tabpanel" class="tab-pane" id="Exp">
                         <div class="uploadingHolder borderBot">
                             <div class="uploadBlock">
-                                Raja Hindustani
+                                Experience
                             </div>
-                            <div class="eduDetails">
+                            {{--<div class="eduDetails">
                                 <div class="row">
                                     <div class="col-sm-6 clearfix">
                                         <label class="headingLable pull-left">Project Name</label>
@@ -302,7 +406,35 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
+                            @if(isset($user_details->userExp) && count($user_details->userExp) > 0)
+                                @foreach($user_details->userExp as $exp)
+                                    <div class="eduDetails">
+                                        <div class="row">
+                                            <div class="col-sm-6 clearfix">
+                                                <label class="headingLable pull-left">Experience Title:</label>
+                                                <p class="pull-left">{{$exp->title}}</p>
+                                            </div>
+
+
+                                            <div class="col-sm-6 clearfix">
+                                                <label class="headingLable pull-left">About Your Work:</label>
+                                                <p class="pull-left">
+                                                    {{$exp->about_your_work}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="eduDetails">
+                                    <div class="row">
+                                        <div class="col-sm-6 clearfix">
+                                            <p class="">Not updated by the artist yet.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

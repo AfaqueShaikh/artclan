@@ -43,34 +43,34 @@
                     <div class="categoryList">
                         <ul>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Writer</a>
+                                <a href="javascript:void(0);" class="rollLink">Writer</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Painter</a>
+                                <a href="javascript:void(0);" class="rollLink">Painter</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Singer</a>
+                                <a href="javascript:void(0);" class="rollLink">Singer</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Dancer</a>
+                                <a href="javascript:void(0);" class="rollLink">Dancer</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Costume Designer</a>
+                                <a href="javascript:void(0);" class="rollLink">Costume Designer</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Photographer</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(10))}}" class="rollLink">Photographer</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Film Maker</a>
+                                <a href="javascript:void(0);" class="rollLink">Film Maker</a>
                             </li>
                             <li>
                                 <a href="{{url('/artist/listing/'.base64_encode(12))}}"class="rollLink">Actor</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Fashion Model</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(13))}}" class="rollLink">Fashion Model</a>
                             </li>
                             <li>
-                                <a href="{{url('/artist/listing')}}" class="rollLink">Makeup Artist</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(9))}}" class="rollLink">Makeup Artist</a>
                             </li>
                             {{--<li>
                                 <a href="javascript:void(0);" class="rollLink">Voice-Over Artist</a>

@@ -43,50 +43,50 @@
 						<div class="categoryList">
 							<ul>
 								<li>
-									<a href="javascript:void(0);" class="rollLink">Actor</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);" class="rollLink">Modal</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);" class="rollLink">Singer</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);" class="rollLink">Photographer</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);" class="rollLink">Musician</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);" class="rollLink">Graphics Designer</a>
-								</li>
-								<li>
 									<a href="javascript:void(0);" class="rollLink">Writer</a>
 								</li>
 								<li>
 									<a href="javascript:void(0);" class="rollLink">Painter</a>
 								</li>
 								<li>
+									<a href="javascript:void(0);" class="rollLink">Singer</a>
+								</li>
+								<li>
 									<a href="javascript:void(0);" class="rollLink">Dancer</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="rollLink">Anchor</a>
+									<a href="javascript:void(0);" class="rollLink">Costume Designer</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="rollLink">Voice-Over Artist</a>
+									<a href="{{url('/artist/listing/'.base64_encode(10))}}" class="rollLink">Photographer</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="rollLink">Stylist</a>
+									<a href="javascript:void(0);" class="rollLink">Film Maker</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="rollLink">Filmmaker</a>
+									<a href="{{url('/artist/listing/'.base64_encode(12))}}"class="rollLink">Actor</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="rollLink">Advertising Professional</a>
+									<a href="{{url('/artist/listing/'.base64_encode(13))}}" class="rollLink">Fashion Model</a>
 								</li>
 								<li>
-									<a href="javascript:void(0);" class="rollLink">Stand-up Comedian</a>
+									<a href="{{url('/artist/listing/'.base64_encode(9))}}" class="rollLink">Makeup Artist</a>
 								</li>
+								{{--<li>
+                                    <a href="javascript:void(0);" class="rollLink">Voice-Over Artist</a>
+                                </li>--}}
+								{{--<li>
+                                    <a href="javascript:void(0);" class="rollLink">Stylist</a>
+                                </li>--}}
+								{{--<li>
+                                    <a href="javascript:void(0);" class="rollLink">Filmmaker</a>
+                                </li>--}}
+								{{--<li>
+                                    <a href="javascript:void(0);" class="rollLink">Advertising Professional</a>
+                                </li>--}}
+								{{--<li>
+                                    <a href="javascript:void(0);" class="rollLink">Stand-up Comedian</a>
+                                </li>--}}
 							</ul>
 						</div>
 					</li>

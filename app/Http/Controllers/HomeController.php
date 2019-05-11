@@ -102,6 +102,7 @@ class HomeController extends Controller
 
     public function viewArtistListingPage(Request $request)
     {
+
         $user_types[1] = "admin";
         $user_types[2] = "sub_admin";
         $user_types[3] = "user";
@@ -122,8 +123,22 @@ class HomeController extends Controller
 
     public function viewArtistDetailPage()
     {
-
-        return view('listing-detail-page');
+        $user_types[1] = "admin";
+        $user_types[2] = "sub_admin";
+        $user_types[3] = "user";
+        $user_types[4] = "writer";
+        $user_types[5] = "painter";
+        $user_types[6] = "singer";
+        $user_types[7] = "dancer";
+        $user_types[8] = "costume_designer";
+        $user_types[9] = "makeup_artist";
+        $user_types[10] = "Photographer";
+        $user_types[11] = "Film Maker";
+        $user_types[12] = "Actor";
+        $user_types[13] = "Fashion Model";
+        $user_id = base64_decode(request()->segment(3));
+        $user_details = User::where('id',$user_id)->first();
+        return view('listing-detail-page',compact('user_details','user_types'));
     }
 
 
