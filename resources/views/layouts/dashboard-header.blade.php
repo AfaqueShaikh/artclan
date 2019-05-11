@@ -35,7 +35,7 @@
 			</ul>
 		</div>
 		<nav class="custome-navbar clearfix">
-			<div class="logo"><a href="index.html"><img src="{{url('public/image/logo.jpeg')}}"> <!-- Logo <span>Here</span> --></a></div>
+			<div class="logo"><a href="{{url('/')}}"><img src="{{url('public/image/logo.jpeg')}}"> <!-- Logo <span>Here</span> --></a></div>
 			<div class="navbar-right">
 				<ul class="menus">
 					<li>
