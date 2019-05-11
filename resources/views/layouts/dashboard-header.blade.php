@@ -109,10 +109,17 @@
 			</div> 
 		</nav>   
 		<div class="sidemenu">
-			<a href="javascript:void()" class="closeSidenav">
-				<img src="img/close.png" alt="">
+			<a href="javascript:void(0);" class="closeSidenav">
+				<img src="{{url('public/image/close.png')}}" alt="">
 			</a>
-			<div class="sidenavLogo"><a href="index.html"><img src="img/logo.jpeg" alt="Weizmann Forex" width="127"></a></div>
+			<div class="sidenavLogo">
+				@if(isset(Auth::user()->profile_img))
+					<a href="javascript:void(0);"><img src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" width="127"></a>
+				@else
+					<a href="javascript:void(0);"><img src="{{url('public/image/noimagefound.png')}}" alt="Weizmann Forex" width="127"></a>
+				@endif
+			</div>
+			<br>
 			<ul class="sidemenu-list">
 				<li class="active">
 					<a href="javascript:void(0);" class="color-red">About Us</a>

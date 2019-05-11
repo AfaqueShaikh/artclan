@@ -44,14 +44,16 @@
 								<li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
 							</ul>
 						</div>
-						<<div class="footerBtns">
-							<a class="btn custom-btn" href="{{url('/artist/registration')}}">
-								<span>REGISTER AS ARTIST</span>
-							</a>
-							<a class="btn custom-btn" href="{{url('/recruiter/registration')}}">
-								<span>REGISTER AS RECRUITER</span>
-							</a>
-						</div>
+						@if(!Auth::check())
+							<div class="footerBtns">
+								<a class="btn custom-btn" href="{{url('/artist/registration')}}">
+									<span>REGISTER AS ARTIST</span>
+								</a>
+								<a class="btn custom-btn" href="{{url('/recruiter/registration')}}">
+									<span>REGISTER AS RECRUITER</span>
+								</a>
+							</div>
+						@endif
 					</div>
 				</div>
 			</div>
