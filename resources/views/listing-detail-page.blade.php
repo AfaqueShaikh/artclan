@@ -95,8 +95,10 @@
                         </div>
                     </li>
                     <li><a href="javascript:void(0);">Blogs</a></li>
-                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#login">Login</a></li>
-                    <li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>
+                    @if(!Auth::check())
+                        <li><a href="javascript:void(0);" data-toggle="modal" data-target="#login">Login</a></li>
+                        <li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>
+                    @endif
                 </ul>
                 <div class="sideNavToggle">
                     <a href="javascript:void(0);" class="color-red">Menu</a>
@@ -158,9 +160,9 @@
             <div class="dashPrifilerInfo clearfix">
                 <div class="profilerImage relative">
                     @if(isset($user_details->profile_img))
-                        <img  src="{{url('storage/app/public/user_profile/'.$user_details->profile_img)}}" alt="Artist Image"/>
+                        <img  src="{{url('storage/app/public/user_profile/'.$user_details->profile_img)}}" height="570" alt="Artist Image"/>
                     @else
-                        <img  src="{{url('public/image/noimagefound.png')}}"  alt="Artist Image"/>
+                        <img  src="{{url('public/image/noimagefound.png')}}" height="570"  alt="Artist Image"/>
                     @endif
                     {{--<img src="{{url('public/image/artist2.jpg')}}">--}}
                     {{--<span class="uploadImage">
@@ -258,6 +260,36 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="uploadingHolder">
+                            <div class="uploadBlock">
+                                Documents
+                                <span class="addButtons" data-toggle="modal" data-target="#uploadDocument">{{--<i class="fa fa-plus"></i>--}}</span>
+                            </div>
+                            <div class="uploadedListing">
+                                <ul class="listUpload clearfix">
+
+                                    @if(isset($user_details->userDocuments) && count($user_details->userDocuments) > 0)
+                                        @foreach($user_details->userDocuments as $document)
+                                            <li class="relative">
+                                                <div class="pdfIcon">
+                                                    <a href='{{url('storage/app/public/user_documents/'.$document->file_name)}}' download="{{$document->file_name}}"><img src="{{url('public/image/pdf-icon.png')}}"></a>
+                                                </div>
+                                                <span class="deleteBtn"><i class="fa fa-trash"></i></span>
+                                                <p class="uplName">{{$document->title}}</p>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <div class="eduDetails">
+                                            <div class="row">
+                                                <div class="col-sm-6 clearfix">
+                                                    <p class="">Not updated by the artist yet.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="bio">
                         <div class="uploadingHolder">
@@ -339,14 +371,52 @@
                         </div>
                         <div class="uploadingHolder">
                             <div class="uploadBlock">
-                                Skill
-                                <span class="addButtons" data-toggle="modal" data-target="#uploadLang">{{--<i class="fa fa-plus"></i>--}}</span>
+                                Physical Attributes
+                                <span class="addButtons" data-toggle="modal" data-target="#PhysicalStats">{{--<i class="fa fa-edit"></i>--}}</span>
                             </div>
                             <div class="eduDetails">
                                 <div class="row">
                                     <div class="col-sm-6 clearfix">
-                                        <label class="headingLable pull-left">Language</label>
-                                        <p class="pull-left">Hindi, English, Urdu, Punjabi, Bhojpuri</p>
+                                        <label class="headingLable pull-left">Height</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->height)?$user_details->userPhysics->height:''}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Weight</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->weight)?$user_details->userPhysics->weight:''}}</p>
+                                    </div>
+                                    @if($user_details->gender != '1')
+                                        <div class="col-sm-6 clearfix">
+                                            <label class="headingLable pull-left">Bust</label>
+                                            <p class="pull-left">{{isset($user_details->userPhysics->bust)?$user_details->userPhysics->bust:''}}</p>
+                                        </div>
+                                    @endif
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Waist</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->waist)?$user_details->userPhysics->waist:''}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Hips</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->hips)?$user_details->userPhysics->hips:''}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Chest</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->chest)?$user_details->userPhysics->chest:''}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Biceps</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->biceps)?$user_details->userPhysics->biceps:''}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Hair Type</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->hair_type)?$user_details->userPhysics->hair_type:''}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Hair Length</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->hair_length)?$user_details->userPhysics->hair_length:''}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Complexion</label>
+                                        <p class="pull-left">{{isset($user_details->userPhysics->complexion)?$user_details->userPhysics->complexion:''}}</p>
                                     </div>
                                 </div>
                             </div>
