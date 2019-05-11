@@ -104,10 +104,10 @@
         </div>
     </nav>
     <div class="sidemenu">
-        <a href="javascript:void()" class="closeSidenav">
+        <a href="javascript:void(0);" class="closeSidenav">
             <img src="{{url('public/image/close.png')}}" alt="">
         </a>
-        <div class="sidenavLogo"><a href="index.html"><img src="{{url('public/image/logo.jpeg')}}" alt="Weizmann Forex" width="127"></a></div>
+        <div class="sidenavLogo"><a href="{{url('/')}}"><img src="{{url('public/image/logo.jpeg')}}" alt="Weizmann Forex" width="127"></a></div>
         <ul class="sidemenu-list">
             <li class="active">
                 <a href="javascript:void(0);" class="color-red">About Us</a>
