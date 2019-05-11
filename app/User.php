@@ -54,6 +54,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Modules\User\Models\Experience');
     }
+      public function userPhysics()
+    {
+        return $this->hasOne('\App\Modules\User\Models\Physics');
+    }
     
     public function artistOfTheDay()
     {
