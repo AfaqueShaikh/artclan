@@ -149,7 +149,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label class="name-label">Email Id</label>
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email Id">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email Id" required>
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                                     <strong>{{ $errors->first('email') }}</strong>
@@ -163,7 +163,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <label class="name-label">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                                     @if ($errors->has('password'))
                                         <span class="help-block">
                                                     <strong>{{ $errors->first('password') }}</strong>
@@ -209,12 +209,12 @@
             </div>
 
             <div class="modal-footer text-center">
-                <button class="btn custom-btn" type="button">
+                <a class="btn custom-btn" href="{{url('/artist/registration')}}">
                     <span>REGISTER AS ARTIST</span>
-                </button>
-                <button class="btn custom-btn" type="button">
-                    <span>HIRE ARTIST</span>
-                </button>
+                </a>
+                <a class="btn custom-btn" href="{{url('/recruiter/registration')}}">
+                    <span>REGISTER AS RECRUITER</span>
+                </a>
             </div>
         </div>
     </div>

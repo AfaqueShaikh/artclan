@@ -20,8 +20,8 @@
     <!-----Registration both user------->
     <section class="bothUsers">
         <div class="clearfix">
-            <a href="javascript:void(0);" class="quickRegister artistRegister">REGISTER AS ARTIST</a>
-            <a href="javascript:void(0);" class="quickRegister requiterRegister">REGISTER AS RECRUITER</a>
+            <a href="{{url('/artist/registration')}}" class="quickRegister artistRegister">REGISTER AS ARTIST</a>
+            <a href="{{url('/recruiter/registration')}}" class="quickRegister requiterRegister">REGISTER AS RECRUITER</a>
         </div>
     </section>
 

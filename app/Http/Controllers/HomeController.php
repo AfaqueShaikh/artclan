@@ -73,6 +73,7 @@ class HomeController extends Controller
                 'user_type' => $request->category,
                 'user_status' => '1',
                 'name' =>$request->name,
+                'gender' => $request->gender,
                 'password' => bcrypt($request->password),
             ]);
 

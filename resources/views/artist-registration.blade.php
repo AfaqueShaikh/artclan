@@ -30,10 +30,10 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                                         <label class="name-label">
-                                            <input type="radio" id="gender" name="gender" value="male" checked="checked"> Mr
+                                            <input type="radio" id="gender" name="gender" value="0" checked="checked"> Mr
                                         </label>
                                         <label class="name-label" style="margin-left: 30px;">
-                                            <input type="radio" id="gender" name="gender" value="female"> Ms
+                                            <input type="radio" id="gender" name="gender" value="1"> Ms
                                         </label>
                                         @if ($errors->has('gender'))
                                             <span class="help-block">

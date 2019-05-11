@@ -25,4 +25,5 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::post('/user/education/create', 'UserController@createEducation');
     Route::post('/user/work-preference/update', 'UserController@updateWorkPreference');
     Route::post('/user/experience/create', 'UserController@createExperience');
+    Route::post('/user/physical-attributes/create', 'UserController@createPhysics');
 });

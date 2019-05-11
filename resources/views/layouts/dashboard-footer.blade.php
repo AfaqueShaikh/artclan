@@ -44,14 +44,14 @@
 								<li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
 							</ul>
 						</div>
-						<div class="footerBtns">		
-							<button class="btn custom-btn" type="button">
+						<<div class="footerBtns">
+							<a class="btn custom-btn" href="{{url('/artist/registration')}}">
 								<span>REGISTER AS ARTIST</span>
-							</button>
-							<button class="btn custom-btn" type="button">
-								<span>HIRE ARTIST</span> 
-							</button>	
-		                </div>
+							</a>
+							<a class="btn custom-btn" href="{{url('/recruiter/registration')}}">
+								<span>REGISTER AS RECRUITER</span>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

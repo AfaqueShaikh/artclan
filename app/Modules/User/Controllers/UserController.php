@@ -39,7 +39,7 @@ class UserController extends Controller
      */
     public function dashboard()
     {
-        /* Auth::loginUsingId(13);*/
+         
          
         $userData = Auth::user();
         $user_types[1] = "admin"; 
@@ -59,9 +59,10 @@ class UserController extends Controller
         
         
         $cities = \App\Modules\District\Models\District::all();
+        $userPhysicsData = Auth::user()->userPhysics;
         
         
-        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities]);
+        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities, 'userPhysicsData'=>$userPhysicsData]);
     }
     
     /**
@@ -153,6 +154,44 @@ class UserController extends Controller
       $obj->user_id = Auth::user()->id;
 
       $obj->save();
+       return redirect(url('dashboard'));
+    }
+    public function createPhysics(Request $request)
+    {
+ 
+        $obj = \App\Modules\User\Models\Physics::where('user_id',Auth::user()->id)->first();
+        if($obj)
+        {
+      
+      $obj->height = $request->height;
+      $obj->weight = $request->weight;
+      $obj->bust = $request->bust;
+      $obj->waist = $request->waist;
+      $obj->hips = $request->hips;
+      $obj->chest = $request->chest;
+      $obj->biceps = $request->biceps;
+      $obj->hair_type = $request->hair_type;
+      $obj->hair_length = $request->hair_length;
+      $obj->complexion = $request->complexion;
+      $obj->user_id = Auth::user()->id;
+
+      $obj->save();
+        }else{
+        $obj = new \App\Modules\User\Models\Physics();
+      $obj->height = $request->height;
+      $obj->weight = $request->weight;
+      $obj->bust = $request->bust;
+      $obj->waist = $request->waist;
+      $obj->hips = $request->hips;
+      $obj->chest = $request->chest;
+      $obj->biceps = $request->biceps;
+      $obj->hair_type = $request->hair_type;
+      $obj->hair_length = $request->hair_length;
+      $obj->complexion = $request->complexion;
+      $obj->user_id = Auth::user()->id;
+
+      $obj->save();
+        }
        return redirect(url('dashboard'));
     }
     public function createDocument(Request $request)

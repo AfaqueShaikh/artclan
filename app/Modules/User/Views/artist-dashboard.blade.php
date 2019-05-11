@@ -194,14 +194,52 @@
 						</div>						
 						<div class="uploadingHolder">
 							<div class="uploadBlock">
-								Physical Stats 
-								<span class="addButtons" data-toggle="modal" data-target="#PhysicalStats"><i class="fa fa-plus"></i></span>
+								Physical Attributes 
+								<span class="addButtons" data-toggle="modal" data-target="#PhysicalStats"><i class="fa fa-edit"></i></span>
 							</div>
 							<div class="eduDetails">
 								<div class="row">
 									<div class="col-sm-6 clearfix">
-										<label class="headingLable pull-left">Language</label>
-										<p class="pull-left">Hindi, English, Marathi</p>
+										<label class="headingLable pull-left">Height</label>
+										<p class="pull-left">{{isset($userPhysicsData->height)?$userPhysicsData->height:''}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Weight</label>
+										<p class="pull-left">{{isset($userPhysicsData->weight)?$userPhysicsData->weight:''}}</p>
+									</div>
+                                                                    @if(Auth::user()->gender != '1')
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Bust</label>
+										<p class="pull-left">{{isset($userPhysicsData->bust)?$userPhysicsData->bust:''}}</p>
+									</div>
+                                                                    @endif
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Waist</label>
+										<p class="pull-left">{{isset($userPhysicsData->waist)?$userPhysicsData->waist:''}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Hips</label>
+										<p class="pull-left">{{isset($userPhysicsData->hips)?$userPhysicsData->hips:''}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Chest</label>
+										<p class="pull-left">{{isset($userPhysicsData->chest)?$userPhysicsData->chest:''}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Biceps</label>
+										<p class="pull-left">{{isset($userPhysicsData->biceps)?$userPhysicsData->biceps:''}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Hair Type</label>
+										<p class="pull-left">{{isset($userPhysicsData->hair_type)?$userPhysicsData->hair_type:''}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Hair Length</label>
+										<p class="pull-left">{{isset($userPhysicsData->hair_length)?$userPhysicsData->hair_length:''}}</p>
+									</div>
+									<div class="col-sm-6 clearfix">
+										<label class="headingLable pull-left">Complexion</label>
+										<p class="pull-left">{{isset($userPhysicsData->complexion)?$userPhysicsData->complexion:''}}</p>
 									</div>
 								</div>
 							</div>
@@ -588,80 +626,62 @@
 					<img src="{{url('public/image/close.png')}}"/></span>
 				</button>
 			</div>
-			<div class="modal-body">				
+			<div class="modal-body">	
+                            <form action="{{url('user/physical-attributes/create')}}" method="post">
 				<div class="eduDetails">
 					<div class="eduDetails">
+						
 						<div class="form-group">
-							<label>Hair length </label>
-							<select class="form-control" name="attributes[]" id="attributes[]" class="input-common-style">		 
-									<option value="">Select</option>
-									<option value="440_439">Long</option>
-					
-									<option value="441_439">Medium</option>
-					
-									<option value="442_439">Short</option>
-					
-									<option value="443_439">Pixie</option>
-					
-									<option value="444_439">Bald</option>					
-				 
-							</select>
+							<label>Height</label>
+                                                        <input name="height" required=""  value="{{isset($userPhysicsData->height)?$userPhysicsData->height:""}}" class="form-control" >
+						</div>	
+						<div class="form-group">
+							<label>Weight	</label>
+                                                        <input name="weight" required="" value="{{isset($userPhysicsData->weight)?$userPhysicsData->weight:""}}" class="form-control" >
+						</div>	
+                                            @if(Auth::user()->gender != '1')
+						<div class="form-group">
+							<label>Bust	</label>
+                                                        <input name="bust" required="" class="form-control" value="{{isset($userPhysicsData->bust)?$userPhysicsData->bust:""}}" >
+						</div>	
+                                            @endif
+						<div class="form-group">
+							<label>Waist	</label>
+                                                        <input name="waist" required="" class="form-control" value="{{isset($userPhysicsData->waist)?$userPhysicsData->waist:""}}" >
+						</div>	
+						<div class="form-group">
+							<label>Hips	</label>
+                                                        <input name="hips" required="" class="form-control" value="{{isset($userPhysicsData->hips)?$userPhysicsData->hips:""}}" >
+						</div>	
+						<div class="form-group">
+							<label>Chest	</label>
+                                                        <input name="chest" required="" class="form-control" value="{{isset($userPhysicsData->chest)?$userPhysicsData->chest:""}}" >
+						</div>	
+						<div class="form-group">
+							<label>Biceps	</label>
+                                                        <input name="biceps" required="" class="form-control" value="{{isset($userPhysicsData->biceps)?$userPhysicsData->biceps:""}}" >
+						</div>	
+						<div class="form-group">
+							<label>Hair Type	</label>
+                                                        <input name="hair_type" required="" class="form-control" value="{{isset($userPhysicsData->hair_type)?$userPhysicsData->hair_type:""}}" >
+						</div>	
+						<div class="form-group">
+							<label>Hair Length	</label>
+                                                        <input name="hair_length" required="" class="form-control" value="{{isset($userPhysicsData->hair_length)?$userPhysicsData->hair_length:""}}" >
 						</div>
+                                            
 						<div class="form-group">
-							<label>Hair length </label>
-							<select class="form-control" name="attributes[]" id="attributes[]" class="input-common-style">		 
-									<option value="">Select</option>
-									<option value="440_439">Long</option>
-					
-									<option value="441_439">Medium</option>
-					
-									<option value="442_439">Short</option>
-					
-									<option value="443_439">Pixie</option>
-					
-									<option value="444_439">Bald</option>					
-				 
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Hair length </label>
-							<select class="form-control" name="attributes[]" id="attributes[]" class="input-common-style">		 
-									<option value="">Select</option>
-									<option value="440_439">Long</option>
-					
-									<option value="441_439">Medium</option>
-					
-									<option value="442_439">Short</option>
-					
-									<option value="443_439">Pixie</option>
-					
-									<option value="444_439">Bald</option>					
-				 
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Hair length </label>
-							<select class="form-control" name="attributes[]" id="attributes[]" class="input-common-style">		 
-									<option value="">Select</option>
-									<option value="440_439">Long</option>
-					
-									<option value="441_439">Medium</option>
-					
-									<option value="442_439">Short</option>
-					
-									<option value="443_439">Pixie</option>
-					
-									<option value="444_439">Bald</option>					
-				 
-							</select>
+							<label>Complexion	</label>
+                                                        <input name="complexion" required="" class="form-control" value="{{isset($userPhysicsData->complexion)?$userPhysicsData->complexion:""}}" >
 						</div>	
 					</div>
 				</div>
 				<div class="form-group text-center">
-					<button class="btn custom-btn" type="button">
+					<button class="btn custom-btn" type="submit">
 						<span>Submit</span>
 					</button>
 				</div>
+                            </form>
 			</div>			
 		</div>
 	</div>
