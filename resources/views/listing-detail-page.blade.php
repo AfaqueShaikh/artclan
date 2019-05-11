@@ -214,7 +214,7 @@
                                         @foreach($user_details->userVideos as $video)
                                             <li class="relative">
                                                 <iframe width="204" height="222" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="{{$video->video_url}}"></iframe>
-                                                <span class="deleteBtn"><i class="fa fa-trash"></i></span>
+                                                {{--<span class="deleteBtn"><i class="fa fa-trash"></i></span>--}}
                                                 <p class="uplName">{{$video->title}}</p>
                                             </li>
                                         @endforeach
@@ -245,7 +245,7 @@
                                         @foreach($user_details->userPhotos as $photo)
                                             <li class="relative">
                                                 <img src="{{url('storage/app/public/user_photos/'.$photo->photo)}}">
-                                                <span class="deleteBtn"><i class="fa fa-trash"></i></span>
+                                                {{--<span class="deleteBtn"><i class="fa fa-trash"></i></span>--}}
                                             </li>
                                         @endforeach
                                     @else
