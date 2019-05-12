@@ -44,7 +44,7 @@ Update Testimonial
                               <div class="form-group">
                                 <label>Description</label>
                               
-                            <textarea name="description" id="description">{!!old('description',$testimonial_data->description)!!}</textarea>
+                            <textarea name="description" id="description1">{!!old('description',$testimonial_data->description)!!}</textarea>
                             @if ($errors->has('description'))
                             <span><strong class="text-danger">{{ $errors->first('description') }}</strong></span>
                             @endif

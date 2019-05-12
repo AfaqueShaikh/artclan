@@ -561,8 +561,8 @@
                                     <img src="{{url('storage/app/public/testimonial/'.$testimonial->image)}}">
                                 </div>
                                 <div class="client-posts pull-left">
-                                    <h3>John Doe</h3>
-                                    <p>Actor</p>
+                                    <h3>{{$testimonial->name}}</h3>
+                                    
                                 </div>
                             </div>
                             <div class="client-tell">

@@ -45,7 +45,7 @@ Create Testimonial
                               <div class="form-group">
                                 <label>Description</label>
                               
-                            <textarea name="description" id="description">{!!old('description')!!}</textarea>
+                            <textarea name="description" id="description1">{!!old('description')!!}</textarea>
                             @if ($errors->has('description'))
                             <span><strong class="text-danger">{{ $errors->first('description') }}</strong></span>
                             @endif
