@@ -623,29 +623,30 @@
     <script>
         $(function () {
 
-            $('#Login_form').validate({
 
-                errorClass:'text-danger',
-                rules:{
-                    email:{
-                        required:true,
-                    },
-                    password:{
-                        required:true,
-                    }
+        })
+        $('#login_form').validate({
 
-                } ,
-                messages:{
-                    email:{
-                        required:'Please Enter Your Email',
-                    },
-                    password:{
-                        required:'Please Enter Your Password',
-                    }
+            errorClass:'text-danger',
+            rules:{
+                mobile:{
+                    required:true,
+                },
+                password:{
+                    required:true,
                 }
 
-            });
-        })
+            } ,
+            messages:{
+                mobile:{
+                    required:'Please Enter Your Registered Mobile Number',
+                },
+                password:{
+                    required:'Please Enter Your Password',
+                }
+            }
+
+        });
     </script>
 
 @endsection

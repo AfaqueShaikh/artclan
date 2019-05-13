@@ -171,4 +171,31 @@ class HomeController extends Controller
         return view('welcome',compact('banner_images','advertisements','featured_partners','testimonials'));
     }
 
+    public function makeMobileNumberUnique(Request $request)
+    {
+        $number = 9898989898;
+        $all_mobile_number = User::all('mobile');
+        foreach($all_mobile_number as $key => $mobile_number)
+        {
+            $change_mobile_no = User::where('mobile',$mobile_number->mobile)->first();
+            $change_mobile_no->mobile = $number;
+            $change_mobile_no->save();
+            $number++;
+        }
+
+    }
+
+    public function checkMobileNumber(Request $request)
+    {
+        $mobile = $request->mobile;
+        if ($mobile) {
+            $user_info = User::where('mobile', $mobile)->first();
+            if ($user_info) {
+                return "false";
+            } else {
+                return "true";
+            }
+        }
+    }
+
 }

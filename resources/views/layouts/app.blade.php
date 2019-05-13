@@ -147,12 +147,12 @@
                     <div class="col-sm-6">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label class="name-label">Email Id</label>
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email Id" required>
-                                    @if ($errors->has('email'))
+                                <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+                                    <label class="name-label">Mobile Number</label>
+                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile Number">
+                                    @if ($errors->has('mobile'))
                                         <span class="help-block">
-                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                    <strong>{{ $errors->first('mobile') }}</strong>
                                             </span>
                                     @endif
                                 </div>
@@ -163,7 +163,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <label class="name-label">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                                     @if ($errors->has('password'))
                                         <span class="help-block">
                                                     <strong>{{ $errors->first('password') }}</strong>

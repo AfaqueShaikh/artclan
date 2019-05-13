@@ -131,6 +131,8 @@
     <script src="{{url('/')}}/public/backend/js/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 <!--notify-->
     <script src="{{url('/')}}/public/backend/js/pnotify.js"></script>
+    <script src="{{url('public/js/validation.js')}}"></script>
+    <script src="{{url('public/js/jquery.validate.js')}}"></script>
 @yield('footer')
   </body>
   <script>
