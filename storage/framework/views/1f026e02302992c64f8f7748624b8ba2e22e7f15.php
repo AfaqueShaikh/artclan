@@ -142,12 +142,12 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="form-group<?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
+                                <div class="form-group<?php echo e($errors->has('mobile') ? ' has-error' : ''); ?>">
                                     <label class="name-label">Mobile Number</label>
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email Id" required>
-                                    <?php if($errors->has('email')): ?>
+                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile Number">
+                                    <?php if($errors->has('mobile')): ?>
                                         <span class="help-block">
-                                                    <strong><?php echo e($errors->first('email')); ?></strong>
+                                                    <strong><?php echo e($errors->first('mobile')); ?></strong>
                                             </span>
                                     <?php endif; ?>
                                 </div>
@@ -159,7 +159,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group<?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
                                     <label class="name-label">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                                     <?php if($errors->has('password')): ?>
                                         <span class="help-block">
                                                     <strong><?php echo e($errors->first('password')); ?></strong>
@@ -175,9 +175,9 @@
                                         
 
                                 </div>
-                                <div class="form-group text-center">
-                                    <!--<a href="javascript:void(0);" class="clrRed">Forgot password?</a>-->
-                                </div>
+<!--                                <div class="form-group text-center">
+                                    <a href="javascript:void(0);" class="clrRed">Forgot password?</a>
+                                </div>-->
                             </div>
                         </div>
                     </div>
