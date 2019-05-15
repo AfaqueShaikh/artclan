@@ -173,6 +173,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script type="text/javascript">
     var registerData = {};
+    var javascript_site_path = '{{url('/')}}';
     $(function () {
         var filterList = {
             init: function () {
@@ -223,6 +224,10 @@
             },
             mobile:{
                 required:true,
+                remote: {
+                    url: javascript_site_path + '/chk-mobile-duplicate',
+                    method: 'get'
+                }
             }
 
         } ,
@@ -238,6 +243,7 @@
             },
             mobile:{
                 required:'Please Enter Your Mobile No',
+                remote:'Mobile Number Already Exits'
             },
 
             password:{

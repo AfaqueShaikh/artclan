@@ -25,6 +25,23 @@ $(document).ready(function(){
 			"<i class='fa fa-angle-right'></i>"
 		], 
 	});
+	$('.testMonials').owlCarousel({
+		loop:true,
+		margin:0,
+		nav:false,
+		animateOut: 'fadeOut',
+		animateIn: 'fadeIn',
+		// animateOut: 'slideOutDown',
+  //       animateIn: 'flipInX',
+		dots:true,
+		autoplay:true,
+		items:1,  
+		mouseDrag:true,
+		navText: [
+			"<i class='fa fa-angle-left'></i>",
+			"<i class='fa fa-angle-right'></i>"
+		], 
+	});
 	$('#artistSlider').owlCarousel({
 		loop:true,
 		margin:0,
@@ -77,45 +94,28 @@ $(document).ready(function(){
 		        }
 		    }
 		});
-	// $('#partnerSlider').owlCarousel({
-	//     loop:true,
-	//     margin:0,
-	//     nav:false,
-	//     dots:true,
-	//     responsive:{
-	//         0:{
-	//             items:1
-	//         },
-	//         600:{
-	//             items:6
-	//         },
-	//         1000:{
-	//             items:9
-	//         }
-	//     }
-	// });
-	$('#clientSay').owlCarousel({
-        center: true,
-        items: 1,
-        loop: true,
-        margin: 10,
-        nav: true,
-        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-        responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 2
-            },
-            768: {
-                items: 3
-            },
-            1200: {
-                items: 4
-            }
-        }
-    });
+		$('#clientSay').owlCarousel({
+	        //center: true,
+	        items: 1,
+	        loop: true,
+	        dots:true,
+	        nav: false,
+	        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+	        responsive: {
+	            0: {
+	                items: 1
+	            },
+	            480: {
+	                items: 1
+	            },
+	            768: {
+	                items: 1
+	            },
+	            1200: {
+	                items: 1
+	            }
+	        }
+	    });
 
 	/*--------------fullHeight---------*/
 	function fullSize() {

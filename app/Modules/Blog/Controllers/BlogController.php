@@ -64,7 +64,6 @@ class BlogController extends Controller
                 $validator = Validator::make($request->all(), [
                     'title' => 'required',
                     'slug' => 'required',
-                    
                     'body' => 'required',
 
                 ]);

@@ -49,4 +49,8 @@ Route::post('/send-enquiry', 'ContactUsController@createContactUs');
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
+Route::get('/chk-mobile-duplicate','HomeController@checkMobileNumber');
+
+
+Route::get("/make/mobile-number-unique","HomeController@makeMobileNumberUnique");
 

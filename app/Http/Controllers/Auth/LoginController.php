@@ -43,13 +43,16 @@ use AuthenticatesUsers;
 
     public function redirectToProvider($provider) {
         
+        
         return Socialite::driver($provider)->redirect();
     }
 
     public function handleProviderCallback($provider) {
+        
+        
         try {
             $user = Socialite::driver($provider)->user();
-            
+        dd($user);    
             $authUser = $this->findOrCreateUser($user, $provider);
             
             Auth::loginUsingId($authUser->id);

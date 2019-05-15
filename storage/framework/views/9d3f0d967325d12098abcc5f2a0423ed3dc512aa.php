@@ -35,7 +35,7 @@
         </ul>
     </div>
     <nav class="custome-navbar clearfix">
-        <div class="logo"><a href="index.html"><img src="<?php echo e(url('public/image/logo.jpeg')); ?>"> <!-- Logo <span>Here</span> --></a></div>
+        <div class="logo"><a href="<?php echo e(url('/')); ?>"><img src="<?php echo e(url('public/image/logo.jpeg')); ?>"> <!-- Logo <span>Here</span> --></a></div>
         <div class="navbar-right">
             <ul class="menus">
                 <li>
@@ -58,19 +58,19 @@
                                 <a href="javascript:void(0);" class="rollLink">Costume Designer</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Photographer</a>
+                                <a href="<?php echo e(url('/artist/listing/'.base64_encode(10))); ?>" class="rollLink">Photographer</a>
                             </li>
                             <li>
                                 <a href="javascript:void(0);" class="rollLink">Film Maker</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Actor</a>
+                                <a href="<?php echo e(url('/artist/listing/'.base64_encode(12))); ?>"class="rollLink">Actor</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Fashion Model</a>
+                                <a href="<?php echo e(url('/artist/listing/'.base64_encode(13))); ?>" class="rollLink">Fashion Model</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Makeup Artist</a>
+                                <a href="<?php echo e(url('/artist/listing/'.base64_encode(9))); ?>" class="rollLink">Makeup Artist</a>
                             </li>
                             
                             
@@ -80,9 +80,11 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="javascript:void(0);">Blogs</a></li>
-                <li><a href="javascript:void(0);">Login</a></li>
-                <li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>
+<!--                <li><a href="javascript:void(0);"><strong class="bigft">Blogs</strong></a></li>-->
+                <?php if(!Auth::check()): ?>
+                    <li><a href="javascript:void(0);"data-toggle="modal" data-target="#login">Login</a></li>
+                    <li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>
+                <?php endif; ?>
             </ul>
             <div class="sideNavToggle">
                 <a href="javascript:void(0);" class="color-red">Menu</a>
@@ -94,10 +96,10 @@
         </div>
     </nav>
     <div class="sidemenu">
-        <a href="javascript:void()" class="closeSidenav">
+        <a href="javascript:void(0);" class="closeSidenav">
             <img src="<?php echo e(url('public/image/close.png')); ?>" alt="">
         </a>
-        <div class="sidenavLogo"><a href="index.html"><img src="<?php echo e(url('public/image/logo.jpeg')); ?>" alt="Weizmann Forex" width="127"></a></div>
+        <div class="sidenavLogo"><a href="<?php echo e(url('/')); ?>"><img src="<?php echo e(url('public/image/logo.jpeg')); ?>" alt="Weizmann Forex" width="127"></a></div>
         <ul class="sidemenu-list">
             <li class="active">
                 <a href="javascript:void(0);" class="color-red">About Us</a>

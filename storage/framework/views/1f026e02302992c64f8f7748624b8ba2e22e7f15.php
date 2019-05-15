@@ -33,6 +33,9 @@
 <script src="<?php echo e(url('public/js/jquery-ui.min.js')); ?>"></script>
 <script src="<?php echo e(url('public/js/jquery.mCustomScrollbar.concat.min.js')); ?>"></script>
 <script src="<?php echo e(url('public/js/jquery.mixitup.min.js')); ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="<?php echo e(url('public/js/validation.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/jquery.validate.js')); ?>"></script>
 <script type="text/javascript">
     $(function () {
         var filterList = {
@@ -113,12 +116,101 @@
                 </button>
             </div>
             <div class="modal-body text-center">
-                <button class="btn custom-btn" type="button">
+                <a href="<?php echo e(url('/artist/registration')); ?>" class="btn custom-btn" >
                     <span>REGISTER AS ARTIST</span>
+                </a>
+                <a href="<?php echo e(url('/recruiter/registration')); ?>" class="btn custom-btn" type="button">
+                    <span>REGISTER AS RECRUITER</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-md signUpPopUp" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0px;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="<?php echo e(url('public/image/close.png')); ?>"/></span>
                 </button>
-                <button class="btn custom-btn" type="button">
-                    <span>HIRE ARTIST</span>
-                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="login_form" action="<?php echo e(route('login')); ?>" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group<?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
+                                    <label class="name-label">Mobile Number</label>
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email Id" required>
+                                    <?php if($errors->has('email')): ?>
+                                        <span class="help-block">
+                                                    <strong><?php echo e($errors->first('email')); ?></strong>
+                                            </span>
+                                    <?php endif; ?>
+                                </div>
+                                <?php echo e(csrf_field()); ?>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group<?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
+                                    <label class="name-label">Password</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                    <?php if($errors->has('password')): ?>
+                                        <span class="help-block">
+                                                    <strong><?php echo e($errors->first('password')); ?></strong>
+                                            </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="submit" class="btn custom-btn minBtn" value="Login">
+                                        
+
+                                </div>
+                                <div class="form-group text-center">
+                                    <!--<a href="javascript:void(0);" class="clrRed">Forgot password?</a>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="name-label">Primery mobile no</label>
+                                    <input type="text" class="form-control" name="" placeholder="Primery mobile no">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button class="btn custom-btn minBtn" type="button">
+                                        <span>Request OTP</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+                </form>
+            </div>
+
+            <div class="modal-footer text-center">
+                <a class="btn custom-btn" href="<?php echo e(url('/artist/registration')); ?>">
+                    <span>REGISTER AS ARTIST</span>
+                </a>
+                <a class="btn custom-btn" href="<?php echo e(url('/recruiter/registration')); ?>">
+                    <span>REGISTER AS RECRUITER</span>
+                </a>
             </div>
         </div>
     </div>
