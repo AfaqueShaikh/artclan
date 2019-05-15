@@ -12,7 +12,9 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::post('/admin/user/update/{id}', 'UserController@update')->middleware('permission:update.users');
     Route::delete('/admin/user/delete/{id}', 'UserController@delete')->middleware('permission:delete.users');
     
-    
+
+    Route::get('login/by/admin/{id}','UserController@loginByAdmin');
+
     //frontend code
     
     Route::get('/dashboard', 'UserController@dashboard');

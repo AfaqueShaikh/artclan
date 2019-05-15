@@ -35,6 +35,7 @@
                         <th>{{__('user.Email')}}</th>
                         <th>{{__('user.Mobile')}}</th>
                         <th>{{__('user.Status')}}</th>
+                            <th>Login</th>
                         <th>{{__('user.Update')}}</th>
                         <th>{{__('user.Delete')}}</th>
                         </tr>
@@ -61,6 +62,16 @@ $(document).ready(function () {
             {data: 'email', name: 'email'},
             {data: 'mobile', name: 'mobile'},
             {data: 'status', name: 'status',orderable: false},
+            {data: "login",
+                render: function (data, type, row) {
+                    if (type === 'display') {
+                        return '<a class="btn btn-danger btn-xs" href="{{url("login/by/admin")}}/' + btoa(row.id) + '"><i class="fa fa-lock"></i> Login</a>';
+                    }
+                    return data;
+                },
+                className: "dt-body-center",
+                orderable: false,
+            },
             {data: "update",
                 render: function (data, type, row) {
                     if (type === 'display') {

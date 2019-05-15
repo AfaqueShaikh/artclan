@@ -377,4 +377,30 @@ class UserController extends Controller
         
         return redirect('admin/user/list/'.$user_type)->with('success','User Delete Successfully!');
     }
+
+    public function loginByAdmin($id)
+    {
+        $id = base64_decode($id);
+        Auth::logout();
+        Auth::loginUsingId($id);
+        $userData = Auth::user();
+        $user_types[1] = "admin";
+        $user_types[2] = "sub_admin";
+        $user_types[3] = "user";
+        $user_types[4] = "writer";
+        $user_types[5] = "painter";
+        $user_types[6] = "singer";
+        $user_types[7] = "dancer";
+        $user_types[8] = "costume_designer";
+        $user_types[9] = "makeup_artist";
+        $user_types[10] = "Photographer";
+        $user_types[11] = "Film Maker";
+        $user_types[12] = "Actor";
+        $user_types[13] = "Fashion Model";
+        $cities = \App\Modules\District\Models\District::all();
+        $userPhysicsData = Auth::user()->userPhysics;
+        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities, 'userPhysicsData'=>$userPhysicsData]);
+
+
+    }
 }
