@@ -23,6 +23,7 @@ Route::get('admin/logout', function(){
 Route::get('/','HomeController@showLandingPage');
 
 Route::get('/artist/registration','HomeController@showArtistRegistrationForm');
+Route::get('/artist/registration/{type}','HomeController@showArtistRegistrationForm');
 Route::get('/recruiter/registration','HomeController@showRecruiterRegistrationForm');
 
 Route::post('/register/artist','HomeController@registerArtist');

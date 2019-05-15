@@ -7,32 +7,24 @@
                     <div class="footer-nav">
                         <ul class="clearfix">
                             <li><a href="javascript:void(0);">About us</a></li>
-                            <li><a href="javascript:void(0);">How it works</a></li>
-                            <li><a href="javascript:void(0);">Artist</a></li>
-                            <li><a href="javascript:void(0);">Blogs</a></li>
-                            <li><a href="javascript:void(0);">Contact us</a></li>
+                            
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="footer-nav">
                         <ul class="clearfix">
-                            <li><a href="javascript:void(0);">About us</a></li>
+                            
                             <li><a href="javascript:void(0);">How it works</a></li>
-                            <li><a href="javascript:void(0);">Artist</a></li>
-                            <li><a href="javascript:void(0);">Blogs</a></li>
-                            <li><a href="javascript:void(0);">Contact us</a></li>
+                            
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="footer-nav">
                         <ul class="clearfix">
-                            <li><a href="javascript:void(0);">About us</a></li>
-                            <li><a href="javascript:void(0);">How it works</a></li>
-                            <li><a href="javascript:void(0);">Artist</a></li>
-                            <li><a href="javascript:void(0);">Blogs</a></li>
-                            <li><a href="javascript:void(0);">Contact us</a></li>
+                            <li><a href="javascript:void(0);">Artists</a></li>
+                            
                         </ul>
                     </div>
                 </div>
