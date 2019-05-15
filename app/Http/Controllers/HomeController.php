@@ -8,6 +8,7 @@ use App\Modules\District\Models\District;
 use App\Modules\FeaturedPatner\Models\FeaturedPatner;
 use App\Modules\Testimonial\Models\Testimonial;
 use App\User;
+use App\VerifyNumber;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -196,6 +197,22 @@ class HomeController extends Controller
                 return "true";
             }
         }
+    }
+
+
+    public function verifyMobileNumber(Request $request)
+    {
+        $otp = mt_rand(100000,999999);
+        $verify_number = new VerifyNumber();
+        $verify_number->mobile_number = $request->number;
+        $verify_number->otp = $otp;
+        $verify_number->save();
+        return json_encode(['number' => $request->number]);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        
     }
 
 }

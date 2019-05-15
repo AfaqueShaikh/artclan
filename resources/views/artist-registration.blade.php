@@ -23,7 +23,7 @@
         <div class="display-middle">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="stepFirst" id="stepFirst">
+                    <div class="stepFirst" id="stepFirst" style="display: none;">
                         <form id="first_step_form" action="" method="" accept-charset="utf-8">
                             <h3>Register <span>as artist</span></h3>
                             <div class="row">
@@ -379,7 +379,7 @@
                             </div>
                         </form>
                     </div>--}}
-                    <div class="stepFive" id="stepFive" style="display: none;">
+                    <div class="stepFive" id="stepFive" {{--style="display: none;"--}}>
                         <form id="five_step_form" action= method="" accept-charset="utf-8">
                             <h3 class="text-center">Your <span>Location</span></h3>
                             <ul class="steps clearfix">
@@ -418,7 +418,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group text-right">
-                                        <a href="javascript:void(0)" class="clrRed">Resend OTP</a>
+                                        <a href="javascript:void(0);" onclick="verifyNumber();" class="btn btn-danger">Verify Number</a>
                                     </div>
                                 </div>
                                 {{--<div class="col-sm-6">
@@ -449,6 +449,27 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="enter_otp_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-md signUpPopUp" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <form id="otp_verify_form" action="{{url('/verify/otp')}}" method="post">
+                    <input type="hidden" class="form-control" name="mobile_number" id="mobile_number" readonly>
+                    <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP">
+                    <br>
+                    <input type="submit" name="submit_otp" value="Verify OTP" class="btn btn-danger">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 <script src="{{url('public/js/jquery.js')}}"></script>
 <script src="{{url('public/js/bootstrap.min.js')}}"></script>
@@ -460,7 +481,7 @@
 <script src="{{url('public/js/validation.js')}}"></script>
 <script src="{{url('public/js/jquery.validate.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<script type="text/javascript">
+{{--<script type="text/javascript">
     var registerData = {};
     var javascript_site_path = '{{url('/')}}';
     $(function () {
@@ -675,6 +696,71 @@
 
         }
 
+    })
+
+</script>--}}
+<script>
+
+    function verifyNumber()
+    {
+        var number = $('#mobile_no_verification').val();
+        if(number == "")
+        {
+            Swal.fire({
+                type: 'warning',
+                title: "Please enter number to verify",
+                showConfirmButton: false,
+                timer: 1000
+            });
+
+        }
+        else
+        {
+            $.ajax({
+                url: '{{url("/verify/number")}}',
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    number: number,
+                },
+                success: function (result) {
+                    console.log(result.number);
+                    $('#mobile_number').val(result.number);
+                    $('#enter_otp_model').modal("show");
+                    /*Swal.fire({
+                        title: 'Enter OTP To Verify Number',
+                        input: 'text',
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'Verify OTP',
+                        showLoaderOnConfirm: true,
+                    }).then(function() {
+                        alert();
+                    })*/
+                }
+            });
+        }
+    }
+
+    $('#otp_verify_form').validate({
+        errorClass: 'text-danger',
+        rules:{
+            otp:{
+                required:true,
+                number:true,
+            }
+        },
+        messages:{
+            otp:{
+                required:'Enter OTP',
+                number:'Invalid OTP Format'
+            }
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
     })
 
 </script>
