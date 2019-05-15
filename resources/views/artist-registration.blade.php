@@ -23,7 +23,7 @@
         <div class="display-middle">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="stepFirst" id="stepFirst" style="display: none;">
+                    <div class="stepFirst" id="stepFirst">
                         <form id="first_step_form" action="" method="" accept-charset="utf-8">
                             <h3>Register <span>as artist</span></h3>
                             <div class="row">
@@ -379,7 +379,7 @@
                             </div>
                         </form>
                     </div>--}}
-                    <div class="stepFive" id="stepFive" {{--style="display: none;"--}}>
+                    <div class="stepFive" id="stepFive" style="display: none;">
                         <form id="five_step_form" action= method="" accept-charset="utf-8">
                             <h3 class="text-center">Your <span>Location</span></h3>
                             <ul class="steps clearfix">
@@ -418,7 +418,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group text-right">
-                                        <a href="javascript:void(0);" onclick="verifyNumber();" class="btn btn-danger">Verify Number</a>
+                                        <a href="javascript:void(0);" onclick="verifyNumber();" id="verify_number_btn" name="verify_number_btn" class="btn btn-danger">Verify Number</a>
                                     </div>
                                 </div>
                                 {{--<div class="col-sm-6">
@@ -439,7 +439,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group text-center">
                                         <a id="step_five_previous_btn" href="javascript:void(0);" class="btn custom-btn"><span>Back</span></a>
-                                        <a id="step_five_submit_btn" href="javascript:void(0);" class="btn custom-btn"><span>Finish</span></a>
+                                        <a id="step_five_submit_btn" href="javascript:void(0);" class="btn custom-btn" disabled><span>Finish</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -450,7 +450,7 @@
         </div>
     </div>
 
-    <div class="modal" id="enter_otp_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal" id="enter_otp_model" tabindex="-1" role="" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-md signUpPopUp" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom: 0px;">
@@ -459,12 +459,15 @@
                     </button>
                 </div>
                 <div class="modal-body text-center">
-                    <form id="otp_verify_form" action="{{url('/verify/otp')}}" method="post">
+                    <h3>Your OTP IS <span id="otp_display"></span> </h3>
+                    <br>
+                    <form id="otp_verify_form">
                     <input type="hidden" class="form-control" name="mobile_number" id="mobile_number" readonly>
                     <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP">
+                    </form>
                     <br>
                     <button id="btn_verify_otp" onclick="verifyOtp();" class="btn btn-danger">Verify OTP</button>
-                    </form>
+
                 </div>
             </div>
         </div>
@@ -481,7 +484,7 @@
 <script src="{{url('public/js/validation.js')}}"></script>
 <script src="{{url('public/js/jquery.validate.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-{{--<script type="text/javascript">
+<script type="text/javascript">
     var registerData = {};
     var javascript_site_path = '{{url('/')}}';
     $(function () {
@@ -698,9 +701,6 @@
 
     })
 
-</script>--}}
-<script>
-
     function verifyNumber()
     {
         var number = $('#mobile_no_verification').val();
@@ -725,6 +725,7 @@
                 },
                 success: function (result) {
                     console.log(result.number);
+                    $('#otp_display').text(result.generated_otp);
                     $('#mobile_number').val(result.number);
                     $('#enter_otp_model').modal("show");
                     /*Swal.fire({
@@ -757,11 +758,57 @@
                 required:'Enter OTP',
                 number:'Invalid OTP Format'
             }
-        },
-        submitHandler:function(form){
-            form.submit();
         }
-    })
+
+    });
+
+    function verifyOtp()
+    {
+        if($('#otp_verify_form').valid())
+        {
+            $.ajax({
+                url: '{{url("/verify/otp")}}',
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    mobile_number: $('#mobile_number').val(),
+                    otp: $('#otp').val(),
+                },
+                success: function (result) {
+                    console.log(result);
+                    if(result.icon == 'success')
+                    {
+                        $('#mobile_no_verification').attr('readonly',true);
+                        $('#verify_number_btn').attr('disabled',true);
+                        $('#verify_number_btn').text('Verified');
+                        $('#otp_display').text('');
+                        $('#mobile_number').val('');
+                        $('#otp').val('');
+                        $('#enter_otp_model').modal("hide");
+                        $('#step_five_submit_btn').attr('disabled',false);
+
+                    }
+                    else
+                    {
+                        $('#mobile_no_verification').val('');
+                        $('#otp_display').text('');
+                        $('#mobile_number').val('');
+                        $('#otp').val('');
+                        $('#enter_otp_model').modal("hide");
+                    }
+                    Swal.fire({
+                        type: result.icon,
+                        title: result.message,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+
+
+
+                }
+            });
+        }
+    }
 
 </script>
 <script src="{{url('public/js/custom.js')}}"></script>

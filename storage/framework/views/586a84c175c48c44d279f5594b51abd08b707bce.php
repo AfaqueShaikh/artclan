@@ -23,7 +23,7 @@
         <div class="display-middle">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="stepFirst" id="stepFirst" style="display: none;">
+                    <div class="stepFirst" id="stepFirst">
                         <form id="first_step_form" action="" method="" accept-charset="utf-8">
                             <h3>Register <span>as artist</span></h3>
                             <div class="row">
@@ -207,7 +207,7 @@
                         </form>
                     </div>
                     
-                    <div class="stepFive" id="stepFive" >
+                    <div class="stepFive" id="stepFive" style="display: none;">
                         <form id="five_step_form" action= method="" accept-charset="utf-8">
                             <h3 class="text-center">Your <span>Location</span></h3>
                             <ul class="steps clearfix">
@@ -243,7 +243,7 @@
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group text-right">
-                                        <a href="javascript:void(0);" onclick="verifyNumber();" class="btn btn-danger">Verify Number</a>
+                                        <a href="javascript:void(0);" onclick="verifyNumber();" id="verify_number_btn" name="verify_number_btn" class="btn btn-danger">Verify Number</a>
                                     </div>
                                 </div>
                                 
@@ -252,7 +252,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group text-center">
                                         <a id="step_five_previous_btn" href="javascript:void(0);" class="btn custom-btn"><span>Back</span></a>
-                                        <a id="step_five_submit_btn" href="javascript:void(0);" class="btn custom-btn"><span>Finish</span></a>
+                                        <a id="step_five_submit_btn" href="javascript:void(0);" class="btn custom-btn" disabled><span>Finish</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -263,7 +263,7 @@
         </div>
     </div>
 
-    <div class="modal" id="enter_otp_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal" id="enter_otp_model" tabindex="-1" role="" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-md signUpPopUp" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom: 0px;">
@@ -272,12 +272,15 @@
                     </button>
                 </div>
                 <div class="modal-body text-center">
-                    <form id="otp_verify_form" action="<?php echo e(url('/verify/otp')); ?>" method="post">
+                    <h3>Your OTP IS <span id="otp_display"></span> </h3>
+                    <br>
+                    <form id="otp_verify_form">
                     <input type="hidden" class="form-control" name="mobile_number" id="mobile_number" readonly>
                     <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP">
-                    <br>
-                    <input type="submit" name="submit_otp" value="Verify OTP" class="btn btn-danger">
                     </form>
+                    <br>
+                    <button id="btn_verify_otp" onclick="verifyOtp();" class="btn btn-danger">Verify OTP</button>
+
                 </div>
             </div>
         </div>
@@ -294,8 +297,222 @@
 <script src="<?php echo e(url('public/js/validation.js')); ?>"></script>
 <script src="<?php echo e(url('public/js/jquery.validate.js')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script type="text/javascript">
+    var registerData = {};
+    var javascript_site_path = '<?php echo e(url('/')); ?>';
+    $(function () {
+        var filterList = {
+            init: function () {
+                // MixItUp plugin
+                // http://mixitup.io
+                $('#portfoliolist').mixItUp({
+                    selectors: {
+                        target: '.portfolio',
+                        filter: '.filter'
+                    },
+                    load: {
+                        filter: '.all'
+                    }
+                });
+            }
+        };
+        // Run the show!
+        filterList.init();
+    });
 
-<script>
+    $('#first_step_form').validate({
+
+       errorClass:'text-danger',
+       rules:{
+           name:{
+               required:true,
+           },
+           gender:{
+               required:true,
+           },
+           email:{
+               required:true,
+           },
+           mobile:{
+               required:true,
+               remote: {
+                   url: javascript_site_path + '/chk-mobile-duplicate',
+                   method: 'get'
+               }
+           },
+           category:{
+               required:true,
+           },
+           password:{
+               required:true,
+           },
+           age:{
+               required:true,
+           }
+
+       } ,
+        messages:{
+           name:{
+               required:'Please Enter Your Name',
+           },
+            gender:{
+                required:'Please Select Your Gender',
+            },
+            email:{
+                required:'Please Enter Your Email Id',
+            },
+            mobile:{
+                required:'Please Enter Your Mobile No',
+                remote:"Mobile Number Already Exits",
+            },
+            category:{
+                required:'Please Select Category',
+            },
+            password:{
+                required:'Please Enter Password',
+            },
+            age:{
+                required:'Please Select Your Age',
+            },
+        }
+
+    });
+
+    $('#third_step_form').validate({
+
+        errorClass:'text-danger',
+        rules:{
+            date_of_birth:{
+                required:true,
+            },
+            language:{
+                required:true,
+            },
+
+
+        } ,
+        messages:{
+            date_of_birth:{
+                required:'Please Enter Your Date Of Birth',
+            },
+            language:{
+                required:'Please Select Language',
+            },
+
+        }
+
+    });
+
+    $('#five_step_form').validate({
+
+        errorClass:'text-danger',
+        rules:{
+            mobile_no_verification:{
+                required:true,
+            },
+
+
+
+        } ,
+        messages:{
+            mobile_no_verification:{
+                required:'Please Enter Mobile Number For Verification',
+            },
+
+
+        }
+
+    });
+
+
+
+
+
+    $('#first_step_btn').click(function () {
+
+        if($('#first_step_form').valid())
+        {
+            registerData.name = $('#name').val();
+            registerData.email = $('#email').val();
+            registerData.mobile = $('#mobile').val();
+            registerData.category = $('#category').val();
+            registerData.password = $('#password').val();
+            registerData.gender = $("input[name='gender']:checked").val();
+            registerData.age = $("input[name='age']:checked").val();
+            $('#stepFirst').hide();
+            $('#stepThree').show();
+        }
+
+    });
+
+    /*$('#step_secend_previous_btn').click(function () {
+        $('#stepFirst').show();
+        $('#stepSecond').hide();
+    });*/
+
+    /*$('#step_secend_next_btn').click(function () {
+        $('#stepSecond').hide();
+        $('#stepThree').show();
+    });*/
+
+    $('#step_third_previous_btn').click(function () {
+        $('#stepFirst').show();
+        $('#stepThree').hide();
+    });
+
+    $('#step_third_next_btn').click(function () {
+        if($('#third_step_form').valid())
+        {
+            registerData.date_of_birth = $('#date_of_birth').val();
+            registerData.language = $('#language').val();
+            registerData.form_type = $('#form_type').val();
+            $('#stepThree').hide();
+            $('#stepFive').show();
+        }
+
+    });
+
+    /*$('#step_four_previous_btn').click(function () {
+        $('#stepThree').show();
+        $('#stepFour').hide();
+    });*/
+
+   /* $('#step_four_next_btn').click(function () {
+        $('#stepFour').hide();
+        $('#stepFive').show();
+    });*/
+
+    $('#step_five_previous_btn').click(function () {
+        $('#stepThree').show();
+        $('#stepFive').hide();
+    });
+
+    $('#step_five_submit_btn').click(function () {
+        if($('#five_step_form').valid())
+        {
+            console.log(registerData);
+            $.ajax({
+                url: '<?php echo e(url("/register/artist")); ?>',
+                method: "POST",
+                dataType: 'json',
+                data: registerData,
+                success: function (result) {
+                    console.log(result);
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Registered Successfully......',
+                        showConfirmButton: true,
+                    }).then(function() {
+                        // Redirect the user
+                        window.location.href = "<?php echo e(url('/')); ?>";
+                    })
+                }
+            })
+
+
+        }
+
+    })
 
     function verifyNumber()
     {
@@ -321,6 +538,7 @@
                 },
                 success: function (result) {
                     console.log(result.number);
+                    $('#otp_display').text(result.generated_otp);
                     $('#mobile_number').val(result.number);
                     $('#enter_otp_model').modal("show");
                     /*Swal.fire({
@@ -353,11 +571,57 @@
                 required:'Enter OTP',
                 number:'Invalid OTP Format'
             }
-        },
-        submitHandler:function(form){
-            form.submit();
         }
-    })
+
+    });
+
+    function verifyOtp()
+    {
+        if($('#otp_verify_form').valid())
+        {
+            $.ajax({
+                url: '<?php echo e(url("/verify/otp")); ?>',
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    mobile_number: $('#mobile_number').val(),
+                    otp: $('#otp').val(),
+                },
+                success: function (result) {
+                    console.log(result);
+                    if(result.icon == 'success')
+                    {
+                        $('#mobile_no_verification').attr('readonly',true);
+                        $('#verify_number_btn').attr('disabled',true);
+                        $('#verify_number_btn').text('Verified');
+                        $('#otp_display').text('');
+                        $('#mobile_number').val('');
+                        $('#otp').val('');
+                        $('#enter_otp_model').modal("hide");
+                        $('#step_five_submit_btn').attr('disabled',false);
+
+                    }
+                    else
+                    {
+                        $('#mobile_no_verification').val('');
+                        $('#otp_display').text('');
+                        $('#mobile_number').val('');
+                        $('#otp').val('');
+                        $('#enter_otp_model').modal("hide");
+                    }
+                    Swal.fire({
+                        type: result.icon,
+                        title: result.message,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+
+
+
+                }
+            });
+        }
+    }
 
 </script>
 <script src="<?php echo e(url('public/js/custom.js')); ?>"></script>

@@ -200,12 +200,21 @@ class HomeController extends Controller
         $verify_number->mobile_number = $request->number;
         $verify_number->otp = $otp;
         $verify_number->save();
-        return json_encode(['number' => $request->number]);
+        return json_encode(['number' => $request->number,'generated_otp' => $otp]);
     }
 
     public function verifyOtp(Request $request)
     {
         $check_otp = VerifyNumber::where('mobile_number',$request->mobile_number)->where('otp',$request->otp)->get();
+        if(isset($check_otp) && count($check_otp) > 0)
+        {
+            return json_encode(['icon' => 'success','message' => 'Number Verified Successfully']);
+        }
+        else
+        {
+            return json_encode(['icon' => 'warning','message' => 'Incorrect OTP']);
+        }
+
     }
 
 }

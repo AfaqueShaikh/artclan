@@ -139,11 +139,7 @@
             <div class="modal-body">
                 <form id="login_form" action="<?php echo e(route('login')); ?>" method="POST" enctype="multipart/form-data">
                 <div class="row">
-<<<<<<< HEAD
-                    <div class="col-sm-6">
-=======
                     <div class="col-sm-12">
->>>>>>> 9c478101254134beab6586cf1cad2734baae2951
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group<?php echo e($errors->has('mobile') ? ' has-error' : ''); ?>">
@@ -179,15 +175,6 @@
                                         
 
                                 </div>
-<<<<<<< HEAD
-                                <div class="form-group text-center">
-                                    <a href="javascript:void(0);" class="clrRed">Forgot password?</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-=======
 <!--                                <div class="form-group text-center">
                                     <a href="javascript:void(0);" class="clrRed">Forgot password?</a>
                                 </div>-->
@@ -195,7 +182,6 @@
                         </div>
                     </div>
 <!--                    <div class="col-sm-6">
->>>>>>> 9c478101254134beab6586cf1cad2734baae2951
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -213,11 +199,7 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD
-                    </div>
-=======
                     </div>-->
->>>>>>> 9c478101254134beab6586cf1cad2734baae2951
                 </div>
                 </form>
             </div>
