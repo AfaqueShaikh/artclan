@@ -32,30 +32,25 @@ class HomeController extends Controller
     public function index()
     {
         //dd("here");
-        
 
-        if(Auth::user()->user_type==1)
-        {
+
+        if (Auth::user()->user_type == 1) {
             return redirect('admin/dashboard');
-        }
-        else
-        {
-            if(Auth::user()->user_type != 3 && !Auth::user()->user_type != 1 )
-            {
+        } else {
+            if (Auth::user()->user_type != 3 && !Auth::user()->user_type != 1) {
 
 
                 return redirect('/dashboard');
-            }
-            else {
-                return redirect('/')->with('error','Something went wrong');
+            } else {
+                return redirect('/')->with('error', 'Something went wrong');
             }
         }
-        
+
     }
 
     public function showArtistRegistrationForm($type = null)
     {
-        return view('artist-registration', ['type'=>$type]);
+        return view('artist-registration', ['type' => $type]);
     }
 
     public function showRecruiterRegistrationForm()
@@ -67,21 +62,21 @@ class HomeController extends Controller
     {
         User::create([
 
-                'date_of_birth' => $request->date_of_birth,
-                'language' => $request->language,
-                'mobile' => $request->mobile,
-                'email' => $request->email,
-                'user_type' => $request->category,
-                'user_status' => '1',
-                'name' =>$request->name,
-                'gender' => $request->gender,
-                'password' => bcrypt($request->password),
-            ]);
+            'date_of_birth' => $request->date_of_birth,
+            'language' => $request->language,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+            'user_type' => $request->category,
+            'user_status' => '1',
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'password' => bcrypt($request->password),
+        ]);
 
-            return json_encode('Success');
-            /*$languages = (explode(",",$data['language']));
-            $available_to_work = (explode(",",$data['available_to_work']));
-            dd($available_to_work);*/
+        return json_encode('Success');
+        /*$languages = (explode(",",$data['language']));
+        $available_to_work = (explode(",",$data['available_to_work']));
+        dd($available_to_work);*/
     }
 
     public function registerRecruiter(Request $request)
@@ -119,8 +114,8 @@ class HomeController extends Controller
         $user_types[12] = "Actor";
         $user_types[13] = "Fashion Model";
         $user_type = base64_decode(request()->segment(3));
-        $user_details = User::where('user_type',$user_type)->get();
-        return view('listing-page',compact('user_details','user_types'));
+        $user_details = User::where('user_type', $user_type)->get();
+        return view('listing-page', compact('user_details', 'user_types'));
     }
 
     public function viewArtistDetailPage()
@@ -139,8 +134,8 @@ class HomeController extends Controller
         $user_types[12] = "Actor";
         $user_types[13] = "Fashion Model";
         $user_id = base64_decode(request()->segment(3));
-        $user_details = User::where('id',$user_id)->first();
-        return view('listing-detail-page',compact('user_details','user_types'));
+        $user_details = User::where('id', $user_id)->first();
+        return view('listing-detail-page', compact('user_details', 'user_types'));
     }
 
 
@@ -154,9 +149,8 @@ class HomeController extends Controller
     {
 
         $location = District::all()->take(4);
-        if(isset($request->name))
-        {
-            $location = District::where('name',$request->name)->get();
+        if (isset($request->name)) {
+            $location = District::where('name', $request->name)->get();
         }
         return json_encode($location);
 
@@ -169,16 +163,15 @@ class HomeController extends Controller
         $advertisements = Ads::all();
         $featured_partners = FeaturedPatner::all();
         $testimonials = Testimonial::all();
-        return view('welcome',compact('banner_images','advertisements','featured_partners','testimonials'));
+        return view('welcome', compact('banner_images', 'advertisements', 'featured_partners', 'testimonials'));
     }
 
     public function makeMobileNumberUnique(Request $request)
     {
         $number = 9898989898;
         $all_mobile_number = User::all('mobile');
-        foreach($all_mobile_number as $key => $mobile_number)
-        {
-            $change_mobile_no = User::where('mobile',$mobile_number->mobile)->first();
+        foreach ($all_mobile_number as $key => $mobile_number) {
+            $change_mobile_no = User::where('mobile', $mobile_number->mobile)->first();
             $change_mobile_no->mobile = $number;
             $change_mobile_no->save();
             $number++;
@@ -202,7 +195,7 @@ class HomeController extends Controller
 
     public function verifyMobileNumber(Request $request)
     {
-        $otp = mt_rand(100000,999999);
+        $otp = mt_rand(100000, 999999);
         $verify_number = new VerifyNumber();
         $verify_number->mobile_number = $request->number;
         $verify_number->otp = $otp;
@@ -212,7 +205,7 @@ class HomeController extends Controller
 
     public function verifyOtp(Request $request)
     {
-        
+        $check_otp = VerifyNumber::where('mobile_number',$request->mobile_number)->where('otp',$request->otp)->get();
     }
 
 }

@@ -463,7 +463,7 @@
                     <input type="hidden" class="form-control" name="mobile_number" id="mobile_number" readonly>
                     <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP">
                     <br>
-                    <input type="submit" name="submit_otp" value="Verify OTP" class="btn btn-danger">
+                    <button id="btn_verify_otp" onclick="verifyOtp();" class="btn btn-danger">Verify OTP</button>
                     </form>
                 </div>
             </div>
