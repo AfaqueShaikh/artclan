@@ -21,12 +21,12 @@
     <!---------Platinum artist-------->
     
 <section class="platinumArtist">
-			<div class="home-heading">
+<!--			<div class="home-heading">
 				<h3 class="text-center">
 				PLATINUM
 				<span class="cng-clr">ARTISTS</span>
 				</h3>
-			</div>
+			</div>-->
 			<div class="artistGallery clearfix">
 				<div class="artCatLeft">
 					<ul class="artGallery limitedCategories clearfix">
@@ -103,9 +103,9 @@
 				</div>
 				<div class="artTestRight">
 					<div class="home-heading">
-						<h3 class="text-center">
+<!--						<h3 class="text-center">
 							<span class="cng-clr">Testimonial</span>
-						</h3>
+						</h3>-->
 					</div>
 					<div class="client-right">
 						<div id="clientSay" class="client-says owl-carousel">
@@ -170,6 +170,78 @@
 			</div>
 			<div class="artistGallery categoriFull">
 				<ul class="artGallery limitedCategories clearfix">
+					<li>
+						<div class="artPortfolio">
+							<div class="artImage relative text-center">
+								<a href="javascript:void(0);">
+									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+								</a>
+								<p class="aartDetailsCat">
+									Stylist / Delhi
+								</p>
+							</div>
+							<div class="hrCatBtn text-center">
+								<p>Model</p>
+								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								
+							</div>
+							
+						</div>
+					</li>
+					<li>
+						<div class="artPortfolio">
+							<div class="artImage relative text-center">
+								<a href="javascript:void(0);">
+									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+								</a>
+								<p class="aartDetailsCat">
+									Stylist / Delhi
+								</p>
+							</div>
+							<div class="hrCatBtn text-center">
+								<p>Model</p>
+								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								
+							</div>
+							
+						</div>
+					</li>
+					<li>
+						<div class="artPortfolio">
+							<div class="artImage relative text-center">
+								<a href="javascript:void(0);">
+									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+								</a>
+								<p class="aartDetailsCat">
+									Stylist / Delhi
+								</p>
+							</div>
+							<div class="hrCatBtn text-center">
+								<p>Model</p>
+								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								
+							</div>
+							
+						</div>
+					</li>
+					<li>
+						<div class="artPortfolio">
+							<div class="artImage relative text-center">
+								<a href="javascript:void(0);">
+									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
+								</a>
+								<p class="aartDetailsCat">
+									Stylist / Delhi
+								</p>
+							</div>
+							<div class="hrCatBtn text-center">
+								<p>Model</p>
+								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								
+							</div>
+							
+						</div>
+					</li>
 					<li>
 						<div class="artPortfolio">
 							<div class="artImage relative text-center">
