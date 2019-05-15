@@ -144,7 +144,7 @@
             <div class="modal-body">
                 <form id="login_form" action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
@@ -179,13 +179,13 @@
                                         {{--<span>REGISTER AS ARTIST</span>--}}
 
                                 </div>
-                                <div class="form-group text-center">
+<!--                                <div class="form-group text-center">
                                     <a href="javascript:void(0);" class="clrRed">Forgot password?</a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+<!--                    <div class="col-sm-6">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 </form>
             </div>

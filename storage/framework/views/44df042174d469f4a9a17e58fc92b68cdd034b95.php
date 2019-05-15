@@ -19,12 +19,20 @@
     <!---------Platinum artist-------->
     
 <section class="platinumArtist">
+<<<<<<< HEAD
 			<div class="home-heading">
+=======
+<!--			<div class="home-heading">
+>>>>>>> 9c478101254134beab6586cf1cad2734baae2951
 				<h3 class="text-center">
 				PLATINUM
 				<span class="cng-clr">ARTISTS</span>
 				</h3>
+<<<<<<< HEAD
 			</div>
+=======
+			</div>-->
+>>>>>>> 9c478101254134beab6586cf1cad2734baae2951
 			<div class="artistGallery clearfix">
 				<div class="artCatLeft">
 					<ul class="artGallery limitedCategories clearfix">
@@ -101,9 +109,15 @@
 				</div>
 				<div class="artTestRight">
 					<div class="home-heading">
+<<<<<<< HEAD
 						<h3 class="text-center">
 							<span class="cng-clr">Testimonial</span>
 						</h3>
+=======
+<!--						<h3 class="text-center">
+							<span class="cng-clr">Testimonial</span>
+						</h3>-->
+>>>>>>> 9c478101254134beab6586cf1cad2734baae2951
 					</div>
 					<div class="client-right">
 						<div id="clientSay" class="client-says owl-carousel">
@@ -187,6 +201,81 @@
 							
 						</div>
 					</li>
+<<<<<<< HEAD
+=======
+					<li>
+						<div class="artPortfolio">
+							<div class="artImage relative text-center">
+								<a href="javascript:void(0);">
+									<img src="<?php echo e(url('public/image/artist1.jpg')); ?>" alt="Artist Image"/>
+								</a>
+								<p class="aartDetailsCat">
+									Stylist / Delhi
+								</p>
+							</div>
+							<div class="hrCatBtn text-center">
+								<p>Model</p>
+								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								
+							</div>
+							
+						</div>
+					</li>
+					<li>
+						<div class="artPortfolio">
+							<div class="artImage relative text-center">
+								<a href="javascript:void(0);">
+									<img src="<?php echo e(url('public/image/artist1.jpg')); ?>" alt="Artist Image"/>
+								</a>
+								<p class="aartDetailsCat">
+									Stylist / Delhi
+								</p>
+							</div>
+							<div class="hrCatBtn text-center">
+								<p>Model</p>
+								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								
+							</div>
+							
+						</div>
+					</li>
+					<li>
+						<div class="artPortfolio">
+							<div class="artImage relative text-center">
+								<a href="javascript:void(0);">
+									<img src="<?php echo e(url('public/image/artist1.jpg')); ?>" alt="Artist Image"/>
+								</a>
+								<p class="aartDetailsCat">
+									Stylist / Delhi
+								</p>
+							</div>
+							<div class="hrCatBtn text-center">
+								<p>Model</p>
+								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								
+							</div>
+							
+						</div>
+					</li>
+					<li>
+						<div class="artPortfolio">
+							<div class="artImage relative text-center">
+								<a href="javascript:void(0);">
+									<img src="<?php echo e(url('public/image/artist1.jpg')); ?>" alt="Artist Image"/>
+								</a>
+								<p class="aartDetailsCat">
+									Stylist / Delhi
+								</p>
+							</div>
+							<div class="hrCatBtn text-center">
+								<p>Model</p>
+								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								
+							</div>
+							
+						</div>
+					</li>
+>>>>>>> 9c478101254134beab6586cf1cad2734baae2951
 					
 				</ul>
 			</div>
