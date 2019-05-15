@@ -6,19 +6,19 @@
     <title>Art Clans</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">  -->
-    <link rel="icon" type="image/png" href="{{url('public/image/favicon.png')}}"/>
-    <link href="{{url('public/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/css/owl.carousel.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/css/owl.theme.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/css/jquery.mCustomScrollbar.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/css/animated.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/css/main.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/css/responsive.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="<?php echo e(url('public/image/favicon.png')); ?>"/>
+    <link href="<?php echo e(url('public/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('public/css/owl.carousel.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('public/css/owl.theme.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('public/css/font-awesome.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('public/css/jquery.mCustomScrollbar.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('public/css/jquery-ui.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('public/css/animated.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('public/css/main.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('public/css/responsive.css')); ?>" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<section class="login-here" style="background-image: url('{{url('public/image/login.jpg')}}');">
+<section class="login-here" style="background-image: url('<?php echo e(url('public/image/login.jpg')); ?>');">
     <div class="login-screen mCustomScrollbar">
         <div class="display-middle">
             <div class="row">
@@ -28,113 +28,113 @@
                             <h3>Register <span>as artist</span></h3>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('gender') ? ' has-error' : ''); ?>">
                                         <label class="name-label">
                                             <input type="radio" id="gender" name="gender" value="0" checked="checked"> Mr
                                         </label>
                                         <label class="name-label" style="margin-left: 30px;">
                                             <input type="radio" id="gender" name="gender" value="1"> Ms
                                         </label>
-                                        @if ($errors->has('gender'))
+                                        <?php if($errors->has('gender')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('gender') }}</strong>
+                                                    <strong><?php echo e($errors->first('gender')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('name') ? ' has-error' : ''); ?>">
                                         <label class="name-label">Full Name</label>
                                         <input type="text" class="form-control" name="name" id="name" placeholder="Full Name">
-                                        @if ($errors->has('name'))
+                                        <?php if($errors->has('name')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                    <strong><?php echo e($errors->first('name')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
                                         <label class="name-label">Email</label>
                                         <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                                        @if ($errors->has('email'))
+                                        <?php if($errors->has('email')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                    <strong><?php echo e($errors->first('email')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('mobile') ? ' has-error' : ''); ?>">
                                         <label class="name-label">Mobile</label>
                                         <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile">
-                                        @if ($errors->has('mobile'))
+                                        <?php if($errors->has('mobile')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('mobile') }}</strong>
+                                                    <strong><?php echo e($errors->first('mobile')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('category') ? ' has-error' : ''); ?>">
                                         <label class="name-label">Select Category</label>
                                         <select class="form-control" name="category" id="category">
                                             <option> -- Select Category --</option>
-                                            <option value="13" @if($type == '13') selected @endif>Fashion Model</option>
-                                            <option value="12" @if($type == '12') selected @endif>Actor</option>
-                                            <option value="10" @if($type == '10') selected @endif>DOP Photographer</option>
-                                            <option value="9" @if($type == '9') selected @endif>Makeup Artist</option>
+                                            <option value="13" <?php if($type == '13'): ?> selected <?php endif; ?>>Fashion Model</option>
+                                            <option value="12" <?php if($type == '12'): ?> selected <?php endif; ?>>Actor</option>
+                                            <option value="10" <?php if($type == '10'): ?> selected <?php endif; ?>>DOP Photographer</option>
+                                            <option value="9" <?php if($type == '9'): ?> selected <?php endif; ?>>Makeup Artist</option>
 
 
                                         </select>
 
-                                        @if ($errors->has('mobile'))
+                                        <?php if($errors->has('mobile')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('mobile') }}</strong>
+                                                    <strong><?php echo e($errors->first('mobile')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <div class="form-group <?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
                                         <label class="name-label">Password</label>
                                         <div class="relative">
                                             <input type="password" class="form-control password" name="password" id="password" placeholder="Password">
-                                            @if ($errors->has('password'))
+                                            <?php if($errors->has('password')): ?>
                                                 <span class="help-block">
-                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                    <strong><?php echo e($errors->first('password')); ?></strong>
                                             </span>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group{{ $errors->has('age') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('age') ? ' has-error' : ''); ?>">
                                         <label class="name-label">
                                             <input type="radio" id="age" name="age" value="18+" checked="checked"> I am 18 or above and I agree to the <a href="javascript:void(0);" class="cng-clr"> Terms & Conditions and Privacy Policy.</a>
                                         </label> <br/>
                                         <label class="name-label">
                                             <input type="radio" id="age" name="age" value="18-"> I am below 18
                                         </label>
-                                        @if ($errors->has('age'))
+                                        <?php if($errors->has('age')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('age') }}</strong>
+                                                    <strong><?php echo e($errors->first('age')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -147,79 +147,7 @@
                             </div>
                         </form>
                     </div>
-                   {{-- <div class="stepSecond" id="stepSecond" style="display: none;">
-                        <form action="Login_submit" method="get" accept-charset="utf-8">
-                            <h3 class="text-center">Select <span>category</span></h3>
-                            <ul class="steps clearfix">
-                                <li>
-                                    <i class="fa fa-th"></i>
-                                    <p>Category</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-user"></i>
-                                    <p>Personal</p>
-                                </li>
-                                --}}{{--<li>
-                                    <i class="fa fa-map-marker"></i>
-                                    <p>Location</p>
-                                </li>--}}{{--
-                                <li>
-                                    <i class="fa fa-check"></i>
-                                    <p>Finish</p>
-                                </li>
-                            </ul>
-                            <ul class="catetoryUl clearfix">
-                                <li>
-                                    <i class="fa fa-user-o"></i>
-                                    <p>Actor</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-music"></i>
-                                    <p>Musician</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-user-o"></i>
-                                    <p>Actor</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-music"></i>
-                                    <p>Musician</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-user-o"></i>
-                                    <p>Actor</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-music"></i>
-                                    <p>Musician</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-user-o"></i>
-                                    <p>Actor</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-music"></i>
-                                    <p>Musician</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-user-o"></i>
-                                    <p>Actor</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-music"></i>
-                                    <p>Musician</p>
-                                </li>
-                            </ul>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group text-center">
-                                        <a id="step_secend_previous_btn" href="javascript:void(0);" class="btn custom-btn"><span>Prev</span></a>
-                                        <a id="step_secend_next_btn" href="javascript:void(0);" class="btn custom-btn"><span>Next</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>--}}
+                   
                     <div class="stepThree" id="stepThree" style="display: none;">
                         <form id="third_step_form" action="" method="" accept-charset="utf-8">
                             <h3>Register <span>as artist</span></h3>
@@ -232,10 +160,7 @@
                                     <i class="fa fa-user"></i>
                                     <p>Personal</p>
                                 </li>
-                                {{--<li>
-                                    <i class="fa fa-map-marker"></i>
-                                    <p>Location</p>
-                                </li>--}}
+                                
                                 <li>
                                     <i class="fa fa-check"></i>
                                     <p>Finish</p>
@@ -243,19 +168,19 @@
                             </ul>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('date_of_birth') ? ' has-error' : ''); ?>">
                                         <label class="name-label">Date of birth</label>
                                         <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of birth">
                                         <input type="hidden" name="form_type" id="form_type" value="artist_form">
-                                        @if ($errors->has('date_of_birth'))
+                                        <?php if($errors->has('date_of_birth')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('date_of_birth') }}</strong>
+                                                    <strong><?php echo e($errors->first('date_of_birth')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group{{ $errors->has('language') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('language') ? ' has-error' : ''); ?>">
                                         <label class="name-label">Languages you speak</label>
                                         <select type="text" name="language" id="language" class="form-control" name="" placeholder="Select Language">
                                             <option value="">Select Language</option>
@@ -263,11 +188,11 @@
                                             <option value="Hindi">Hindi</option>
                                             <option value="Marathi">Marathi</option>
                                         </select>
-                                        @if ($errors->has('language'))
+                                        <?php if($errors->has('language')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('language') }}</strong>
+                                                    <strong><?php echo e($errors->first('language')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -281,104 +206,7 @@
                             </div>
                         </form>
                     </div>
-                    {{--<div class="stepFour" id="stepFour" style="display: none;">
-                        <form action="Login_submit" method="get" accept-charset="utf-8">
-                            <h3 class="text-center">Your <span>Location</span></h3>
-                            <ul class="steps clearfix">
-                                <li>
-                                    <i class="fa fa-th"></i>
-                                    <p>Category</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-user"></i>
-                                    <p>Personal</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-map-marker"></i>
-                                    <p>Location</p>
-                                </li>
-                                <li>
-                                    <i class="fa fa-check"></i>
-                                    <p>Finish</p>
-                                </li>
-                            </ul>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <p class="clrRed">Where are you located?</p>
-                                        <p>Where are you located?</p>
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <label class="name-label wid50">
-                                            <input type="radio" name="gender" value="male"> Delhi NCR
-                                        </label>
-                                        <label class="name-label wid50" style="margin-left: 30px;">
-                                            <input type="radio" name="gender" value="female"> Mumbai
-                                        </label>
-                                        <label class="name-label wid50">
-                                            <input type="radio" name="gender" value="male"> Chennai
-                                        </label>
-                                        <label class="name-label wid50" style="margin-left: 30px;">
-                                            <input type="radio" name="gender" value="female"> Kolkata
-                                        </label>
-                                        <label class="name-label wid50">
-                                            <input type="radio" name="gender" value="male"> Hydrabad
-                                        </label>
-                                        <label class="name-label wid50" style="margin-left: 30px;">
-                                            <input type="radio" name="gender" value="female"> Bangalore
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="name-label">Or find your location</label>
-                                        <input type="text" class="form-control" name="" placeholder="find your location">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <p class="clrRed">Where are you available for work?</p>
-                                            <label class="name-label">
-                                                <input type="checkbox" name="gender" value="male"> Delhi NCR
-                                            </label>
-                                            <p class="clrRed">Or select form top locations</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <label class="name-label wid50">
-                                            <input type="checkbox" name="gender" value="male"> Delhi NCR
-                                        </label>
-                                        <label class="name-label wid50" style="margin-left: 30px;">
-                                            <input type="checkbox" name="gender" value="female"> Mumbai
-                                        </label>
-                                        <label class="name-label wid50">
-                                            <input type="checkbox" name="gender" value="male"> Chennai
-                                        </label>
-                                        <label class="name-label wid50" style="margin-left: 30px;">
-                                            <input type="checkbox" name="gender" value="female"> Kolkata
-                                        </label>
-                                        <label class="name-label wid50">
-                                            <input type="checkbox" name="gender" value="male"> Hydrabad
-                                        </label>
-                                        <label class="name-label wid50" style="margin-left: 30px;">
-                                            <input type="checkbox" name="gender" value="female"> Bangalore
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="name-label">And find or add your location</label>
-                                        <input type="text" class="form-control" name="" placeholder="find your location">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group text-center">
-                                        <a id="step_four_previous_btn" href="javascript:void(0);" class="btn custom-btn"><span>Prev</span></a>
-                                        <a id="step_four_next_btn" href="javascript:void(0);" class="btn custom-btn"><span>Next</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>--}}
+                    
                     <div class="stepFive" id="stepFive" style="display: none;">
                         <form id="five_step_form" action= method="" accept-charset="utf-8">
                             <h3 class="text-center">Your <span>Location</span></h3>
@@ -391,10 +219,7 @@
                                     <i class="fa fa-user"></i>
                                     <p>Personal</p>
                                 </li>
-                               {{-- <li>
-                                    <i class="fa fa-map-marker"></i>
-                                    <p>Location</p>
-                                </li>--}}
+                               
                                 <li>
                                     <i class="fa fa-check"></i>
                                     <p>Finish</p>
@@ -407,33 +232,21 @@
                                         <p>We have sent you a One-Time-Password.</p>
                                         <p>Please enter here your mobile no</p>
                                     </div>
-                                    <div class="form-group{{ $errors->has('mobile_no_verification') ? ' has-error' : '' }}">
+                                    <div class="form-group<?php echo e($errors->has('mobile_no_verification') ? ' has-error' : ''); ?>">
                                         <label class="name-label">Enter your mobile no</label>
                                         <input type="tel" class="form-control" name="mobile_no_verification" id="mobile_no_verification" placeholder="Enter Mobile No">
 
-                                        @if ($errors->has('mobile_no_verification'))
+                                        <?php if($errors->has('mobile_no_verification')): ?>
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('mobile_no_verification') }}</strong>
+                                                    <strong><?php echo e($errors->first('mobile_no_verification')); ?></strong>
                                             </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                     <div class="form-group text-right">
                                         <a href="javascript:void(0);" onclick="verifyNumber();" id="verify_number_btn" name="verify_number_btn" class="btn btn-danger">Verify Number</a>
                                     </div>
                                 </div>
-                                {{--<div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <p class="clrRed text-center">
-                                                Add account image
-                                            </p>
-                                            <div class="BrowseProfileImage">
-                                                <input type="file"/>
-                                                <img src="{{url('public/image/testi-img.png')}}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>--}}
+                                
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -455,7 +268,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom: 0px;">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
-					<img src="{{url('public/image/close.png')}}"/></span>
+					<img src="<?php echo e(url('public/image/close.png')); ?>"/></span>
                     </button>
                 </div>
                 <div class="modal-body text-center">
@@ -474,19 +287,19 @@
     </div>
 
 </section>
-<script src="{{url('public/js/jquery.js')}}"></script>
-<script src="{{url('public/js/bootstrap.min.js')}}"></script>
-<script src="{{url('public/js/owl.carousel.min.js')}}"></script>
-<script src="{{url('public/js/wow.js')}}"></script>
-<script src="{{url('public/js/jquery-ui.min.js')}}"></script>
-<script src="{{url('public/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
-<script src="{{url('public/js/jquery.mixitup.min.js')}}"></script>
-<script src="{{url('public/js/validation.js')}}"></script>
-<script src="{{url('public/js/jquery.validate.js')}}"></script>
+<script src="<?php echo e(url('public/js/jquery.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/bootstrap.min.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/owl.carousel.min.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/wow.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/jquery-ui.min.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/jquery.mCustomScrollbar.concat.min.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/jquery.mixitup.min.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/validation.js')); ?>"></script>
+<script src="<?php echo e(url('public/js/jquery.validate.js')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script type="text/javascript">
     var registerData = {};
-    var javascript_site_path = '{{url('/')}}';
+    var javascript_site_path = '<?php echo e(url('/')); ?>';
     $(function () {
         var filterList = {
             init: function () {
@@ -679,7 +492,7 @@
         {
             console.log(registerData);
             $.ajax({
-                url: '{{url("/register/artist")}}',
+                url: '<?php echo e(url("/register/artist")); ?>',
                 method: "POST",
                 dataType: 'json',
                 data: registerData,
@@ -691,7 +504,7 @@
                         showConfirmButton: true,
                     }).then(function() {
                         // Redirect the user
-                        window.location.href = "{{url('/')}}";
+                        window.location.href = "<?php echo e(url('/')); ?>";
                     })
                 }
             })
@@ -717,7 +530,7 @@
         else
         {
             $.ajax({
-                url: '{{url("/verify/number")}}',
+                url: '<?php echo e(url("/verify/number")); ?>',
                 method: "POST",
                 dataType: 'json',
                 data: {
@@ -767,7 +580,7 @@
         if($('#otp_verify_form').valid())
         {
             $.ajax({
-                url: '{{url("/verify/otp")}}',
+                url: '<?php echo e(url("/verify/otp")); ?>',
                 method: "POST",
                 dataType: 'json',
                 data: {
@@ -811,6 +624,6 @@
     }
 
 </script>
-<script src="{{url('public/js/custom.js')}}"></script>
+<script src="<?php echo e(url('public/js/custom.js')); ?>"></script>
 </body>
 <!--Script Section-->
