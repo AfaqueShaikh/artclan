@@ -53,9 +53,9 @@ class HomeController extends Controller
         
     }
 
-    public function showArtistRegistrationForm()
+    public function showArtistRegistrationForm($type = null)
     {
-        return view('artist-registration');
+        return view('artist-registration', ['type'=>$type]);
     }
 
     public function showRecruiterRegistrationForm()

@@ -90,7 +90,7 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="javascript:void(0);">Blogs</a></li>
+<!--                <li><a href="javascript:void(0);"><strong class="bigft">Blogs</strong></a></li>-->
                 @if(!Auth::check())
                     <li><a href="javascript:void(0);"data-toggle="modal" data-target="#login">Login</a></li>
                     <li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>

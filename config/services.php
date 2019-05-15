@@ -35,9 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'facebook' => [
-        'client_id'     => '557262404618545',
-        'client_secret' => 'c6efef9e7e6182c21afc361b2021a738',
-        'redirect'      => 'http://localhost:8080/p101/auth/facebook/callback',
+        'client_id'     => '355480908427982',
+        'client_secret' => '0e21c146d2a525d9e6acaf30558c23e6',
+        'redirect'      => 'http://pubgkatta.in.cp-ht-9.bigrockservers.com/artclans/auth/facebook/callback',
     ],
     'google' => [
         'client_id' => '529642959764-js7of4c3jpmfdu8gnakku6p4eprse82r.apps.googleusercontent.com',
