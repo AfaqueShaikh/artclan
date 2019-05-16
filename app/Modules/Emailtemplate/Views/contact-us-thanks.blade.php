@@ -1,4 +1,4 @@
-<p>Hello {{$USER_NAME}},</p>
+<p>Hello,</p>
 
 <p>Thank you for contacting us, We will response you as soon as possible.</p>
 

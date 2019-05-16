@@ -77,7 +77,7 @@
                     <li><span>Timings</span> 9:30 am to 7:00 pm</li>
                 </ul>--}}
                 {{--<h4 class="contact-heading">Request call back</h4>--}}
-                <form>
+                <form id="contactus_form" >
                     <div class="form-group">
                        <select class="form-control" id="category" name="category">
                            <option value="">-- Select Category --</option>
@@ -93,19 +93,20 @@
                            <option value="13">Fashion Model</option>
                        </select>
                     </div>
+
+                    <div class="form-group">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Email ID">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="phone_number" name="phone_number" class="form-control" placeholder="Phone number">
+                    </div>
                     <div class="form-group">
                         {{--<input type="text" class="form-control" placeholder="Full Name">--}}
-                        <textarea class="form-control" placeholder="Description"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email ID">
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" class="form-control" placeholder="Phone number">
+                        <textarea id="description" name="description" class="form-control" placeholder="Description"></textarea>
                     </div>
 
                     <div class="text-right">
-                        <button type="submit" class="btn btn-lg">Submit</button>
+                        <button type="button" id="contact_us_from_btn" onclick="sendContactRequest();" class="btn btn-lg"><i id="btn_spin" style="font-size:17px"></i> Submit</button>
                     </div>
                 </form>
             </div>

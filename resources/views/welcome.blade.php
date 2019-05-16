@@ -320,6 +320,74 @@
             }
 
         });
+        $('#contactus_form').validate({
+
+            errorClass:'text-danger',
+            rules:{
+                category:{
+                    required:true,
+                },
+				email:{
+                    required:true,
+				},
+                phone_number:{
+                    required:true,
+                },
+                description:{
+                    required:true,
+				}
+
+            } ,
+            messages:{
+                category:{
+                    required:'Please Select Category',
+                },
+                email:{
+                    required:'Please Enter Email Id',
+                },
+                phone_number:{
+                    required:'Please Enter Your Mobile Number',
+                },
+                description:{
+                    required:'Please Enter Description',
+                }
+            }
+
+        });
+
+        function sendContactRequest()
+		{
+		    if($('#contactus_form').valid())
+			{
+			    $('#contact_us_from_btn').attr('disabled',true);
+			    $('#btn_spin').addClass('fa fa-spinner fa-spin');
+				$.ajax({
+                    url: '{{url("/create/contact-request")}}',
+                    method: "POST",
+                    dataType: 'json',
+                    data: {
+                        category: $('#category').val(),
+                        email: $('#email').val(),
+						phone_number : $('#phone_number').val(),
+                        description: $('#description').val(),
+					},
+                    success: function (result) {
+                        console.log(result);
+                        $('#contact_us_from_btn').attr('disabled',false);
+                        $('#btn_spin').removeClass('fa fa-spinner fa-spin');
+                        $('#contactus_form').find('input[type=text], textarea, select').val('');
+						$('#chatModal').modal('hide');
+                        Swal.fire({
+                            type: 'success',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+						});
+                    }
+                })
+			}
+		}
+
     </script>
 
 @endsection

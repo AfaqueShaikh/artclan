@@ -20,7 +20,7 @@ Contact Us
                     <table id="users" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                        <th>Contact Person Name</th>
+                        <th>Category</th>
                         <th>Email</th>
                         <th>Message</th>
                         <th>Reply</th>
@@ -45,7 +45,7 @@ $(document).ready(function () {
         serverSide: true,
         ajax: "{{ url('/admin/contactus/data') }}",
         columns: [
-            {data: 'name', name: 'name'},
+            {data: 'category', name: 'category'},
             {data: 'email', name: 'email'},
             {data: 'message', name: 'message'},
             {data: 'reply', name: 'reply'},

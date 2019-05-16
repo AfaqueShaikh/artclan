@@ -36,21 +36,40 @@ class ContactUsController extends Controller {
     }
 
     public function contactusData() {
+        $user_types[1] = "admin";
+        $user_types[2] = "sub_admin";
+        $user_types[3] = "user";
+        $user_types[4] = "writer";
+        $user_types[5] = "painter";
+        $user_types[6] = "singer";
+        $user_types[7] = "dancer";
+        $user_types[8] = "costume_designer";
+        $user_types[9] = "makeup_artist";
+        $user_types[10] = "Photographer";
+        $user_types[11] = "Film Maker";
+        $user_types[12] = "Actor";
+        $user_types[13] = "Fashion Model";
         $contactus = ContactUs::all();
         return Datatables::of($contactus)
+            ->addColumn('category', function($contactus) use($user_types) {
+                return $user_types[$contactus->category];
+            })
             ->addColumn('status', function($contactus) {
                 return $contactus->reply == '' ? '<label class="label label-danger">New, Not replied yet!</label>' : "<label class='label label-success'>Replied</label>";
             })
+
             ->rawColumns(['status','reply'])
             ->make(true);
     }
 
     public function createContactUs(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'category' => 'required',
+            'phone_number' => 'required',
             'email' => 'required',
-            'message' => 'required',
+            'description' => 'required',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -61,9 +80,10 @@ class ContactUsController extends Controller {
         {
             $contactus = new ContactUs();
 
-            $contactus->name = $request->name;
+            $contactus->category = $request->category;
             $contactus->email = $request->email;
-            $contactus->message = $request->message;
+            $contactus->phone_number = $request->phone_number;
+            $contactus->message = $request->description;
 
             if ($request->hasFile('image')) {
                 $photo = $request->file('image');
@@ -79,18 +99,19 @@ class ContactUsController extends Controller {
 
             $contactus->save();
 
-            $site_title = GlobalValue::where('slug','site-title')->first();
-            $site_email = GlobalValue::where('slug','site-email')->first();
+            $site_title = \App\Modules\Models\GlobalValue::where('slug','site-title')->first();
+            $site_email = \App\Modules\Models\GlobalValue::where('slug','site-email')->first();
 
-            $data['USER_NAME'] = $request->name;
+            //$data['USER_NAME'] = $request->name;
             $data['SITE_TITLE'] = $site_title->value;
             $data['SITE_EMAIL'] = $site_email->value;
 
-            $email_template = EmailTemplate::where('template_key','contact-us-thanks')->first();
-            Mail::send('emailtemplate.contact-us-thanks',$data, function($message) use ($site_email,$site_title,$request,$email_template) {
-                $message->to($request->email, $request->name)->subject($email_template->subject)->from($site_email->value,$site_title->value);
+            $email_template = \App\Modules\Emailtemplate\Models\EmailTemplate::where('template_key','contact-us-thanks')->first();
+            Mail::send('Emailtemplate::contact-us-thanks',$data, function($message) use ($site_email,$site_title,$request,$email_template) {
+                $message->to($request->email)->subject($email_template->subject)->from($site_email->value,$site_title->value);
             });
-            return redirect()->back()->with('success','Thank You For Contacting Us');
+            //return redirect()->back()->with('success','Thank You For Contacting Us');
+            return json_encode(['message' => 'Thank You For Contacting Us' ]);
         }
     }
 
@@ -112,15 +133,15 @@ class ContactUsController extends Controller {
             $contactus->reply = $request->value;
             $contactus->save();
 
-            $site_title = GlobalValue::where('slug','site-title')->first();
-            $site_email = GlobalValue::where('slug','site-email')->first();
+            $site_title = \App\Modules\Models\GlobalValue::where('slug','site-title')->first();
+            $site_email = \App\Modules\Models\GlobalValue::where('slug','site-email')->first();
 
-            $data['MESSAGE'] = $request->value;
+            $data['MESSAGE'] = strip_tags($request->value);
             $data['SITE_TITLE'] = $site_title->value;
             $data['SITE_EMAIL'] = $site_email->value;
-            $email_template = EmailTemplate::where('template_key','contact-us-reply')->first();
-            Mail::send('emailtemplate.contact-us-reply',$data, function($message) use ($site_email,$site_title,$contactus,$email_template) {
-                $message->to($contactus->email, $contactus->name)->subject($email_template->subject)->from($site_email->value,$site_title->value);
+            $email_template =  \App\Modules\Emailtemplate\Models\EmailTemplate::where('template_key','contact-us-reply')->first();
+            Mail::send('Emailtemplate::contact-us-reply',$data, function($message) use ($site_email,$site_title,$contactus,$email_template) {
+                $message->to($contactus->email)->subject($email_template->subject)->from($site_email->value,$site_title->value);
             });
 
             return redirect('admin/contactus/list')->with('success','Reply Successfully!');
