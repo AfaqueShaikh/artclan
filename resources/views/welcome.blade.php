@@ -153,8 +153,10 @@
 						</li>
 					</ul>
 				</div>
-				<div class="artTestRight bgImageSec" style="background-image:url('img/featureBg.jpg');">
-					<p class="addText">Advertising Block</p>					
+				<div class="artTestRight bgImageSec"  style="background-image:url('img/featureBg.jpg');">
+					@foreach($advertisements as $advertisement)
+						<a class="addText"><img height="250px" width="250px" src="{{url('storage/app/public/ads_images/'.$advertisement->image)}}"></a>
+					@endforeach
 				</div>
 			</div>
 		</section>

@@ -11,6 +11,9 @@ Contact Us
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Manage Contact Us</h2>
+                      <div class="pull-right">
+                          <a href="{{url('/admin/add-contact-request')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add New</a>
+                      </div>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">

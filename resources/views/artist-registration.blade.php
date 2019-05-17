@@ -8,6 +8,7 @@
     <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">  -->
     <link rel="icon" type="image/png" href="{{url('public/image/favicon.png')}}"/>
     <link href="{{url('public/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/bootstrap-multiselect.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/owl.carousel.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/owl.theme.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
@@ -16,6 +17,11 @@
     <link href="{{url('public/css/animated.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/main.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/responsive.css')}}" rel="stylesheet" type="text/css" />
+    <style>
+       /* .multiselect-container>li>a>label {
+            padding: 4px 20px 3px 20px;
+        }*/
+    </style>
 </head>
 <body>
 <section class="login-here" style="background-image: url('{{url('public/image/login.jpg')}}');">
@@ -69,7 +75,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{--<div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
                                         <label class="name-label">Mobile</label>
@@ -81,7 +87,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <div class="row">
                                 <div class="col-sm-12">
@@ -245,7 +251,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
                                         <label class="name-label">Date of birth</label>
-                                        <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of birth">
+                                        <input type="date" class="form-control" data-date-format="DD MMMM YYYY" name="date_of_birth" id="date_of_birth" placeholder="Date of birth">
                                         <input type="hidden" name="form_type" id="form_type" value="artist_form">
                                         @if ($errors->has('date_of_birth'))
                                             <span class="help-block">
@@ -257,8 +263,10 @@
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('language') ? ' has-error' : '' }}">
                                         <label class="name-label">Languages you speak</label>
-                                        <select type="text" name="language" id="language" class="form-control" name="" placeholder="Select Language">
-                                            <option value="">Select Language</option>
+                                        <br>
+
+                                        <select type="text" name="language" id="language" clas="form-control" multiple="multiple" name="" placeholder="Select Language">
+
                                             <option value="English">English</option>
                                             <option value="Hindi">Hindi</option>
                                             <option value="Marathi">Marathi</option>
@@ -483,11 +491,19 @@
 <script src="{{url('public/js/jquery.mixitup.min.js')}}"></script>
 <script src="{{url('public/js/validation.js')}}"></script>
 <script src="{{url('public/js/jquery.validate.js')}}"></script>
+<script src="{{url('public/js/bootstrap-multiselect.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script type="text/javascript">
     var registerData = {};
     var javascript_site_path = '{{url('/')}}';
     $(function () {
+
+        $('#language').multiselect({
+
+            includeSelectAllOption: true
+
+        });
+
         var filterList = {
             init: function () {
                 // MixItUp plugin
@@ -520,13 +536,13 @@
            email:{
                required:true,
            },
-           mobile:{
+          /* mobile:{
                required:true,
                remote: {
                    url: javascript_site_path + '/chk-mobile-duplicate',
                    method: 'get'
                }
-           },
+           },*/
            category:{
                required:true,
            },
@@ -548,10 +564,10 @@
             email:{
                 required:'Please Enter Your Email Id',
             },
-            mobile:{
+            /*mobile:{
                 required:'Please Enter Your Mobile No',
                 remote:"Mobile Number Already Exits",
-            },
+            },*/
             category:{
                 required:'Please Select Category',
             },
@@ -596,6 +612,10 @@
         rules:{
             mobile_no_verification:{
                 required:true,
+                remote: {
+                    url: javascript_site_path + '/chk-mobile-duplicate',
+                    method: 'get'
+                }
             },
 
 
@@ -604,6 +624,7 @@
         messages:{
             mobile_no_verification:{
                 required:'Please Enter Mobile Number For Verification',
+                remote:"Mobile Number Already Exits",
             },
 
 
@@ -621,7 +642,7 @@
         {
             registerData.name = $('#name').val();
             registerData.email = $('#email').val();
-            registerData.mobile = $('#mobile').val();
+            /*registerData.mobile = $('#mobile').val();*/
             registerData.category = $('#category').val();
             registerData.password = $('#password').val();
             registerData.gender = $("input[name='gender']:checked").val();
@@ -651,8 +672,9 @@
         if($('#third_step_form').valid())
         {
             registerData.date_of_birth = $('#date_of_birth').val();
-            registerData.language = $('#language').val();
+            registerData.language = $('#language').val().toString();
             registerData.form_type = $('#form_type').val();
+            console.log(registerData);
             $('#stepThree').hide();
             $('#stepFive').show();
         }
@@ -677,6 +699,7 @@
     $('#step_five_submit_btn').click(function () {
         if($('#five_step_form').valid())
         {
+            registerData.mobile = $('#mobile_no_verification').val();
             console.log(registerData);
             $.ajax({
                 url: '{{url("/register/artist")}}',
@@ -703,45 +726,46 @@
 
     function verifyNumber()
     {
-        var number = $('#mobile_no_verification').val();
-        if(number == "")
+        if($('#five_step_form').valid())
         {
-            Swal.fire({
-                type: 'warning',
-                title: "Please enter number to verify",
-                showConfirmButton: false,
-                timer: 1000
-            });
+            var number = $('#mobile_no_verification').val();
+            if (number == "") {
+                Swal.fire({
+                    type: 'warning',
+                    title: "Please enter number to verify",
+                    showConfirmButton: false,
+                    timer: 1000
+                });
 
-        }
-        else
-        {
-            $.ajax({
-                url: '{{url("/verify/number")}}',
-                method: "POST",
-                dataType: 'json',
-                data: {
-                    number: number,
-                },
-                success: function (result) {
-                    console.log(result.number);
-                    $('#otp_display').text(result.generated_otp);
-                    $('#mobile_number').val(result.number);
-                    $('#enter_otp_model').modal("show");
-                    /*Swal.fire({
-                        title: 'Enter OTP To Verify Number',
-                        input: 'text',
-                        inputAttributes: {
-                            autocapitalize: 'off'
-                        },
-                        showCancelButton: true,
-                        confirmButtonText: 'Verify OTP',
-                        showLoaderOnConfirm: true,
-                    }).then(function() {
-                        alert();
-                    })*/
-                }
-            });
+            }
+            else {
+                $.ajax({
+                    url: '{{url("/verify/number")}}',
+                    method: "POST",
+                    dataType: 'json',
+                    data: {
+                        number: number,
+                    },
+                    success: function (result) {
+                        console.log(result.number);
+                        $('#otp_display').text(result.generated_otp);
+                        $('#mobile_number').val(result.number);
+                        $('#enter_otp_model').modal("show");
+                        /*Swal.fire({
+                            title: 'Enter OTP To Verify Number',
+                            input: 'text',
+                            inputAttributes: {
+                                autocapitalize: 'off'
+                            },
+                            showCancelButton: true,
+                            confirmButtonText: 'Verify OTP',
+                            showLoaderOnConfirm: true,
+                        }).then(function() {
+                            alert();
+                        })*/
+                    }
+                });
+            }
         }
     }
 

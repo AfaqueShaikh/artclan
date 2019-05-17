@@ -5,6 +5,9 @@ Route::group(['module' => 'ContactUs', 'middleware' => ['web'], 'namespace' => '
     Route::get('/admin/contactus/list', 'ContactUsController@listContactUs')->middleware('permission:view.contactus');
 // Route::get('/admin/contactus/list', function(){dd(34);})->middleware('permission:view.contactus');
     Route::get('/admin/contactus/data', 'ContactUsController@contactusData')->middleware('permission:view.contactus');
+    Route::get('/admin/add-contact-request','ContactUsController@addContactRequest');
+    Route::post('/admin/add-contact-request','ContactUsController@addContactRequest');
+
     Route::post('/create/contact-request','ContactUsController@createContactUs');
 //
     Route::get('/admin/contactus/reply/{id}', 'ContactUsController@updateContactUs')->middleware('permission:reply.contactus');

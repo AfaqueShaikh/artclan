@@ -181,7 +181,7 @@ class HomeController extends Controller
 
     public function checkMobileNumber(Request $request)
     {
-        $mobile = $request->mobile;
+        $mobile = $request->mobile_no_verification;
         if ($mobile) {
             $user_info = User::where('mobile', $mobile)->first();
             if ($user_info) {
