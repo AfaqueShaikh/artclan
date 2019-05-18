@@ -60,11 +60,9 @@
 							<div class="uploadedListing">
 								<ul class="listUpload clearfix">
                                                                     
-                                                                    @foreach($userData->userVideos as $video)
+									@foreach($userData->userVideos as $video)
 									<li class="relative">
-										
-                                                                               
-                                                                            <iframe width="204" height="222" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="{{$video->video_url}}"></iframe>
+										<iframe width="204" height="222" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="{{$video->video_url}}"></iframe>
 										<span class="deleteBtn"><i class="fa fa-trash"></i></span>
 										<p class="uplName">{{$video->title}}</p>
 									</li>
@@ -627,52 +625,70 @@
 				</button>
 			</div>
 			<div class="modal-body">	
-                            <form action="{{url('user/physical-attributes/create')}}" method="post">
+                            <form action="{{url('user/physical-attributes/create')}}" id="physical_attribute_form" method="post">
 				<div class="eduDetails">
 					<div class="eduDetails">
 						
 						<div class="form-group">
-							<label>Height</label>
-                                                        <input name="height" required=""  value="{{isset($userPhysicsData->height)?$userPhysicsData->height:""}}" class="form-control" >
+							<label>Height</label><span style="color: red"> (In inches)</span>
+							{{--<input name="height"   value="{{isset($userPhysicsData->height)?$userPhysicsData->height:""}}" class="form-control" >--}}
+							<select class="form-control" id="height" name="height">
+								<option value="">-- Select Height --</option>
+								<option value="5 Inch">5 Inch</option>
+								<option value="5.1">5.1 Inch</option>
+								<option value="5.2 Inch">5.2 Inch</option>
+								<option value="5.3 Inch">5.3 Inch</option>
+								<option value="5.4 Inch">5.4 Inch </option>
+								<option value="5.5 Inch">5.5 Inch </option>
+								<option value="5.6 Inch">5.6 Inch</option>
+								<option value="5.7 Inch">5.7 Inch</option>
+								<option value="5.8 Inch">5.8 Inch</option>
+								<option value="5.9 Inch">5.9 Inch</option>
+								<option value="5.10 Inch">5.10 Inch</option>
+								<option value="5.11 Inch">5.11 Inch</option>
+								<option value="6 Inch">6 Inch</option>
+								<option value="6.1 Inch">6.1 Inch</option>
+								<option value="6.2 Inch">6.2 Inch</option>
+							</select>
 						</div>	
 						<div class="form-group">
-							<label>Weight	</label>
-                                                        <input name="weight" required="" value="{{isset($userPhysicsData->weight)?$userPhysicsData->weight:""}}" class="form-control" >
+							<label>Weight	</label><span style="color: red"> (In Kg)</span>
+							<input name="weight"  value="{{isset($userPhysicsData->weight)?$userPhysicsData->weight:""}}" class="form-control" >
 						</div>	
-                                            @if(Auth::user()->gender != '1')
+						@if(Auth::user()->gender != '1')
+							<div class="form-group">
+								<label>Bust	</label><span style="color: red"> (In inches)</span>
+								<input name="bust"  class="form-control" value="{{isset($userPhysicsData->bust)?$userPhysicsData->bust:""}}" >
+							</div>
+						@endif
 						<div class="form-group">
-							<label>Bust	</label>
-                                                        <input name="bust" required="" class="form-control" value="{{isset($userPhysicsData->bust)?$userPhysicsData->bust:""}}" >
-						</div>	
-                                            @endif
-						<div class="form-group">
-							<label>Waist	</label>
-                                                        <input name="waist" required="" class="form-control" value="{{isset($userPhysicsData->waist)?$userPhysicsData->waist:""}}" >
-						</div>	
-						<div class="form-group">
-							<label>Hips	</label>
-                                                        <input name="hips" required="" class="form-control" value="{{isset($userPhysicsData->hips)?$userPhysicsData->hips:""}}" >
+							<label>Waist	</label><span style="color: red"> (In inches)</span>
+							<input name="waist"  class="form-control" value="{{isset($userPhysicsData->waist)?$userPhysicsData->waist:""}}" >
 						</div>	
 						<div class="form-group">
-							<label>Chest	</label>
-                                                        <input name="chest" required="" class="form-control" value="{{isset($userPhysicsData->chest)?$userPhysicsData->chest:""}}" >
+							<label>Hips	</label><span style="color: red"> (In inches)</span>
+							<input name="hips"  class="form-control" value="{{isset($userPhysicsData->hips)?$userPhysicsData->hips:""}}" >
 						</div>	
 						<div class="form-group">
-							<label>Biceps	</label>
-                                                        <input name="biceps" required="" class="form-control" value="{{isset($userPhysicsData->biceps)?$userPhysicsData->biceps:""}}" >
+							<label>Chest	</label><span style="color: red"> (In inches)</span>
+							<input name="chest"  class="form-control" value="{{isset($userPhysicsData->chest)?$userPhysicsData->chest:""}}" >
+						</div>	
+						<div class="form-group">
+							<label>Biceps	</label><span style="color: red"> (In inches)</span>
+							<input name="biceps"  class="form-control" value="{{isset($userPhysicsData->biceps)?$userPhysicsData->biceps:""}}" >
 						</div>	
 						<div class="form-group">
 							<label>Hair Type	</label>
-                                                        <input name="hair_type" required="" class="form-control" value="{{isset($userPhysicsData->hair_type)?$userPhysicsData->hair_type:""}}" >
+							<input name="hair_type"  class="form-control" value="{{isset($userPhysicsData->hair_type)?$userPhysicsData->hair_type:""}}" >
 						</div>	
 						<div class="form-group">
 							<label>Hair Length	</label>
-                                                        <input name="hair_length" required="" class="form-control" value="{{isset($userPhysicsData->hair_length)?$userPhysicsData->hair_length:""}}" >
+							<input name="hair_length"  class="form-control" value="{{isset($userPhysicsData->hair_length)?$userPhysicsData->hair_length:""}}" >
 						</div>
                                             
 						<div class="form-group">
 							<label>Complexion	</label>
-                                                        <input name="complexion" required="" class="form-control" value="{{isset($userPhysicsData->complexion)?$userPhysicsData->complexion:""}}" >
+							<input name="complexion"  class="form-control" value="{{isset($userPhysicsData->complexion)?$userPhysicsData->complexion:""}}" >
 						</div>	
 					</div>
 				</div>
@@ -719,4 +735,60 @@
 		</div>
 	</div>
 </div>
+@endsection
+@section('jcontent')
+	<script>
+		$(function () {
+			$('#physical_attribute_form').validate({
+				errorClass:'text-danger',
+				rules:{
+				   height:{
+				       required:true,
+
+				   },
+                    weight:{
+                        digits: true,
+					},
+                    waist:{
+                        digits: true,
+                    },
+                    hips:{
+                        digits: true,
+                    },
+                    chest:{
+                        digits: true,
+                    },
+                    biceps:{
+                        digits: true,
+                    },
+
+				},
+				messages:{
+                    height:{
+                        required:"Enter Height",
+
+                    },
+                    weight:{
+                        digits: 'Value Should Be Numeric',
+                    },
+                    waist:{
+                        digits: 'Value Should Be Numeric',
+                    },
+                    hips:{
+                        digits: 'Value Should Be Numeric',
+                    },
+                    chest:{
+                        digits: 'Value Should Be Numeric',
+                    },
+                    biceps:{
+                        digits: 'Value Should Be Numeric',
+                    },
+
+                },
+				submitHandler:function(form){
+						form.submit();
+                }
+			});
+        })
+	</script>
 @endsection

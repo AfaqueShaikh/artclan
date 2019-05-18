@@ -10,7 +10,9 @@
                     <div class="banner-caption">
                         <h2>20 years of quality! service in <span class="cng-clr">KITGREEN</span></h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <button class="btn custom-btn" type="submit"><span>GET A QUOTE NOW</span></button>
+						@if($banner_image->show_button == true)
+							<a class="btn custom-btn" target="_blank" href="{{$banner_image->button_url}}"><span>{{$banner_image->button_text}}</span></a>
+						@endif
                     </div>
                 </div>
             @endforeach

@@ -106,9 +106,9 @@ class BannerImageController extends Controller
 //            }
             $validator = Validator::make($request->all(), [
                 'banner_image' => 'required',
-                'button_position' => 'required',
+                /*'button_position' => 'required',
                 'button_text' => 'required',
-                'button_url' => 'required',
+                'button_url' => 'required',*/
             ]);
             if ($validator->fails()) {
                 return redirect()->back()
@@ -133,6 +133,11 @@ class BannerImageController extends Controller
                 $insert_image->button_position = $request->button_position;
                 $insert_image->button_text = $request->button_text;
                 $insert_image->button_url = $request->button_url;
+                $insert_image->show_button = '0';
+                if($request->show_button)
+                {
+                    $insert_image->show_button = $request->show_button;
+                }
                 $insert_image->save();
                 return redirect('/admin/banner/list')->with('success', 'Banner Image Added Successfully!');
 
@@ -186,6 +191,11 @@ class BannerImageController extends Controller
             $banner_image->button_position = $request->button_position;
             $banner_image->button_text = $request->button_text;
             $banner_image->button_url = $request->button_url;
+            $banner_image->show_button = '0';
+            if($request->show_button)
+            {
+                $banner_image->show_button = $request->show_button;
+            }
             if($banner_image->save())
             {
                 return redirect('/admin/banner/list')->with('success', 'Banner Image Updated Successfully!');

@@ -61,6 +61,10 @@
                                     @endif
                                 </div>
 
+
+                                <input class="" type="checkbox" name="show_button" id="show_button" value="1">
+                                <label>Show Button</label>
+
                                 <div class="ln_solid"></div>
 
                                 <div class="form-group">

@@ -32,6 +32,8 @@
 <script src="{{url('public/js/wow.js')}}"></script>
 <script src="{{url('public/js/jquery-ui.min.js')}}"></script>
 <script src="{{url('public/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script src="{{url('public/js/validation.js')}}"></script>
+<script src="{{url('public/js/jquery.validate.js')}}"></script>
 
 <script src="{{url('public/js/custom.js')}}"></script>
 </body>
