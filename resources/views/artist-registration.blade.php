@@ -447,7 +447,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group text-center">
                                         <a id="step_five_previous_btn" href="javascript:void(0);" class="btn custom-btn"><span>Back</span></a>
-                                        <a id="step_five_submit_btn" href="javascript:void(0);" class="btn custom-btn" disabled><span>Finish</span></a>
+                                        <a id="step_five_submit_btn" href="javascript:void(0);" class="btn custom-btn" disabled><i id="register_btn_spin" style="font-size:17px"></i><span>Finish</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -700,6 +700,9 @@
         if($('#five_step_form').valid())
         {
             registerData.mobile = $('#mobile_no_verification').val();
+            $('#step_five_submit_btn').attr('disabled',true);
+            $('#register_btn_spin').addClass('fa fa-spinner fa-spin');
+
             console.log(registerData);
             $.ajax({
                 url: '{{url("/register/artist")}}',
@@ -708,6 +711,8 @@
                 data: registerData,
                 success: function (result) {
                     console.log(result);
+                    $('#step_five_submit_btn').attr('disabled',false);
+                    $('#register_btn_spin').removeClass('fa fa-spinner fa-spin');
                     Swal.fire({
                         type: 'success',
                         title: 'Registered Successfully......',

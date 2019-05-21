@@ -19,6 +19,7 @@
     <link href="{{url('public/css/responsive.css')}}" rel="stylesheet" type="text/css" />
 </head>
 <body>
+
 <section class="login-here" style="background-image: url('{{url('public/image/login.jpg')}}');">
     <div class="login-screen mCustomScrollbar">
         <div class="display-middle">
@@ -151,7 +152,7 @@
                     <div class="col-sm-12">
                         <div class="form-group text-center">
                             <a id="submit_btn"class="btn custom-btn">
-                                <span>Verify</span>
+                                <i id="register_recruiter_btn_spin" style="font-size:17px"></i><span>Verify</span>
                             </a>
                         </div>
                     </div>
@@ -279,6 +280,9 @@
             registerData.i_am_looking = $('#i_am_looking').val();
             registerData.city = $('#city').val();
 
+            $('#submit_btn').attr('disabled',true);
+            $('#register_recruiter_btn_spin').addClass('fa fa-spinner fa-spin');
+
             $.ajax({
                 url: '{{url("/register/recruiter")}}',
                 method: "POST",
@@ -286,6 +290,8 @@
                 data: registerData,
                 success: function (result) {
                     console.log(result);
+                    $('#submit_btn').attr('disabled',false);
+                    $('#register_recruiter_btn_spin').removeClass('fa fa-spinner fa-spin');
                     Swal.fire({
                         type: 'success',
                         title: 'Registered Successfully......',
