@@ -59,4 +59,18 @@ class CmsController extends Controller
         }
     }
 
+
+    public function viewAboutUsPage()
+    {
+        $about_us_data = Cms::where('slug','about-us')->first();
+
+        return view('about-us',compact('about_us_data'));
+    }
+
+    public function viewHowItWorkPage()
+    {
+        $how_it_works_data = Cms::where('slug','how-it-works')->first();
+        return view('how-it-works',compact('how_it_works_data'));
+    }
+
 }

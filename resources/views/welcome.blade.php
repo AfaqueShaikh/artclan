@@ -157,7 +157,7 @@
 				</div>
 				<div class="artTestRight bgImageSec"  style="background-image:url('img/featureBg.jpg');">
 					@foreach($advertisements as $advertisement)
-						<a class="addText"><img height="250px" width="250px" src="{{url('storage/app/public/ads_images/'.$advertisement->image)}}"></a>
+						<a class="addText" target="_blank" href="{{$advertisement->ads_url}}"><img height="250px" width="250px" src="{{url('storage/app/public/ads_images/'.$advertisement->image)}}"></a>
 					@endforeach
 				</div>
 			</div>

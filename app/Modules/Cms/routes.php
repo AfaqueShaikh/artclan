@@ -10,4 +10,8 @@ Route::group(['module' => 'Cms', 'middleware' => ['web'], 'namespace' => 'App\Mo
     Route::get('/admin/cms/update/{id}', 'CmsController@updateCms')->middleware('permission:update.cms');
     Route::post('/admin/cms/update/{id}', 'CmsController@updateCms')->middleware('permission:update.cms');
 
+    Route::get('/about-us','CmsController@viewAboutUsPage');
+
+    Route::get('/how-it-works','CmsController@viewHowItWorkPage');
+
 });

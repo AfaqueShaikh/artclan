@@ -251,7 +251,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
                                         <label class="name-label">Date of birth</label>
-                                        <input type="date" class="form-control" data-date-format="DD MMMM YYYY" name="date_of_birth" id="date_of_birth" placeholder="Date of birth">
+                                        <input type="date" class="form-control" data-date-format="DD MM YYYY" name="date_of_birth" id="date_of_birth" placeholder="Date of birth">
                                         <input type="hidden" name="form_type" id="form_type" value="artist_form">
                                         @if ($errors->has('date_of_birth'))
                                             <span class="help-block">
@@ -426,7 +426,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group text-right">
-                                        <a href="javascript:void(0);" onclick="verifyNumber();" id="verify_number_btn" name="verify_number_btn" class="btn btn-danger">Verify Number</a>
+                                        <a href="javascript:void(0);" onclick="verifyNumber();" id="verify_number_btn" name="verify_number_btn" class="btn btn-danger"><i id="verify_btn_spin" style="font-size:17px"></i>Verify Number</a>
                                     </div>
                                 </div>
                                 {{--<div class="col-sm-6">
@@ -467,7 +467,7 @@
                     </button>
                 </div>
                 <div class="modal-body text-center">
-                    <h3>Your OTP IS <span id="otp_display"></span> </h3>
+                    <h3 id="success_otp_heading"> </h3>
                     <br>
                     <form id="otp_verify_form">
                     <input type="hidden" class="form-control" name="mobile_number" id="mobile_number" readonly>
@@ -739,6 +739,9 @@
 
             }
             else {
+                $('#mobile_no_verification').attr('readonly',true);
+                $('#verify_number_btn').attr('disabled',true);
+                $('#verify_btn_spin').addClass('fa fa-spinner fa-spin');
                 $.ajax({
                     url: '{{url("/verify/number")}}',
                     method: "POST",
@@ -748,9 +751,24 @@
                     },
                     success: function (result) {
                         console.log(result.number);
-                        $('#otp_display').text(result.generated_otp);
-                        $('#mobile_number').val(result.number);
-                        $('#enter_otp_model').modal("show");
+                        if(result.message == 'success')
+                        {
+                            $('#verify_btn_spin').removeClass('fa fa-spinner fa-spin');
+                            $('#success_otp_heading').text('We have sent an OTP on your mobile number please enter OTP to proceed Thank you!!!');
+                            /*$('#otp_display').text(result.generated_otp);*/
+                            $('#mobile_number').val(result.number);
+                            $('#enter_otp_model').modal("show");
+                        }
+                        else
+                        {
+                            Swal.fire({
+                                type: 'warning',
+                                title: "Something went wrong",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+
                         /*Swal.fire({
                             title: 'Enter OTP To Verify Number',
                             input: 'text',

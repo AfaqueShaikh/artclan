@@ -6,7 +6,7 @@
                 <div class="col-sm-3">
                     <div class="footer-nav">
                         <ul class="clearfix">
-                            <li><a href="javascript:void(0);">About us</a></li>
+                            <li><a href="{{url('/about-us')}}">About us</a></li>
                             
                         </ul>
                     </div>
@@ -15,7 +15,7 @@
                     <div class="footer-nav">
                         <ul class="clearfix">
                             
-                            <li><a href="javascript:void(0);">How it works</a></li>
+                            <li><a href="{{url('/how-it-works')}}">How it works</a></li>
                             
                         </ul>
                     </div>

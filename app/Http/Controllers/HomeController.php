@@ -200,7 +200,41 @@ class HomeController extends Controller
         $verify_number->mobile_number = $request->number;
         $verify_number->otp = $otp;
         $verify_number->save();
-        return json_encode(['number' => $request->number,'generated_otp' => $otp]);
+
+        // Account details
+        $apiKey = urlencode('LO9A0/OulyE-9QrYBlTSEJnnokThhVVnbgXGOgaNgw');
+
+        // Message details
+        $numbers = array($request->number);
+        $sender = urlencode('TXTLCL');
+        $message = rawurlencode('Thank you for initiating registration on artclan website. please use '. $otp .' as one time password to verify your mobile number and proceed');
+
+        $numbers = implode(',', $numbers);
+
+
+        // Prepare data for POST request
+        $data = array('apikey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
+        //dd($data);
+
+        // Send the POST request with cURL
+        $ch = curl_init('https://api.textlocal.in/send/');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // Process your response here
+        //dd($response);
+        $result = json_decode($response,true);
+        if($result['status'] == 'success')
+        {
+            return json_encode(['number' => $request->number,'generated_otp' => $otp, 'message' => 'success']);
+        }
+        else
+        {
+            return json_encode(['number' => $request->number, 'message' => 'error']);
+        }
     }
 
     public function verifyOtp(Request $request)
