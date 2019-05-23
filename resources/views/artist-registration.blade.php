@@ -95,10 +95,18 @@
                                         <label class="name-label">Select Category</label>
                                         <select class="form-control" name="category" id="category">
                                             <option> -- Select Category --</option>
-                                            <option value="13" @if($type == '13') selected @endif>Fashion Model</option>
-                                            <option value="12" @if($type == '12') selected @endif>Actor</option>
-                                            <option value="10" @if($type == '10') selected @endif>DOP Photographer</option>
-                                            <option value="9" @if($type == '9') selected @endif>Makeup Artist</option>
+                                            <option value="4">Writer</option>
+                                            <option value="5">Painter</option>
+                                            <option value="6">Singer</option>
+                                            <option value="7">Dancer</option>
+                                            <option value="8">Costume Designer</option>
+                                            <option value="9">Makeup Artist</option>
+                                            <option value="10">DOP Photographer</option>
+                                            <option value="11">Film Maker</option>
+                                            <option value="12">Actor</option>
+                                            <option value="13">Fashion Model</option>
+
+
 
 
                                         </select>

@@ -64,6 +64,19 @@ class User extends Authenticatable
         return $this->hasOne('\App\Modules\User\Models\ArtistOfTheDay');
     }
 
+    public function userWritingType()
+    {
+        return $this->hasOne('\App\Modules\User\Models\WritingType','user_id','id');
+    }
+
+    public function userGenre()
+    {
+        return $this->hasOne('\App\Modules\User\Models\Genre','user_id','id');
+    }
+
+
+
+
     public function roles()
     {
         return $this->belongsToMany('App\Models\Role','user_roles','user_id','role_id');

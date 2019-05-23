@@ -260,6 +260,7 @@
                                 </ul>
                             </div>
                         </div>
+                        @if($user_details->user_type == 4)
                         <div class="uploadingHolder">
                             <div class="uploadBlock">
                                 Documents
@@ -290,6 +291,7 @@
                                 </ul>
                             </div>
                         </div>
+                            @endif
                     </div>
                     <div role="tabpanel" class="tab-pane" id="bio">
                         <div class="uploadingHolder">
@@ -384,7 +386,7 @@
                                         <label class="headingLable pull-left">Weight</label>
                                         <p class="pull-left">{{isset($user_details->userPhysics->weight)?$user_details->userPhysics->weight:''}}</p>
                                     </div>
-                                    @if($user_details->gender != '1')
+                                    @if($user_details->gender != '0')
                                         <div class="col-sm-6 clearfix">
                                             <label class="headingLable pull-left">Bust</label>
                                             <p class="pull-left">{{isset($user_details->userPhysics->bust)?$user_details->userPhysics->bust:''}}</p>

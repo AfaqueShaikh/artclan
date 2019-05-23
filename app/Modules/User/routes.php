@@ -28,4 +28,6 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::post('/user/work-preference/update', 'UserController@updateWorkPreference');
     Route::post('/user/experience/create', 'UserController@createExperience');
     Route::post('/user/physical-attributes/create', 'UserController@createPhysics');
+    Route::post('/user/writing-type/create','UserController@createWritingType');
+    Route::post('/user/genre/create','UserController@createGenre');
 });

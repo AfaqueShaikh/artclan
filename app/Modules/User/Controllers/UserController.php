@@ -2,6 +2,8 @@
 
 namespace App\Modules\User\Controllers;
 
+use App\Modules\User\Models\Genre;
+use App\Modules\User\Models\WritingType;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,6 +41,7 @@ class UserController extends Controller
      */
     public function dashboard()
     {
+
          
          
         $userData = Auth::user();
@@ -60,9 +63,12 @@ class UserController extends Controller
         
         $cities = \App\Modules\District\Models\District::all();
         $userPhysicsData = Auth::user()->userPhysics;
+        $userWritingType = Auth::user()->userWritingType;
+        $userGenre = Auth::user()->userGenre;
+
         
         
-        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities, 'userPhysicsData'=>$userPhysicsData]);
+        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities, 'userPhysicsData'=>$userPhysicsData, 'userWritingType' => $userWritingType, 'userGenre' => $userGenre]);
     }
     
     /**
@@ -207,6 +213,44 @@ class UserController extends Controller
        $obj->save();
        
        return redirect(url('dashboard'));
+    }
+
+    public function createWritingType(Request $request)
+    {
+
+        $check_data = WritingType::where('user_id',Auth::user()->id)->first();
+        if(isset($check_data))
+        {
+            $check_data->writing_type = implode(',', $request->writing_type);
+            $check_data->save();
+        }
+        else
+        {
+            $writing_type = new WritingType();
+            $writing_type->user_id = Auth::user()->id;
+            $writing_type->writing_type = implode(',', $request->writing_type);
+            $writing_type->save();
+        }
+
+        return redirect(url('dashboard'));
+    }
+
+    public function createGenre(Request $request)
+    {
+        $check_genre = Genre::where('user_id',Auth::user()->id)->first();
+        if(isset($check_genre))
+        {
+            $check_genre->genre = implode(',', $request->genre);
+            $check_genre->save();
+        }
+        else
+        {
+            $genre = new Genre();
+            $genre->user_id = Auth::user()->id;
+            $genre->genre = implode(',', $request->genre);
+            $genre->save();
+        }
+        return redirect(url('dashboard'));
     }
     /**
      * Show the application dashboard.
