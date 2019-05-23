@@ -3,7 +3,7 @@
 @section('content')
     <body class="dashboardPage">
     <!-------------Header------------>
-    <header class="custom-header">
+    {{--<header class="custom-header">
         <div class="social-left fixedSocials">
             <ul class="clearfix">
                 <!-- <li>
@@ -76,21 +76,21 @@
                                 <li>
                                     <a href="{{url('/artist/listing/'.base64_encode(9))}}" class="rollLink">Makeup Artist</a>
                                 </li>
-                                {{--<li>
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Voice-Over Artist</a>
-                                </li>--}}
-                                {{--<li>
+                                </li>--}}{{--
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Stylist</a>
-                                </li>--}}
-                                {{--<li>
+                                </li>--}}{{--
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Filmmaker</a>
-                                </li>--}}
-                                {{--<li>
+                                </li>--}}{{--
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Advertising Professional</a>
-                                </li>--}}
-                                {{--<li>
+                                </li>--}}{{--
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Stand-up Comedian</a>
-                                </li>--}}
+                                </li>--}}{{--
                             </ul>
                         </div>
                     </li>
@@ -151,9 +151,9 @@
                 </ul>
             </div>
         </div>
-    </header>
+    </header>--}}
     <section class="dashboardWelcome">
-        <div class="container">Actors List</div>
+        <div class="container">{{$user_types[base64_decode(Request::segment(3))]}} List</div>
     </section>
     <section class="dashboardSection">
         <div class="container">
@@ -163,21 +163,18 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="filterSearch relative">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                    <button type="search" class="btn searchFilter">
+                                    <input type="text" id="search" name="search" class="form-control" placeholder="Search">
+                                    <button type="button" id="search_btn" class="btn searchFilter">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <select name="" class="form-control">
-                                    <option value="">All Cities</option>
-                                    <option value="">Delhi NCR</option>
-                                    <option value="">Mumbai</option>
-                                    <option value="">Hyderabad</option>
-                                    <option value="">Patna</option>
-                                    <option value="">Kochi</option>
-                                    <option value="">Chennai</option>
+                                <select name="city" id="city" class="form-control">
+                                    <option value="all">All Cities</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Delhi">Delhi</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
@@ -194,7 +191,7 @@
                         </div>
                     </div>
                     <div class="dashboardartistGallery">
-                        <ul class="artGallery clearfix">
+                        <ul class="artGallery clearfix" id="list-body">
                             @foreach($user_details as $user_detail)
 
                                 <li>
@@ -204,7 +201,7 @@
                                                 @if(isset($user_detail->profile_img))
                                                 <img  src="{{url('storage/app/public/user_profile/'.$user_detail->profile_img)}}" alt="Artist Image"/>
                                                     @else
-                                                    <img  src="{{url('public/image/noimagefound.png')}}" width="128px" height="128px" alt="Artist Image"/>
+                                                    <img  src="{{url('public/image/testi_img.png')}}"  alt="Artist Image"/>
                                                 @endif
                                             </a>
                                             <p class="artDetailsCat">
@@ -664,4 +661,120 @@
     @endsection
 
 @section('jcontent')
+
+    <script>
+
+        var user_types = [];
+        user_types[1] = "admin";
+        user_types[2] = "sub_admin";
+        user_types[3] = "user";
+        user_types[4] = "writer";
+        user_types[5] = "painter";
+        user_types[6] = "singer";
+        user_types[7] = "dancer";
+        user_types[8] = "costume_designer";
+        user_types[9] = "makeup_artist";
+        user_types[10] = "Photographer";
+        user_types[11] = "Film Maker";
+        user_types[12] = "Actor";
+        user_types[13] = "Fashion Model";
+
+        $(function () {
+
+        });
+
+        $('#search_btn').click(function () {
+            searchArtist();
+        })
+
+
+
+        function searchArtist()
+        {
+            var search = $('#search').val();
+            var city = $('#city').val();
+            console.log(city);
+            $.ajax({
+                url: '{{url("artist/filter")}}',
+                method: "get",
+                dataType: 'json',
+                data: {
+                    search : search,
+                    type: '{{Request::segment(3)}}',
+                    city: city,
+                },
+                success: function (result) {
+                    var html_data = '';
+                    if(result != "")
+                    {
+                        $.each(result, function(id, obj) {
+                            console.log(obj);
+
+                            html_data += '<li>' +
+                                '<div class="artPortfolio">' +
+                                '<div class="artImage relative">' +
+                                '<a href="{{url('/artist/detail/')}}/'+btoa(obj.id)+'">';
+                            if(obj.profile_img != null)
+                            {
+
+                                html_data += '<img  src="{{url('storage/app/public/user_profile/')}}/'+obj.profile_img+'" alt="Artist Image"/>';
+                            }
+                            else
+                            {
+                                html_data += '<img  src="{{url('public/image/noimagefound.png')}}" width="128px" height="128px" alt="Artist Image"/>';
+
+                            }
+                            html_data += '</a>';
+                            html_data += '<p class="artDetailsCat">' +
+                                user_types[obj.user_type] + " / "+obj.city +
+                                '</p>' +
+                                '</div>' +
+                                '<div class="artInfo text-center">' +
+                                '<h3 class="artName">' +
+                                '<a href="javascript:void(0);">'+obj.name+'</a>' +
+                                '</h3>' +
+                                '</div>' +
+                                '<div class="social-left actorSocial">' +
+                                '<ul class="clearfix">' +
+                                '<li>' +
+                                '<a href="javascript:void(0);">' +
+                                '<i class="fa fa-facebook"></i>' +
+                                '</a>' +
+                                '</li>' +
+                                '<li>' +
+                                '<a href="javascript:void(0);">' +
+                                '<i class="fa fa-twitter"></i>' +
+                                '</a>' +
+                                '</li>' +
+                                '<li>' +
+                                '<a href="javascript:void(0);">' +
+                                '<i class="fa fa-instagram"></i>' +
+                                '</a>' +
+                                '</li>' +
+                                '<li>' +
+                                '<a href="javascript:void(0);">' +
+                                '<i class="fa fa-linkedin"></i>' +
+                                '</a>' +
+                                '</li>' +
+                                '</ul>' +
+                                '</div>' +
+                                '</div>' +
+                                ' </li>';
+
+                        });
+                    }
+                    else
+                    {
+                        html_data += '<div><center><h3>Record Not Found</h3></center><div>';
+                    }
+
+
+
+                    $('#list-body').html(html_data);
+
+                }
+            })
+        }
+
+    </script>
     @endsection

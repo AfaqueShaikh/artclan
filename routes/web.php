@@ -54,6 +54,8 @@ Route::get('/chk-mobile-duplicate','HomeController@checkMobileNumber');
 Route::post('/verify/number','HomeController@verifyMobileNumber');
 Route::post('/verify/otp','HomeController@verifyOtp');
 
+Route::get('/artist/filter','HomeController@artistFilter');
+
 
 Route::get("/make/mobile-number-unique","HomeController@makeMobileNumberUnique");
 
