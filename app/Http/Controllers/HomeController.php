@@ -61,7 +61,6 @@ class HomeController extends Controller
     public function registerArtist(Request $request)
     {
         User::create([
-
             'date_of_birth' => $request->date_of_birth,
             'language' => $request->language,
             'mobile' => $request->mobile,
@@ -153,8 +152,6 @@ class HomeController extends Controller
             $location = District::where('name', $request->name)->get();
         }
         return json_encode($location);
-
-
     }
 
     public function showLandingPage(Request $request)
@@ -251,4 +248,13 @@ class HomeController extends Controller
 
     }
 
+    public function testPaytm()
+    {
+        return view('demo-pay');
+    }
+    
+    public function payPaytm()
+    {
+        return view('demo-pay');
+    }
 }

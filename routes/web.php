@@ -56,4 +56,6 @@ Route::post('/verify/otp','HomeController@verifyOtp');
 
 
 Route::get("/make/mobile-number-unique","HomeController@makeMobileNumberUnique");
+Route::get("/paytm/test","HomeController@testPaytm");
+Route::get("/paytm/pay","HomeController@payPaytm");
 
