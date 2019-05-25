@@ -199,6 +199,61 @@ class HomeController extends Controller
         $verify_number->save();
 
         // Account details
+        
+        $message = 'Thank you for initiating registration on artclan website. please use '. $otp .' as one time password to verify your mobile number and proceed';
+
+        $numbers = $request->number;
+
+        $senderId="DEMOOS";
+        $routeId="1";
+        $authKey = "b8729fc9c2f434ea5ffb8252a7868c";
+        $getData = 'mobileNos='.$numbers.'&message='.urlencode($message).'&senderId='.$senderId.'&routeId='.$routeId;
+        $serverUrl="msg.msgclub.net";
+        $url="http://".$serverUrl."/rest/services/sendSMS/sendGroupSms?AUTH_KEY=".$authKey."&".$getData;
+        // Prepare data for POST request
+        
+        
+   // init the resource
+
+   $ch = curl_init();
+
+   curl_setopt_array($ch, array(
+
+       CURLOPT_URL => $url,
+
+       CURLOPT_RETURNTRANSFER => true,
+
+       CURLOPT_SSL_VERIFYHOST => 0,
+
+       CURLOPT_SSL_VERIFYPEER => 0
+
+   ));
+   
+   $output = curl_exec($ch);
+
+   //Print error if any
+
+   if(curl_errno($ch))
+
+   {
+
+       $error =  curl_error($ch);
+          return json_encode(['number' => $request->number, 'message' => $error]);
+   }
+   
+   return json_encode(['number' => $request->number,'generated_otp' => $otp, 'message' => 'success']);
+   curl_close($ch);
+        
+    }
+    public function verifyMobileNumber1(Request $request)
+    {
+        $otp = mt_rand(100000, 999999);
+        $verify_number = new VerifyNumber();
+        $verify_number->mobile_number = $request->number;
+        $verify_number->otp = $otp;
+        $verify_number->save();
+
+        // Account details
         $apiKey = urlencode('LO9A0/OulyE-9QrYBlTSEJnnokThhVVnbgXGOgaNgw');
 
         // Message details
