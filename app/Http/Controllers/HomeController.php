@@ -99,15 +99,15 @@ class HomeController extends Controller
     public function viewArtistListingPage(Request $request)
     {
 
-        $user_types[1] = "admin";
-        $user_types[2] = "sub_admin";
-        $user_types[3] = "user";
-        $user_types[4] = "writer";
-        $user_types[5] = "painter";
-        $user_types[6] = "singer";
-        $user_types[7] = "dancer";
-        $user_types[8] = "costume_designer";
-        $user_types[9] = "makeup_artist";
+        $user_types[1] = "Admin";
+        $user_types[2] = "Sub_admin";
+        $user_types[3] = "User";
+        $user_types[4] = "Writer";
+        $user_types[5] = "Painter";
+        $user_types[6] = "Singer";
+        $user_types[7] = "Dancer";
+        $user_types[8] = "Costume Designer";
+        $user_types[9] = "Makeup Artist";
         $user_types[10] = "Photographer";
         $user_types[11] = "Film Maker";
         $user_types[12] = "Actor";
@@ -119,15 +119,15 @@ class HomeController extends Controller
 
     public function viewArtistDetailPage()
     {
-        $user_types[1] = "admin";
-        $user_types[2] = "sub_admin";
-        $user_types[3] = "user";
-        $user_types[4] = "writer";
-        $user_types[5] = "painter";
-        $user_types[6] = "singer";
-        $user_types[7] = "dancer";
-        $user_types[8] = "costume_designer";
-        $user_types[9] = "makeup_artist";
+        $user_types[1] = "Admin";
+        $user_types[2] = "Sub_admin";
+        $user_types[3] = "User";
+        $user_types[4] = "Writer";
+        $user_types[5] = "Painter";
+        $user_types[6] = "Singer";
+        $user_types[7] = "Dancer";
+        $user_types[8] = "Costume Designer";
+        $user_types[9] = "Makeup Artist";
         $user_types[10] = "Photographer";
         $user_types[11] = "Film Maker";
         $user_types[12] = "Actor";
@@ -247,14 +247,24 @@ class HomeController extends Controller
         }
 
     }
-
-    public function testPaytm()
-    {
-        return view('demo-pay');
-    }
     
-    public function payPaytm()
-    {
-        return view('demo-pay');
+    public function artistFilter(Request $request){
+        $type = base64_decode($request->type);
+        $filter_artist = User::query();
+        if(isset($request->search))
+        {
+            $search_value = $request->search;
+            $filter_artist = $filter_artist->where('user_type',$type)->where('name',$search_value);
+        }
+        if(isset($request->city))
+        {
+            $city = $request->city;
+            if($city != 'all')
+            {
+                $filter_artist = $filter_artist->where('user_type',$type)->where('city',$city);
+            }
+        }
+        $filter_artist = $filter_artist->get();
+        return json_encode($filter_artist);
     }
 }

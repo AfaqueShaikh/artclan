@@ -43,25 +43,25 @@
                     <div class="categoryList">
                         <ul>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Writer</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(4))}}" class="rollLink">Writer</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Painter</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(5))}}" class="rollLink">Painter</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Singer</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(6))}}" class="rollLink">Singer</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Dancer</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(7))}}" class="rollLink">Dancer</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Costume Designer</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(8))}}" class="rollLink">Costume Designer</a>
                             </li>
                             <li>
                                 <a href="{{url('/artist/listing/'.base64_encode(10))}}" class="rollLink">Photographer</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="rollLink">Film Maker</a>
+                                <a href="{{url('/artist/listing/'.base64_encode(11))}}" class="rollLink">Film Maker</a>
                             </li>
                             <li>
                                 <a href="{{url('/artist/listing/'.base64_encode(12))}}"class="rollLink">Actor</a>

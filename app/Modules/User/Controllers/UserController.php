@@ -217,39 +217,59 @@ class UserController extends Controller
 
     public function createWritingType(Request $request)
     {
-
         $check_data = WritingType::where('user_id',Auth::user()->id)->first();
-        if(isset($check_data))
+        if(isset($request->writing_type))
         {
-            $check_data->writing_type = implode(',', $request->writing_type);
-            $check_data->save();
+            if (isset($check_data))
+            {
+                $check_data->writing_type = implode(',', $request->writing_type);
+                $check_data->save();
+            }
+            else
+            {
+                $writing_type = new WritingType();
+                $writing_type->user_id = Auth::user()->id;
+                $writing_type->writing_type = implode(',', $request->writing_type);
+                $writing_type->save();
+            }
         }
         else
         {
-            $writing_type = new WritingType();
-            $writing_type->user_id = Auth::user()->id;
-            $writing_type->writing_type = implode(',', $request->writing_type);
-            $writing_type->save();
+            if (isset($check_data))
+            {
+                $check_data->delete();
+            }
         }
-
         return redirect(url('dashboard'));
+
     }
 
     public function createGenre(Request $request)
     {
         $check_genre = Genre::where('user_id',Auth::user()->id)->first();
-        if(isset($check_genre))
+        if(isset($request->genre))
         {
-            $check_genre->genre = implode(',', $request->genre);
-            $check_genre->save();
+            if(isset($check_genre))
+            {
+                $check_genre->genre = implode(',', $request->genre);
+                $check_genre->save();
+            }
+            else
+            {
+                $genre = new Genre();
+                $genre->user_id = Auth::user()->id;
+                $genre->genre = implode(',', $request->genre);
+                $genre->save();
+            }
         }
         else
         {
-            $genre = new Genre();
-            $genre->user_id = Auth::user()->id;
-            $genre->genre = implode(',', $request->genre);
-            $genre->save();
+            if(isset($check_genre))
+            {
+                $check_genre->delete();
+            }
         }
+
         return redirect(url('dashboard'));
     }
     /**

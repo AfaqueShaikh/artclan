@@ -3,7 +3,7 @@
 @section('content')
     <body class="dashboardPage">
     <!-------------Header------------>
-    <header class="custom-header">
+   {{-- <header class="custom-header">
         <div class="social-left fixedSocials">
             <ul class="clearfix">
                 <!-- <li>
@@ -76,25 +76,25 @@
                                 <li>
                                     <a href="{{url('/artist/listing/'.base64_encode(9))}}" class="rollLink">Makeup Artist</a>
                                 </li>
-                                {{--<li>
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Voice-Over Artist</a>
-                                </li>--}}
-                                {{--<li>
+                                </li>--}}{{--
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Stylist</a>
-                                </li>--}}
-                                {{--<li>
+                                </li>--}}{{--
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Filmmaker</a>
-                                </li>--}}
-                                {{--<li>
+                                </li>--}}{{--
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Advertising Professional</a>
-                                </li>--}}
-                                {{--<li>
+                                </li>--}}{{--
+                                --}}{{--<li>
                                     <a href="javascript:void(0);" class="rollLink">Stand-up Comedian</a>
-                                </li>--}}
+                                </li>--}}{{--
                             </ul>
                         </div>
                     </li>
-                    <li><a href="javascript:void(0);">Blogs</a></li>
+                    --}}{{--<li><a href="javascript:void(0);">Blogs</a></li>--}}{{--
                     @if(!Auth::check())
                         <li><a href="javascript:void(0);" data-toggle="modal" data-target="#login">Login</a></li>
                         <li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>
@@ -151,7 +151,7 @@
                 </ul>
             </div>
         </div>
-    </header>
+    </header>--}}
     <section class="dashboardWelcome">
         <div class="container">Welcome {{$user_details->name}}</div>
     </section>
@@ -183,6 +183,9 @@
                         <li data-toggle="modal" data-target="#shareLink">
                             Share Portfolio
                             <span class="viewCount"><i class="fa fa-share-alt"></i></span>
+                        </li>
+                        <li data-toggle="modal" data-target="#shareLink">
+                            <a href="javascript:void(0);"data-toggle="modal" data-target="#contact_artist_model" class="btn btn-danger">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -371,6 +374,7 @@
                             @endif
 
                         </div>
+                        @if($user_details->user_type == 13 || $user_details->user_type == 12)
                         <div class="uploadingHolder">
                             <div class="uploadBlock">
                                 Physical Attributes
@@ -423,6 +427,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                         <div class="uploadingHolder">
                             <div class="uploadBlock">
                                 Work & Location Preference
@@ -508,13 +513,147 @@
                                 </div>
                             @endif
                         </div>
+
+                        @if($user_details->user_type == 4)
+                        <div class="uploadingHolder borderBot">
+                            <div class="uploadBlock">
+                                Writing Type
+                            </div>
+                            @if(isset($user_details->userWritingType))
+                                <div class="eduDetails">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2 clearfix">
+                                                    <input type="checkbox" disabled
+                                                           @if(isset($user_details->userWritingType->writing_type)) @if(str_contains('Creative', explode(',', $user_details->userWritingType->writing_type))) Checked @endif @endif>
+                                                    Creative
+                                                </div>
+                                                <div class="col-sm-2 clearfix">
+                                                    <input type="checkbox" disabled
+                                                           @if(isset($user_details->userWritingType->writing_type)) @if(str_contains('Poetry', explode(',', $user_details->userWritingType->writing_type))) Checked @endif @endif>
+                                                    Poetry
+                                                </div>
+                                                <div class="col-sm-2 clearfix">
+                                                    <input type="checkbox" disabled
+                                                           @if(isset($user_details->userWritingType->writing_type)) @if(str_contains('ContentWriter', explode(',', $user_details->userWritingType->writing_type))) Checked @endif @endif>
+                                                    Content Writer
+                                                </div>
+                                                <div class="col-sm-2 clearfix">
+                                                    <input type="checkbox" disabled
+                                                           @if(isset($user_details->userWritingType->writing_type)) @if(str_contains('ScriptWriter', explode(',', $user_details->userWritingType->writing_type))) Checked @endif @endif>
+                                                    Script Writer
+                                                </div>
+                                                <div class="col-sm-2 clearfix">
+                                                    <input type="checkbox" disabled
+                                                           @if(isset($user_details->userWritingType->writing_type)) @if(str_contains('NovelWriter', explode(',', $user_details->userWritingType->writing_type))) Checked @endif @endif>
+                                                    Novel Writer
+                                                </div>
+                                                <div class="col-sm-2 clearfix">
+                                                    <input type="checkbox" disabled
+                                                           @if(isset($user_details->userWritingType->writing_type)) @if(str_contains('ComicWriter', explode(',', $user_details->userWritingType->writing_type))) Checked @endif @endif>
+                                                    Comic Writer
+                                                </div>
+                                            </div>
+                                    </div>
+
+                            @else
+                                <div class="eduDetails">
+                                    <div class="row">
+                                        <div class="col-sm-6 clearfix">
+                                            <p class="">Not updated by the artist yet.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
+                        @endif
+                        @if($user_details->user_type == 4)
+                        <div class="uploadingHolder borderBot">
+                            <div class="uploadBlock">
+                                Genre
+                            </div>
+                            @if(isset($user_details->userGenre))
+                                <div class="eduDetails">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-2 clearfix">
+                                                <input type="checkbox" disabled
+                                                       @if(isset($user_details->userGenre->genre)) @if(str_contains('Romance', explode(',', $user_details->userGenre->genre))) Checked @endif @endif>
+                                                Romance
+                                            </div>
+                                            <div class="col-sm-2 clearfix">
+                                                <input type="checkbox" disabled
+                                                       @if(isset($user_details->userGenre->genre)) @if(str_contains('Horror', explode(',', $user_details->userGenre->genre))) Checked @endif @endif>
+                                                Horror
+                                            </div>
+                                            <div class="col-sm-2 clearfix">
+                                                <input type="checkbox" disabled
+                                                       @if(isset($user_details->userGenre->genre)) @if(str_contains('sci-fi', explode(',', $user_details->userGenre->genre))) Checked @endif @endif>
+                                                Sci-Fi
+                                            </div>
+                                            <div class="col-sm-2 clearfix">
+                                                <input type="checkbox" disabled
+                                                       @if(isset($user_details->userGenre->genre)) @if(str_contains('Drama', explode(',', $user_details->userGenre->genre))) Checked @endif @endif>
+                                                Drama
+                                            </div>
+                                            <div class="col-sm-2 clearfix">
+                                                <input type="checkbox" disabled
+                                                       @if(isset($user_details->userGenre->genre)) @if(str_contains('Fantasy', explode(',', $user_details->userGenre->genre))) Checked @endif @endif>
+                                                Fantasy
+                                            </div>
+                                            <div class="col-sm-2 clearfix">
+                                                <input type="checkbox" disabled
+                                                       @if(isset($user_details->userGenre->genre)) @if(str_contains('Comedy', explode(',', $user_details->userGenre->genre))) Checked @endif @endif>
+                                                Comedy
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @else
+                                        <div class="eduDetails">
+                                            <div class="row">
+                                                <div class="col-sm-6 clearfix">
+                                                    <p class="">Not updated by the artist yet.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                        </div>
+                            @endif
+
+
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
 @endsection
+    <div class="modal" id="contact_artist_model" tabindex="-1" role="" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-md signUpPopUp" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 0px;">
+                    <center><h3>Contact Artist</h3></center>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h3 id="success_otp_heading"> </h3>
+                    <br>
+                    <form id="otp_verify_form">
+                        <input type="hidden" class="form-control" name="mobile_number" id="mobile_number" readonly>
+                        <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP">
+                    </form>
+                    <br>
+                    <button id="btn_verify_otp" onclick="verifyOtp();" class="btn btn-danger">Verify OTP</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 @section('jcontent')
 @endsection

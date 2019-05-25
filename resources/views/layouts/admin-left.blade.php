@@ -25,6 +25,10 @@ switch ($segment_value)
         $segment_parameter = 'testimonial';
         break;
 
+    case 'promotion':
+        $segment_parameter = 'promotion';
+        break;
+
     case 'blog':
         $segment_parameter = 'blog';
         break;
@@ -82,6 +86,12 @@ switch ($segment_value)
                      @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.countries'))
                         <li class="@if($segment_value === 'testimonial') current-page @endif">
                             <a href="{{url('/admin/testimonial/list')}}"><i class="fa fa-lock"></i> Manage Testimonial </a>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.countries'))
+                        <li class="@if($segment_value === 'promotion') current-page @endif">
+                            <a href="{{url('/admin/promotion/list')}}"><i class="fa fa-lock"></i> Manage Promotion </a>
                         </li>
                     @endif
 

@@ -36,6 +36,7 @@
 							<div class="artPortfolio">
 								<div class="artImage relative text-center">
 									<a href="javascript:void(0);">
+										<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
 										
 									</a>
 									<p class="artDetailsCat">
@@ -43,8 +44,8 @@
 									</p>
 								</div>
 								<div class="hrCatBtn text-center">
+									<a href="{{url('/artist/listing/'.base64_encode(13))}}" class="btn custom-btn" type="button"><span>Hire Fashion Models</span></a>
 									<a class="btn custom-btn" href="{{url('/artist/registration/13')}}" type="button"><span>REGISTER</span></a>
-									<a href="{{url('/artist/listing/'.base64_encode(13))}}" class="btn custom-btn" type="button"><span>Hire</span></a>
 								</div>
 								
 							</div>
@@ -53,6 +54,7 @@
 							<div class="artPortfolio">
 								<div class="artImage relative text-center">
 									<a href="javascript:void(0);">
+										<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
 										
 									</a>
 									<p class="artDetailsCat">
@@ -60,8 +62,8 @@
 									</p>
 								</div>
 								<div class="hrCatBtn text-center">
-                                                                    <a class="btn custom-btn" href="{{url('/artist/registration/12')}}" type="button"><span>REGISTER</span></a>
-									<a href="{{url('/artist/listing/'.base64_encode(12))}}" class="btn custom-btn" type="button"><span>Hire</span></a>
+									<a href="{{url('/artist/listing/'.base64_encode(12))}}" class="btn custom-btn" type="button"><span>Hire Actors</span></a>
+									<a class="btn custom-btn" href="{{url('/artist/registration/12')}}" type="button"><span>REGISTER</span></a>
 								</div>
 								
 							</div>
@@ -70,15 +72,17 @@
 							<div class="artPortfolio">
 								<div class="artImage relative text-center">
 									<a href="javascript:void(0);">
-										
+
+										<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
+
 									</a>
 									<p class="artDetailsCat">
 										 Photographers
 									</p>
 								</div>
 								<div class="hrCatBtn text-center">
+									<a href="{{url('/artist/listing/'.base64_encode(10))}}" class="btn custom-btn" type="button"><span>Hire Photographers</span></a>
 									<a class="btn custom-btn" href="{{url('/artist/registration/10')}}" type="button"><span>REGISTER</span></a>
-									<a href="{{url('/artist/listing/'.base64_encode(10))}}" class="btn custom-btn" type="button"><span>Hire</span></a>
 								</div>
 								
 							</div>
@@ -87,15 +91,15 @@
 							<div class="artPortfolio">
 								<div class="artImage relative text-center">
 									<a href="javascript:void(0);">
-										
+										<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
 									</a>
 									<p class="artDetailsCat">
 										Makeup Artist
 									</p>
 								</div>
 								<div class="hrCatBtn text-center">
+									<a href="{{url('/artist/listing/'.base64_encode(9))}}" class="btn custom-btn" type="button"><span>Hire Makeup Artist</span></a>
 									<a class="btn custom-btn" href="{{url('/artist/registration/9')}}" type="button"><span>REGISTER</span></a>
-									<a href="{{url('/artist/listing/'.base64_encode(9))}}" class="btn custom-btn" type="button"><span>Hire</span></a>
 								</div>
 								
 							</div>
@@ -104,11 +108,11 @@
 					</ul>
 				</div>
 				<div class="artTestRight">
-					<div class="home-heading">
-<!--						<h3 class="text-center">
+					{{--<div class="home-heading">
+						<h3 class="text-center">
 							<span class="cng-clr">Testimonial</span>
-						</h3>-->
-					</div>
+						</h3>
+					</div>--}}
 					<div class="client-right">
 						<div id="clientSay" class="client-says owl-carousel">
 							@foreach($testimonials as $testimonial)
@@ -140,6 +144,7 @@
 							<div class="artPortfolio">
 								<div class="artImage relative text-center">
 									<a href="javascript:void(0);">
+										<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
 										
 									</a>
 									<p class="artDetailsCat">
@@ -147,20 +152,123 @@
 									</p>
 								</div>
 								<div class="hrCatBtn text-center">
-									<button class="btn custom-btn" type="button"><span>REGISTER</span></button>
-									<button class="btn custom-btn" type="button"><span>Hire</span></button>
+									<a href="{{url('/artist/listing/'.base64_encode(8))}}" class="btn custom-btn" type="button"><span>Hire Costume Designer</span></a>
+									<a class="btn custom-btn" href="{{url('/artist/registration/8')}}" type="button"><span>REGISTER</span></a>
 								</div>
 								
 							</div>
 						</li>
+						<li>
+							<div class="artPortfolio">
+								<div class="artImage relative text-center">
+									<a href="javascript:void(0);">
+										<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
+									</a>
+									<p class="artDetailsCat">
+										Writer
+									</p>
+								</div>
+								<div class="hrCatBtn text-center">
+									<a href="{{url('/artist/listing/'.base64_encode(4))}}" class="btn custom-btn" type="button"><span>Hire Writer</span></a>
+									<a class="btn custom-btn" href="{{url('/artist/registration/4')}}" type="button"><span>REGISTER</span></a>
+								</div>
+
+							</div>
+						</li>
+						<li>
+							<div class="artPortfolio">
+								<div class="artImage relative text-center">
+									<a href="javascript:void(0);">
+										<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
+									</a>
+									<p class="artDetailsCat">
+										Painter
+									</p>
+								</div>
+								<div class="hrCatBtn text-center">
+									<a href="{{url('/artist/listing/'.base64_encode(5))}}" class="btn custom-btn" type="button"><span>Hire Painter</span></a>
+									<a class="btn custom-btn" href="{{url('/artist/registration/5')}}" type="button"><span>REGISTER</span></a>
+								</div>
+
+							</div>
+						</li>
+						<li>
+							<div class="artPortfolio">
+								<div class="artImage relative text-center">
+									<a href="javascript:void(0);">
+										<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
+									</a>
+									<p class="artDetailsCat">
+										Singer
+									</p>
+								</div>
+								<div class="hrCatBtn text-center">
+									<a href="{{url('/artist/listing/'.base64_encode(6))}}" class="btn custom-btn" type="button"><span>Hire Singer</span></a>
+									<a class="btn custom-btn" href="{{url('/artist/registration/6')}}" type="button"><span>REGISTER</span></a>
+								</div>
+
+							</div>
+						</li>
+
 					</ul>
+
+
 				</div>
 				<div class="artTestRight bgImageSec"  style="background-image:url('img/featureBg.jpg');">
 					@foreach($advertisements as $advertisement)
 						<a class="addText" target="_blank" href="{{$advertisement->ads_url}}"><img height="250px" width="250px" src="{{url('storage/app/public/ads_images/'.$advertisement->image)}}"></a>
 					@endforeach
 				</div>
+
 			</div>
+
+	<div class="artistGallery pdTop clearfix">
+		<div class="artCatLeft">
+			<ul class="artGallery limitedCategories clearfix">
+
+				<li>
+					<div class="artPortfolio">
+						<div class="artImage relative text-center">
+							<a href="javascript:void(0);">
+								<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
+							</a>
+							<p class="artDetailsCat">
+								Dancer
+							</p>
+						</div>
+						<div class="hrCatBtn text-center">
+							<a href="{{url('/artist/listing/'.base64_encode(7))}}" class="btn custom-btn" type="button"><span>Hire Dancer</span></a>
+							<a class="btn custom-btn" href="{{url('/artist/registration/7')}}" type="button"><span>REGISTER</span></a>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<div class="artPortfolio">
+						<div class="artImage relative text-center">
+							<a href="javascript:void(0);">
+								<img src="{{url('public/image/testi_img.png')}}" alt="Artist Image"/>
+							</a>
+							<p class="artDetailsCat">
+								Film Maker
+							</p>
+						</div>
+						<div class="hrCatBtn text-center">
+							<a href="{{url('/artist/listing/'.base64_encode(11))}}" class="btn custom-btn" type="button"><span>Hire Film Maker</span></a>
+							<a class="btn custom-btn" href="{{url('/artist/registration/11')}}" type="button"><span>REGISTER</span></a>
+						</div>
+
+					</div>
+				</li>
+
+
+			</ul>
+
+
+		</div>
+
+
+	</div>
 		</section>
     <!------------Testimonials-------->
     
