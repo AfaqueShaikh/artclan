@@ -419,9 +419,8 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <p class="clrRed">OTP Verification</p>
-                                        <p>We have sent you a One-Time-Password.</p>
-                                        <p>Please enter here your mobile no</p>
+                                        <p class="clrRed">Mobile Number Verification</p>
+                                        <p>Please enter your mobile no here</p>
                                     </div>
                                     <div class="form-group{{ $errors->has('mobile_no_verification') ? ' has-error' : '' }}">
                                         <label class="name-label">Enter your mobile no</label>

@@ -58,7 +58,7 @@ class PromotionController extends Controller
         // Message details
         $numbers = $request->mobile_number;
 
-        $sender = urlencode('TXTLCL');
+        /*$sender = urlencode('TXTLCL');
         $message = rawurlencode('Promotional Message');
         $numbers = implode(',', $numbers);
 
@@ -87,7 +87,53 @@ class PromotionController extends Controller
         else
         {
             return json_encode(['type' => 'error', 'msg' => 'Something Went Wrong']);
+        }*/
+        // Account details
+
+        $message = 'Promotional Message';
+        //dd($request->mobile_number);
+        $numbers = $request->mobile_number;
+
+
+        $senderId="DEMOOS";
+        $routeId="1";
+        $authKey = "b8729fc9c2f434ea5ffb8252a7868c";
+        $getData = 'mobileNos='.$numbers.'&message='.urlencode($message).'&senderId='.$senderId.'&routeId='.$routeId;
+        $serverUrl="msg.msgclub.net";
+        $url="http://".$serverUrl."/rest/services/sendSMS/sendGroupSms?AUTH_KEY=".$authKey."&".$getData;
+        // Prepare data for POST request
+
+
+        // init the resource
+
+        $ch = curl_init();
+
+        curl_setopt_array($ch, array(
+
+            CURLOPT_URL => $url,
+
+            CURLOPT_RETURNTRANSFER => true,
+
+            CURLOPT_SSL_VERIFYHOST => 0,
+
+            CURLOPT_SSL_VERIFYPEER => 0
+
+        ));
+
+        $output = curl_exec($ch);
+
+        //Print error if any
+
+        if(curl_errno($ch))
+
+        {
+
+            $error =  curl_error($ch);
+            return json_encode(['type' => 'error', 'msg' => 'Something Went Wrong']);
         }
+
+        return json_encode(['type' => 'success', 'msg' => 'Promotional Messages Sent successfully']);
+        curl_close($ch);
     }
 
 

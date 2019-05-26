@@ -155,15 +155,17 @@
             if(flag == 1)
             {
                 var mobile_number_arr = [];
+                var mobile_numbers = '';
                 $.each($("input[name='send_message']:checked"), function(){
 
                     mobile_number_arr.push($(this).val());
                 });
                 console.log(mobile_number_arr);
+                mobile_numbers = mobile_number_arr.toString();
                 $('#send_to_all_btn').attr('disabled',true);
                 $('#send_to_all_btn_spin').removeClass('fa fa fa-comment');
                 $('#send_to_all_btn_spin').addClass('fa fa-spinner fa-spin');
-                sendMessage(mobile_number_arr);
+                sendMessage(mobile_numbers);
 
             }
             else
@@ -180,7 +182,8 @@
         $('body').on('click','.send_message_individual_button',function () {
             $(this).attr('disabled',true);
             $(this).find('.send_message_individual_button_spin').removeClass('fa fa fa-comment').addClass('fa fa-spinner fa-spin');
-            var mobile_number = new Array($(this).attr('data-attribute'));
+            var mobile_number = $(this).attr('data-attribute');
+
             sendMessage(mobile_number);
         });
 

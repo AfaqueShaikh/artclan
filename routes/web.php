@@ -58,6 +58,9 @@ Route::get('/artist/filter','HomeController@artistFilter');
 
 
 Route::get("/make/mobile-number-unique","HomeController@makeMobileNumberUnique");
+
+//Paytm Route
 Route::get("/paytm/test","HomeController@testPaytm");
 Route::get("/paytm/pay","HomeController@payPaytm");
+Route::post('/come-back','HomeController@comeBack');
 
