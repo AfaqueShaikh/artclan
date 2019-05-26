@@ -17,6 +17,7 @@
     <link href="{{url('public/css/animated.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/main.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/responsive.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
        /* .multiselect-container>li>a>label {
             padding: 4px 20px 3px 20px;
@@ -135,6 +136,23 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group {{ $errors->has('confirm_password') ? ' has-error' : '' }}">
+                                        <label class="name-label">Confirm Password</label>
+                                        <div class="relative">
+                                            <input type="password" class="form-control password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
+                                            @if ($errors->has('confirm_password'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('confirm_password') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('age') ? ' has-error' : '' }}">
@@ -259,7 +277,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
                                         <label class="name-label">Date of birth</label>
-                                        <input type="date" class="form-control" data-date-format="DD MM YYYY" name="date_of_birth" id="date_of_birth" placeholder="Date of birth">
+                                        <input type="text" class="form-control"  name="date_of_birth" id="date_of_birth" placeholder="Date of birth">
                                         <input type="hidden" name="form_type" id="form_type" value="artist_form">
                                         @if ($errors->has('date_of_birth'))
                                             <span class="help-block">
@@ -433,7 +451,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group text-right">
-                                        <a href="javascript:void(0);" onclick="verifyNumber();" id="verify_number_btn" name="verify_number_btn" class="btn btn-danger"><i id="verify_btn_spin" style="font-size:17px"></i>Verify Number</a>
+                                        <a href="javascript:void(0);" onclick="verifyNumber();" id="verify_number_btn" name="verify_number_btn" class="btn btn-danger"><i id="verify_btn_spin" style="font-size:17px"></i>Send OTP</a>
                                     </div>
                                 </div>
                                 {{--<div class="col-sm-6">
@@ -505,6 +523,12 @@
     var javascript_site_path = '{{url('/')}}';
     $(function () {
 
+
+
+        $('#date_of_birth').datepicker({
+            dateFormat: 'dd/mm/yy',
+        });
+
         $('#language').multiselect({
 
             includeSelectAllOption: true
@@ -556,6 +580,10 @@
            password:{
                required:true,
            },
+           confirm_password:{
+               required:true,
+               equalTo: "#password",
+           },
            age:{
                required:true,
            }
@@ -580,6 +608,10 @@
             },
             password:{
                 required:'Please Enter Password',
+            },
+            confirm_password:{
+                required:'Please Confirm Password',
+                equalTo:'Confirm Password Should Be Same As Password',
             },
             age:{
                 required:'Please Select Your Age',
@@ -736,68 +768,73 @@
 
     })
 
-    function verifyNumber()
-    {
-        if($('#five_step_form').valid())
+
+        function verifyNumber()
         {
-            var number = $('#mobile_no_verification').val();
-            if (number == "") {
-                Swal.fire({
-                    type: 'warning',
-                    title: "Please enter number to verify",
-                    showConfirmButton: false,
-                    timer: 1000
-                });
+            setTimeout(function(){
+            if($('#five_step_form').valid())
+            {
+                var number = $('#mobile_no_verification').val();
+                if (number == "") {
+                    Swal.fire({
+                        type: 'warning',
+                        title: "Please enter number to verify",
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
 
-            }
-            else {
-                $('#mobile_no_verification').attr('readonly',true);
-                $('#verify_number_btn').attr('disabled',true);
-                $('#verify_btn_spin').addClass('fa fa-spinner fa-spin');
-                $.ajax({
-                    url: '{{url("/verify/number")}}',
-                    method: "POST",
-                    dataType: 'json',
-                    data: {
-                        number: number,
-                    },
-                    success: function (result) {
-                        console.log(result.number);
-                        if(result.message == 'success')
-                        {
-                            $('#verify_btn_spin').removeClass('fa fa-spinner fa-spin');
-                            $('#success_otp_heading').text('We have sent an OTP on your mobile number please enter OTP to proceed Thank you!!!');
-                            /*$('#otp_display').text(result.generated_otp);*/
-                            $('#mobile_number').val(result.number);
-                            $('#enter_otp_model').modal("show");
-                        }
-                        else
-                        {
-                            Swal.fire({
-                                type: 'warning',
-                                title: "Something went wrong",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
+                }
+                else {
+                    $('#mobile_no_verification').attr('readonly',true);
+                    $('#verify_number_btn').attr('disabled',true);
+                    $('#verify_btn_spin').addClass('fa fa-spinner fa-spin');
+                    $.ajax({
+                        url: '{{url("/verify/number")}}',
+                        method: "POST",
+                        dataType: 'json',
+                        data: {
+                            number: number,
+                        },
+                        success: function (result) {
+                            console.log(result.number);
+                            if(result.message == 'success')
+                            {
+                                $('#verify_btn_spin').removeClass('fa fa-spinner fa-spin');
+                                $('#success_otp_heading').text('We have sent an OTP on your mobile number please enter OTP to proceed Thank you!!!');
+                                /*$('#otp_display').text(result.generated_otp);*/
+                                $('#mobile_number').val(result.number);
+                                $('#enter_otp_model').modal("show");
+                            }
+                            else
+                            {
+                                Swal.fire({
+                                    type: 'warning',
+                                    title: "Something went wrong",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
 
-                        /*Swal.fire({
-                            title: 'Enter OTP To Verify Number',
-                            input: 'text',
-                            inputAttributes: {
-                                autocapitalize: 'off'
-                            },
-                            showCancelButton: true,
-                            confirmButtonText: 'Verify OTP',
-                            showLoaderOnConfirm: true,
-                        }).then(function() {
-                            alert();
-                        })*/
-                    }
-                });
+                            /*Swal.fire({
+                                title: 'Enter OTP To Verify Number',
+                                input: 'text',
+                                inputAttributes: {
+                                    autocapitalize: 'off'
+                                },
+                                showCancelButton: true,
+                                confirmButtonText: 'Verify OTP',
+                                showLoaderOnConfirm: true,
+                            }).then(function() {
+                                alert();
+                            })*/
+                        }
+                    });
+                }
             }
+            }, 2000);
         }
-    }
+
+
 
     $('#otp_verify_form').validate({
         errorClass: 'text-danger',
@@ -844,6 +881,8 @@
                     }
                     else
                     {
+                        $('#mobile_no_verification').attr('readonly',false);
+                        $('#verify_number_btn').attr('disabled',false);
                         $('#mobile_no_verification').val('');
                         $('#otp_display').text('');
                         $('#mobile_number').val('');

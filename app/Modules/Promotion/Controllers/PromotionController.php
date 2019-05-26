@@ -90,7 +90,10 @@ class PromotionController extends Controller
         }*/
         // Account details
 
-        $message = 'Promotional Message';
+        $promotion_message =  \App\Modules\Models\GlobalValue::where('slug','promotion-message')->first();
+
+
+        $message = $promotion_message->value;
         //dd($request->mobile_number);
         $numbers = $request->mobile_number;
 
