@@ -106,10 +106,6 @@
                                             <option value="11">Film Maker</option>
                                             <option value="12">Actor</option>
                                             <option value="13">Fashion Model</option>
-
-
-
-
                                         </select>
 
                                         @if ($errors->has('mobile'))
@@ -414,7 +410,7 @@
                         </form>
                     </div>--}}
                     <div class="stepFive" id="stepFive" style="display: none;">
-                        <form id="five_step_form" action= method="" accept-charset="utf-8">
+
                             <h3 class="text-center">Your <span>Location</span></h3>
                             <ul class="steps clearfix">
                                 <li>
@@ -435,11 +431,13 @@
                                 </li>
                             </ul>
                             <div class="row">
+                                <form id="five_step_form" action="" method="" accept-charset="utf-8">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <p class="clrRed">Mobile Number Verification</p>
                                         <p>Please enter your mobile no here</p>
                                     </div>
+
                                     <div class="form-group{{ $errors->has('mobile_no_verification') ? ' has-error' : '' }}">
                                         <label class="name-label">Enter your mobile no</label>
                                         <input type="tel" class="form-control" name="mobile_no_verification" id="mobile_no_verification" placeholder="Enter Mobile No">
@@ -451,8 +449,14 @@
                                         @endif
                                     </div>
                                     <div class="form-group text-right">
-                                        <a href="javascript:void(0);" onclick="verifyNumber();" id="verify_number_btn" name="verify_number_btn" class="btn btn-danger"><i id="verify_btn_spin" style="font-size:17px"></i>Send OTP</a>
+                                        <a href="javascript:void(0);" id="change_mobile_number" style="display: none" name="change_mobile_number" class="btn btn-danger">Change Mobile Number</a>
+                                        <button type="submit"  id="verify_number_btn" name="verify_number_btn" class="btn btn-danger"><i id="verify_btn_spin" style="font-size:17px"></i>Send OTP</button>
+
                                     </div>
+
+
+                                </form>
+
                                 </div>
                                 {{--<div class="col-sm-6">
                                     <div class="form-group">
@@ -476,7 +480,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -667,6 +670,54 @@
             },
 
 
+        },
+        submitHandler:function (form) {
+
+            $('#mobile_no_verification').attr('readonly',true);
+            $('#verify_number_btn').attr('disabled',true);
+            $('#verify_btn_spin').addClass('fa fa-spinner fa-spin');
+            var number = $('#mobile_no_verification').val();
+            $.ajax({
+                url: '{{url("/verify/number")}}',
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    number: number,
+                },
+                success: function (result) {
+                    console.log(result.number);
+                    if(result.message == 'success')
+                    {
+                        $('#verify_btn_spin').removeClass('fa fa-spinner fa-spin');
+                        $('#success_otp_heading').text('We have sent an OTP on your mobile number please enter OTP to proceed Thank you!!!');
+                        /*$('#otp_display').text(result.generated_otp);*/
+                        $('#mobile_number').val(result.number);
+                        $('#enter_otp_model').modal("show");
+                    }
+                    else
+                    {
+                        Swal.fire({
+                            type: 'warning',
+                            title: "Something went wrong",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+
+                    /*Swal.fire({
+                        title: 'Enter OTP To Verify Number',
+                        input: 'text',
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'Verify OTP',
+                        showLoaderOnConfirm: true,
+                    }).then(function() {
+                        alert();
+                    })*/
+                }
+            });
         }
 
     });
@@ -769,70 +820,7 @@
     })
 
 
-        function verifyNumber()
-        {
-            setTimeout(function(){
-            if($('#five_step_form').valid())
-            {
-                var number = $('#mobile_no_verification').val();
-                if (number == "") {
-                    Swal.fire({
-                        type: 'warning',
-                        title: "Please enter number to verify",
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
 
-                }
-                else {
-                    $('#mobile_no_verification').attr('readonly',true);
-                    $('#verify_number_btn').attr('disabled',true);
-                    $('#verify_btn_spin').addClass('fa fa-spinner fa-spin');
-                    $.ajax({
-                        url: '{{url("/verify/number")}}',
-                        method: "POST",
-                        dataType: 'json',
-                        data: {
-                            number: number,
-                        },
-                        success: function (result) {
-                            console.log(result.number);
-                            if(result.message == 'success')
-                            {
-                                $('#verify_btn_spin').removeClass('fa fa-spinner fa-spin');
-                                $('#success_otp_heading').text('We have sent an OTP on your mobile number please enter OTP to proceed Thank you!!!');
-                                /*$('#otp_display').text(result.generated_otp);*/
-                                $('#mobile_number').val(result.number);
-                                $('#enter_otp_model').modal("show");
-                            }
-                            else
-                            {
-                                Swal.fire({
-                                    type: 'warning',
-                                    title: "Something went wrong",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                            }
-
-                            /*Swal.fire({
-                                title: 'Enter OTP To Verify Number',
-                                input: 'text',
-                                inputAttributes: {
-                                    autocapitalize: 'off'
-                                },
-                                showCancelButton: true,
-                                confirmButtonText: 'Verify OTP',
-                                showLoaderOnConfirm: true,
-                            }).then(function() {
-                                alert();
-                            })*/
-                        }
-                    });
-                }
-            }
-            }, 2000);
-        }
 
 
 
@@ -877,6 +865,7 @@
                         $('#otp').val('');
                         $('#enter_otp_model').modal("hide");
                         $('#step_five_submit_btn').attr('disabled',false);
+                        $('#change_mobile_number').show();
 
                     }
                     else
@@ -902,6 +891,17 @@
             });
         }
     }
+
+    $('#change_mobile_number').click(function () {
+        $('#mobile_no_verification').attr('readonly',false);
+        $('#verify_number_btn').attr('disabled',false);
+        $('#mobile_no_verification').val('');
+        $('#otp_display').text('');
+        $('#mobile_number').val('');
+        $('#otp').val('');
+        $('#step_five_submit_btn').attr('disabled',true);
+        $('#verify_number_btn').text('Send OTP');
+    })
 
 </script>
 <script src="{{url('public/js/custom.js')}}"></script>

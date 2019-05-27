@@ -74,6 +74,7 @@ Create Testimonial
 <script>
     CKEDITOR.replace( 'description' );
 </script>
+        promotional_text
 
 @endsection
 

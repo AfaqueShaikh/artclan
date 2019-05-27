@@ -51,12 +51,13 @@ class PromotionController extends Controller
 
     public function sendPromotionMessageUser(Request $request)
     {
+        //dd($request->all());
         //dd($request->mobile_number);
         // Account details
-        $apiKey = urlencode('Km7TZwuYT5A-IX49UogjKkdPXj3HKKHaAk3YdJh40t');
+        //$apiKey = urlencode('Km7TZwuYT5A-IX49UogjKkdPXj3HKKHaAk3YdJh40t');
 
         // Message details
-        $numbers = $request->mobile_number;
+        //$numbers = $request->mobile_number;
 
         /*$sender = urlencode('TXTLCL');
         $message = rawurlencode('Promotional Message');
@@ -90,14 +91,11 @@ class PromotionController extends Controller
         }*/
         // Account details
 
-        $promotion_message =  \App\Modules\Models\GlobalValue::where('slug','promotion-message')->first();
 
 
-        $message = $promotion_message->value;
-        //dd($request->mobile_number);
+
+        $message = strip_tags($request->message);
         $numbers = $request->mobile_number;
-
-
         $senderId="DEMOOS";
         $routeId="1";
         $authKey = "b8729fc9c2f434ea5ffb8252a7868c";
@@ -128,9 +126,7 @@ class PromotionController extends Controller
         //Print error if any
 
         if(curl_errno($ch))
-
         {
-
             $error =  curl_error($ch);
             return json_encode(['type' => 'error', 'msg' => 'Something Went Wrong']);
         }

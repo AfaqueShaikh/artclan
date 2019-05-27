@@ -10,6 +10,7 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap -->
+      <link href="{{url('public/css/bootstrap-multiselect.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('/')}}/public/frontend/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{url('/')}}/public/frontend/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -133,6 +134,7 @@
     <script src="{{url('/')}}/public/backend/js/pnotify.js"></script>
     <script src="{{url('public/js/validation.js')}}"></script>
     <script src="{{url('public/js/jquery.validate.js')}}"></script>
+    <script src="{{url('public/js/bootstrap-multiselect.js')}}"></script>
 @yield('footer')
   </body>
   <script>
