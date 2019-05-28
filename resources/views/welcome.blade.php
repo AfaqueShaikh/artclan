@@ -8,8 +8,7 @@
             @foreach($banner_images as $banner_image)
                 <div class="item" style="background-image: url('{{url('/storage/app/public/banner_images/'.$banner_image->banner_image)}}')">
                     <div class="banner-caption">
-                        <h2>20 years of quality! service in <span class="cng-clr">KITGREEN</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
 						@if($banner_image->show_button == true)
 							<a class="btn custom-btn" target="_blank" href="{{$banner_image->button_url}}"><span>{{$banner_image->button_text}}</span></a>
 						@endif
@@ -282,96 +281,34 @@
 			</div>
 			<div class="artistGallery categoriFull">
 				<ul class="artGallery limitedCategories clearfix">
-					<li>
-						<div class="artPortfolio">
-							<div class="artImage relative text-center">
-								<a href="javascript:void(0);">
-									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
-								</a>
-								<p class="aartDetailsCat">
-									Stylist / Delhi
-								</p>
+
+				@foreach($artists_of_the_day as $artist_of_the_day)
+
+						<li>
+							<div class="artPortfolio">
+								<div class="artImage relative text-center">
+
+									@if(isset($artist_of_the_day->user->profile_img))
+										<a href="javascript:void(0);">
+											<img src="{{url('storage/app/public/user_profile/'.$artist_of_the_day->user->profile_img)}}" alt="Artist Image"/>
+										</a>
+									@else
+										<a href="javascript:void(0);">
+											<img src="{{url('/public/image/testi_img.png')}}" alt="Artist Image"/>
+										</a>
+									@endif
+									<p class="artDetailsCat">
+										{{$user_types[$artist_of_the_day->user->user_type]}}
+									</p>
+								</div>
+								<div class="hrCatBtn text-center">
+									<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+								</div>
+
 							</div>
-							<div class="hrCatBtn text-center">
-								<p>Model</p>
-								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
-								
-							</div>
-							
-						</div>
-					</li>
-					<li>
-						<div class="artPortfolio">
-							<div class="artImage relative text-center">
-								<a href="javascript:void(0);">
-									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
-								</a>
-								<p class="aartDetailsCat">
-									Stylist / Delhi
-								</p>
-							</div>
-							<div class="hrCatBtn text-center">
-								<p>Model</p>
-								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
-								
-							</div>
-							
-						</div>
-					</li>
-					<li>
-						<div class="artPortfolio">
-							<div class="artImage relative text-center">
-								<a href="javascript:void(0);">
-									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
-								</a>
-								<p class="aartDetailsCat">
-									Stylist / Delhi
-								</p>
-							</div>
-							<div class="hrCatBtn text-center">
-								<p>Model</p>
-								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
-								
-							</div>
-							
-						</div>
-					</li>
-					<li>
-						<div class="artPortfolio">
-							<div class="artImage relative text-center">
-								<a href="javascript:void(0);">
-									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
-								</a>
-								<p class="aartDetailsCat">
-									Stylist / Delhi
-								</p>
-							</div>
-							<div class="hrCatBtn text-center">
-								<p>Model</p>
-								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
-								
-							</div>
-							
-						</div>
-					</li>
-					<li>
-						<div class="artPortfolio">
-							<div class="artImage relative text-center">
-								<a href="javascript:void(0);">
-									<img src="{{url('public/image/artist1.jpg')}}" alt="Artist Image"/>
-								</a>
-								<p class="aartDetailsCat">
-									Stylist / Delhi
-								</p>
-							</div>
-							<div class="hrCatBtn text-center">
-								<p>Model</p>
-								<button class="btn custom-btn" type="submit"><span>Hire</span></button>
-								
-							</div>
-							
-						</div>
-					</li>
+						</li>
+					@endforeach
+
 					
 				</ul>
 			</div>

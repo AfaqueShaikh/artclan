@@ -90,22 +90,23 @@
                                 </div>
                             </div>--}}
 
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
                                         <label class="name-label">Select Category</label>
                                         <select class="form-control" name="category" id="category">
                                             <option> -- Select Category --</option>
-                                            <option value="4">Writer</option>
-                                            <option value="5">Painter</option>
-                                            <option value="6">Singer</option>
-                                            <option value="7">Dancer</option>
-                                            <option value="8">Costume Designer</option>
-                                            <option value="9">Makeup Artist</option>
-                                            <option value="10">DOP Photographer</option>
-                                            <option value="11">Film Maker</option>
-                                            <option value="12">Actor</option>
-                                            <option value="13">Fashion Model</option>
+                                            <option @if(Request::segment(3) == 4) selected @endif value="4">Writer</option>
+                                            <option @if(Request::segment(3) == 5) selected @endif value="5">Painter</option>
+                                            <option @if(Request::segment(3) == 6) selected @endif value="6">Singer</option>
+                                            <option @if(Request::segment(3) == 7) selected @endif value="7">Dancer</option>
+                                            <option @if(Request::segment(3) == 8) selected @endif value="8">Costume Designer</option>
+                                            <option @if(Request::segment(3) == 9) selected @endif value="9">Makeup Artist</option>
+                                            <option @if(Request::segment(3) == 10) selected @endif value="10">DOP Photographer</option>
+                                            <option @if(Request::segment(3) == 11) selected @endif value="11">Film Maker</option>
+                                            <option @if(Request::segment(3) == 12) selected @endif value="12">Actor</option>
+                                            <option @if(Request::segment(3) == 13) selected @endif value="13">Fashion Model</option>
                                         </select>
 
                                         @if ($errors->has('mobile'))

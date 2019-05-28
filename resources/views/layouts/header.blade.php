@@ -1,5 +1,12 @@
 <!-------------Header------------>
 <header class="custom-header">
+    <style>
+        .profile-img {
+            border-radius: 50%;
+            width: 85px;
+            height: 78px;
+        }
+    </style>
     <div class="social-left fixedSocials">
         <ul class="clearfix">
             <!-- <li>
@@ -109,7 +116,18 @@
         <a href="javascript:void(0);" class="closeSidenav">
             <img src="{{url('public/image/close.png')}}" alt="">
         </a>
-        <div class="sidenavLogo"><a href="{{url('/')}}"><img src="{{url('public/image/logo.jpeg')}}" alt="Weizmann Forex" width="127"></a></div>
+        <div class="sidenavLogo">
+            @if(Auth::check())
+                @if(isset(Auth::user()->profile_img))
+                    <a href="{{url('/dashboard')}}"><img class="profile-img" src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" ></a>
+                @else
+                    <a href="{{url('/dashboard')}}"><img class="profile-img" src="{{url('public/image/noimagefound.png')}}" alt="Weizmann Forex" ></a>
+                @endif
+            @else
+                <a href="javascript:void(0);"><img class="profile-img" src="{{url('public/image/logo.jpeg')}}"> <!-- Logo <span>Here</span> --></a>
+            @endif
+
+        </div>
         <ul class="sidemenu-list">
             <li class="active">
                 <a href="javascript:void(0);" class="color-red">About Us</a>

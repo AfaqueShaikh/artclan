@@ -332,11 +332,10 @@ class UserController extends Controller
     }
     
     public function setArtistOfTheDay(Request $request, $type)
-    {   
+    {
+
         
-        \App\Modules\User\Models\ArtistOfTheDay::truncate();
-        
-        
+        //\App\Modules\User\Models\ArtistOfTheDay::truncate();
         foreach($request->artist as $obj)
         {
             $artist =  new \App\Modules\User\Models\ArtistOfTheDay();

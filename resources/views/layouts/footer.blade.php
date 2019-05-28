@@ -51,5 +51,5 @@
             </div>
         </div>
     </div>
-    <div class="footer-bottom">&copy; Copyright 2018 <a href="javascript:void(0)">www.artclan.com</a> All Rights Reserved.</div>
+    <div class="footer-bottom">&copy; Copyright 2018 <a href="javascript:void(0)">www.artclans.com</a> All Rights Reserved.</div>
 </footer>

@@ -1,5 +1,12 @@
 
 <header class="custom-header">
+	<style>
+		.profile-img {
+			border-radius: 50%;
+			width: 85px;
+			height: 78px;
+		}
+	</style>
 		<div class="social-left fixedSocials">
 			<ul class="clearfix">
 				<!-- <li>
@@ -114,9 +121,9 @@
 			</a>
 			<div class="sidenavLogo">
 				@if(isset(Auth::user()->profile_img))
-					<a href="javascript:void(0);"><img src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" width="127"></a>
+					<a href="javascript:void(0);"><img class="profile-img" src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" ></a>
 				@else
-					<a href="javascript:void(0);"><img src="{{url('public/image/noimagefound.png')}}" alt="Weizmann Forex" width="127"></a>
+					<a href="javascript:void(0);"><img class="profile-img" src="{{url('public/image/noimagefound.png')}}" alt="Weizmann Forex" ></a>
 				@endif
 			</div>
 			<br>
