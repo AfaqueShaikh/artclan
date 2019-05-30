@@ -7,6 +7,7 @@ use App\Modules\BannerImage\Models\BannerImage;
 use App\Modules\District\Models\District;
 use App\Modules\FeaturedPatner\Models\FeaturedPatner;
 use App\Modules\Testimonial\Models\Testimonial;
+use App\Modules\User\Models\ArtistOfTheDay;
 use App\User;
 use App\VerifyNumber;
 use Illuminate\Http\Request;
@@ -156,11 +157,25 @@ class HomeController extends Controller
 
     public function showLandingPage(Request $request)
     {
+        $user_types[1] = "Admin";
+        $user_types[2] = "Sub_admin";
+        $user_types[3] = "User";
+        $user_types[4] = "Writer";
+        $user_types[5] = "Painter";
+        $user_types[6] = "Singer";
+        $user_types[7] = "Dancer";
+        $user_types[8] = "Costume Designer";
+        $user_types[9] = "Makeup Artist";
+        $user_types[10] = "Photographer";
+        $user_types[11] = "Film Maker";
+        $user_types[12] = "Actor";
+        $user_types[13] = "Fashion Model";
         $banner_images = BannerImage::all();
         $advertisements = Ads::all();
         $featured_partners = FeaturedPatner::all();
         $testimonials = Testimonial::all();
-        return view('welcome', compact('banner_images', 'advertisements', 'featured_partners', 'testimonials'));
+        $artists_of_the_day = ArtistOfTheDay::all();
+        return view('welcome', compact('banner_images', 'advertisements', 'featured_partners', 'testimonials','artists_of_the_day','user_types'));
     }
 
     public function makeMobileNumberUnique(Request $request)

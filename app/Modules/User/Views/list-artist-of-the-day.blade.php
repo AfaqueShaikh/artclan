@@ -32,7 +32,7 @@
                       </thead>
                     </table>
                           
-                          <input type="submit" value="Set Artist Of The Day" class="btn btn-primary">
+                          <input type="submit" value="Set Artist Of The Day" id="set_artist_of_day_btn" class="btn btn-primary" disabled>
                           </form>
 					
 					
@@ -53,9 +53,9 @@ $(document).ready(function () {
                 render: function (data, type, row) {
                     if (type === 'display') {
                         if(row.artist_of_the_day=='1')
-                        return '<input checked value="'+row.id+'" name="artist[]" type="checkbox" class="check_box">';
+                        return '<input class="artist_check" checked value="'+row.id+'" name="artist[]" type="checkbox" class="check_box">';
                         else
-                        return '<input  value="'+row.id+'" name="artist[]" type="checkbox" class="check_box">';
+                        return '<input class="artist_check"  value="'+row.id+'" name="artist[]" type="checkbox" class="check_box">';
                     }
                     return data;
                 },
@@ -67,6 +67,38 @@ $(document).ready(function () {
         ]
     });
 });
+
+$(function () {
+    if($('.artist_check').prop("checked") == true){
+
+        alert("Checkbox is checked.");
+    }
+
+});
+
+$('body').on('click','.artist_check',function () {
+    if($('.artist_check').is(":checked") == true){
+
+        $('#set_artist_of_day_btn').prop('disabled' ,false);
+    }
+    else
+    {
+        $('#set_artist_of_day_btn').prop('disabled' ,true);
+    }
+
+})
+
+$('.artist_check').click(function(){
+
+
+    if($(this).is(":checked") == true){
+
+        alert("Checkbox is checked.");
+
+    }
+});
+
+
 
 function confirmDelete(id){
     if(confirm("Do you really want to delete this record"))
