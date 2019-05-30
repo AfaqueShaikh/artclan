@@ -529,8 +529,9 @@
 
 
 
-        $('#date_of_birth').datepicker({
+       $('#date_of_birth').datepicker({
             dateFormat: 'dd/mm/yy',
+            changeYear: true
         });
 
         $('#language').multiselect({
