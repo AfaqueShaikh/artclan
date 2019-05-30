@@ -2,6 +2,7 @@
 
 namespace App\Modules\User\Controllers;
 
+use App\Modules\ArtistContactRequest\Models\ArtistRequest;
 use App\Modules\User\Models\Genre;
 use App\Modules\User\Models\WritingType;
 use App\User;
@@ -13,6 +14,8 @@ use Validator;
 use DataTables;
 use Image;
 use Storage;
+use App\Modules\ContactUs\Models\EmailTemplate;
+use App\Modules\ContactUs\Models\GlobalValue;
 
 
 class UserController extends Controller
@@ -466,5 +469,31 @@ class UserController extends Controller
         return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities, 'userPhysicsData'=>$userPhysicsData]);
 
 
+    }
+
+    public function contactAdmin(Request $request)
+    {
+
+        $artist_contact_request = new ArtistRequest();
+        $artist_contact_request->user_id = Auth::user()->id;
+        $artist_contact_request->artist_category = $request->artist_category;
+        $artist_contact_request->artist_name = $request->artist_name;
+        $artist_contact_request->artist_email = $request->artist_email;
+        $artist_contact_request->artist_city = $request->artist_city;
+        $artist_contact_request->artist_mobile_no = $request->artist_mobile_no;
+        $artist_contact_request->artist_requirement = $request->artist_requirement;
+        $artist_contact_request->save();
+        $site_title = \App\Modules\Models\GlobalValue::where('slug','site-title')->first();
+        $site_email = \App\Modules\Models\GlobalValue::where('slug','site-email')->first();
+
+        //$data['USER_NAME'] = $request->name;
+        $data['SITE_TITLE'] = $site_title->value;
+        $data['SITE_EMAIL'] = $site_email->value;
+
+        $email_template = \App\Modules\Emailtemplate\Models\EmailTemplate::where('template_key','contact-us-thanks')->first();
+        Mail::send('Emailtemplate::contact-us-thanks',$data, function($message) use ($site_email,$site_title,$request,$email_template) {
+            $message->to('sohelahr@gmail.com')->subject($email_template->subject)->from($site_email->value,$site_title->value);
+        });
+        return redirect(url('dashboard'))->with('success','Request Submitted Successfully!');;
     }
 }

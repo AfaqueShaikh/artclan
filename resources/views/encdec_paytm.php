@@ -46,6 +46,7 @@ function getChecksumFromArray($arrayList, $key, $sort=1) {
     $hash = hash("sha256", $finalString);
     $hashString = $hash . $salt;
     $checksum = encrypt_e($hashString, $key);
+
     return $checksum;
 }
 function getChecksumFromString($str, $key) {

@@ -2,7 +2,16 @@
 
 @section('content')
     <section class="dashboardSection">
+
         <div class="container">
+            @if(Session::has('success'))
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+            @endif
             <div class="dashPrifilerInfo clearfix">
                 <div class="profilerImage relative">
                     @if(isset(Auth::user()->profile_img))
@@ -31,6 +40,9 @@
                         <li data-toggle="modal" data-target="#shareLink">
                             Share Portfolio
                             <span class="viewCount"><i class="fa fa-share-alt"></i></span>
+                        </li>
+                        <li data-toggle="modal" data-target="">
+                            <a href="javascript:void(0);"data-toggle="modal" data-target="#contact_artist_model" class="btn btn-danger"> Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -1066,6 +1078,65 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="contact_artist_model" tabindex="-1" role="" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-md signUpPopUp" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 0px;">
+                    <center><h3>Contact Admin</h3></center>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h3 id="success_otp_heading"> </h3>
+                    <br>
+                    <form id="contact_admin_form" method="POST" action="{{url('/contact/admin')}}">
+
+                        <div class="form-group">
+
+                            <select class="form-control" id="artist_category" name="artist_category">
+                                <option value="">-- Select Category --</option>
+                                <option @if(Auth::user()->user_type == '4') selected @endif value="4">Writer</option>
+                                <option @if(Auth::user()->user_type == '5') selected @endif value="5">Painter</option>
+                                <option @if(Auth::user()->user_type == '6') selected @endif value="6">Singer</option>
+                                <option @if(Auth::user()->user_type == '7') selected @endif value="7">Dancer</option>
+                                <option @if(Auth::user()->user_type == '8') selected @endif value="8">Costume Designer</option>
+                                <option @if(Auth::user()->user_type == '9') selected @endif value="9">Makeup Artist</option>
+                                <option @if(Auth::user()->user_type == '10') selected @endif value="10">Photographer</option>
+                                <option @if(Auth::user()->user_type == '11') selected @endif value="11">Film Maker</option>
+                                <option @if(Auth::user()->user_type == '12') selected @endif value="12">Actor</option>
+                                <option @if(Auth::user()->user_type == '13') selected @endif value="13">Fashion Model</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+
+                            <input type="text" id="artist_name" name="artist_name" value="{{Auth::user()->name}}" class="form-control" placeholder="Name" readonly>
+                        </div>
+
+                        <div class="form-group">
+
+                            <input type="text" id="artist_email" name="artist_email" value="{{Auth::user()->email}}" class="form-control" placeholder="Email ID" readonly>
+                        </div>
+                        <div class="form-group">
+
+                            <input type="text" id="artist_city" name="artist_city"  class="form-control" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="artist_mobile_no" name="artist_mobile_no" value="{{Auth::user()->mobile}}" class="form-control" placeholder="Phone number" readonly>
+                        </div>
+                        <div class="form-group">
+                            {{--<input type="text" class="form-control" placeholder="Full Name">--}}
+                            <textarea id="artist_requirement" name="artist_requirement" class="form-control" placeholder="Post Your Requirement"></textarea>
+                        </div>
+                        <div>
+                            <input type="submit" class="btn btn-danger" name="admin_contact_btn" value="Send">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('jcontent')
     <script>
@@ -1120,6 +1191,28 @@
                     form.submit();
                 }
             });
+
+            $('#contact_admin_form').validate({
+                errorClass: 'text-danger',
+                rules: {
+                    artist_requirement: {
+                        required: true,
+                    },
+
+                },
+                messages: {
+
+                    artist_requirement: {
+                        required: 'Please Enter Your Requirement',
+                    },
+
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
+
         })
     </script>
 @endsection

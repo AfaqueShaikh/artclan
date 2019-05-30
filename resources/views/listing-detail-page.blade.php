@@ -184,9 +184,7 @@
                             Share Portfolio
                             <span class="viewCount"><i class="fa fa-share-alt"></i></span>
                         </li>
-                        <li data-toggle="modal" data-target="#shareLink">
-                            <a href="javascript:void(0);"data-toggle="modal" data-target="#contact_artist_model" class="btn btn-danger">Contact</a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -631,29 +629,7 @@
     </section>
 
 @endsection
-    <div class="modal" id="contact_artist_model" tabindex="-1" role="" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-md signUpPopUp" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="border-bottom: 0px;">
-                    <center><h3>Contact Artist</h3></center>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
-					<img src="{{url('public/image/close.png')}}"/></span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                    <h3 id="success_otp_heading"> </h3>
-                    <br>
-                    <form id="otp_verify_form">
-                        <input type="hidden" class="form-control" name="mobile_number" id="mobile_number" readonly>
-                        <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP">
-                    </form>
-                    <br>
-                    <button id="btn_verify_otp" onclick="verifyOtp();" class="btn btn-danger">Verify OTP</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
 
 @section('jcontent')
 @endsection

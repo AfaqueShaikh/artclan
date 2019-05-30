@@ -306,6 +306,7 @@ class HomeController extends Controller
     public function artistFilter(Request $request){
         $type = base64_decode($request->type);
         $filter_artist = User::query();
+        $filter_artist = $filter_artist->where('user_type',$type);
         if(isset($request->search))
         {
             $search_value = $request->search;
@@ -319,7 +320,25 @@ class HomeController extends Controller
                 $filter_artist = $filter_artist->where('user_type',$type)->where('city',$city);
             }
         }
+
         $filter_artist = $filter_artist->get();
         return json_encode($filter_artist);
+    }
+
+
+    //paytm function
+    public function testPaytm()
+    {
+        return view('demo-pay');
+    }
+
+    public function payPaytm(Request $request)
+    {
+        return view('payment');
+    }
+
+    public function comeBack(Request $request)
+    {
+        dd($request->all());
     }
 }

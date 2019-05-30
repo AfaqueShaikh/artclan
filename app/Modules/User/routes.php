@@ -30,4 +30,5 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::post('/user/physical-attributes/create', 'UserController@createPhysics');
     Route::post('/user/writing-type/create','UserController@createWritingType');
     Route::post('/user/genre/create','UserController@createGenre');
+    Route::post('/contact/admin','UserController@contactAdmin');
 });

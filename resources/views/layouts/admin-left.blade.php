@@ -214,6 +214,12 @@ switch ($segment_value)
                         </li>
                     @endif
 
+                    @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.contactus'))
+                        <li>
+                            <a href="{{url('/admin/artist-contact-request/list')}}"><i class="fa fa-mobile"></i> Manage Artist Request </a>
+                        </li>
+                    @endif
+
                     @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.faqs'))
                     <li>
                         <a href="{{url('/admin/faq/list')}}"><i class="fa fa-question"></i> Manage FAQs </a>
