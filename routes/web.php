@@ -29,6 +29,8 @@ Route::get('/recruiter/registration','HomeController@showRecruiterRegistrationFo
 Route::post('/artist/registration','HomeController@registerArtist');
 Route::post('/signup/recruiter','HomeController@registerRecruiter');
 
+Route::get('/login-after-registration/{id}','HomeController@loginAfterRegistration');
+
 Route::get('/artist/listing/{user_type}','HomeController@viewArtistListingPage');
 
 Route::get('/artist/detail/{id}','HomeController@viewArtistDetailPage');

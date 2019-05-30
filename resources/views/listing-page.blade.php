@@ -177,7 +177,7 @@
                                     <option value="Delhi">Delhi</option>
                                 </select>
                             </div>
-                            <div class="col-sm-4">
+                            {{--<div class="col-sm-4">
                                 <select name="" class="form-control">
                                     <option value="">Actor</option>
                                     <option value="">Model</option>
@@ -187,7 +187,7 @@
                                     <option value="">Writer</option>
                                     <option value="">Painter</option>
                                 </select>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                     <div class="dashboardartistGallery">

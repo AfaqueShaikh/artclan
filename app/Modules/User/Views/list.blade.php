@@ -61,7 +61,24 @@ $(document).ready(function () {
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
             {data: 'mobile', name: 'mobile'},
-            {data: 'status', name: 'status',orderable: false},
+
+            {data: "status",
+                render: function (data, type, row) {
+                    if (type === 'display') {
+                        if(row.user_status == 1)
+                        {
+                            return '<form id="status_'+row.id+'" method="post" action="{{url("change/user/status")}}/' + row.id +'"> {{ method_field("POST") }}  {!! csrf_field() !!}<button type="button" class="btn btn-warning btn-xs" onclick="confirmStatus('+row.id+')" ><i class="fa fa-lock"></i> In Active</a></form>';
+                        }
+                        else
+                        {
+                            return '<form id="status_'+row.id+'" method="post" action="{{url("change/user/status")}}/' + row.id +'"> {{ method_field("POST") }}  {!! csrf_field() !!}<button type="button" class="btn btn-success btn-xs" onclick="confirmStatus('+row.id+')" ><i class="fa fa-lock"></i> Active</a></form>';
+                        }
+                    }
+                    return data;
+                },
+                className: "dt-body-center",
+                orderable: false,
+            },
             {data: "login",
                 render: function (data, type, row) {
                     if (type === 'display') {
@@ -102,6 +119,15 @@ function confirmDelete(id){
     {
         $('#delete_'+id).submit();
     }
+}
+
+function confirmStatus(id){
+
+    $('#status_'+id).submit();
+    /*if(confirm("Are You Sure"))
+    {
+        $('#status_'+id).submit();
+    }*/
 }
 </script>
 @endsection

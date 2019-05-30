@@ -801,7 +801,8 @@
                 dataType: 'json',
                 data: registerData,
                 success: function (result) {
-                    console.log(result);
+                    /*console.log(result);
+                    console.log(123);*/
                     $('#step_five_submit_btn').attr('disabled',false);
                     $('#register_btn_spin').removeClass('fa fa-spinner fa-spin');
                     Swal.fire({
@@ -810,7 +811,7 @@
                         showConfirmButton: true,
                     }).then(function() {
                         // Redirect the user
-                        window.location.href = "{{url('/')}}";
+                        window.location.href = "{{url('/login-after-registration')}}/"+ btoa(result.id)+"";
                     })
                 }
             })

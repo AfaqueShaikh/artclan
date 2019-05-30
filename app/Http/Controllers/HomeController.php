@@ -61,7 +61,7 @@ class HomeController extends Controller
 
     public function registerArtist(Request $request)
     {
-        User::create([
+       $create = User::create([
             'date_of_birth' => $request->date_of_birth,
             'language' => $request->language,
             'mobile' => $request->mobile,
@@ -72,8 +72,12 @@ class HomeController extends Controller
             'gender' => $request->gender,
             'password' => bcrypt($request->password),
         ]);
+       if(isset($create))
+       {
+           return json_encode(['id' => $create->id , 'message' => 'success']);
+       }
 
-        return json_encode('Success');
+
         /*$languages = (explode(",",$data['language']));
         $available_to_work = (explode(",",$data['available_to_work']));
         dd($available_to_work);*/
@@ -114,7 +118,7 @@ class HomeController extends Controller
         $user_types[12] = "Actor";
         $user_types[13] = "Fashion Model";
         $user_type = base64_decode(request()->segment(3));
-        $user_details = User::where('user_type', $user_type)->get();
+        $user_details = User::where('user_type', $user_type)->where('user_status','=','2')->get();
         return view('listing-page', compact('user_details', 'user_types'));
     }
 
@@ -322,6 +326,7 @@ class HomeController extends Controller
         $type = base64_decode($request->type);
         $filter_artist = User::query();
         $filter_artist = $filter_artist->where('user_type',$type);
+        $filter_artist = $filter_artist->where('user_status','=','2');
         if(isset($request->search))
         {
             $search_value = $request->search;
@@ -338,6 +343,13 @@ class HomeController extends Controller
 
         $filter_artist = $filter_artist->get();
         return json_encode($filter_artist);
+    }
+
+    public function loginAfterRegistration($id)
+    {
+        $id = base64_decode($id);
+        Auth::loginUsingId($id);
+        return redirect('/home');
     }
 
 

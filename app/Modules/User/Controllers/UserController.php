@@ -294,7 +294,7 @@ class UserController extends Controller
     {   
         $users = User::where('user_type',$user_type)->orderBy('id','desc')->get();
         return Datatables::of($users)
-            ->addColumn('status', function($user) {
+            /*->addColumn('status', function($user) {
                 if($user->user_status == 1)
                 {
                     return '<label class="label label-success">Active</label>';
@@ -303,7 +303,7 @@ class UserController extends Controller
                 {
                     return '<label class="label label-danger">Inactive</label>';
                 }
-            })
+            })*/
             ->rawColumns(['status'])
             ->make(true);
     }
@@ -442,6 +442,28 @@ class UserController extends Controller
         $delete_user->delete();
         
         return redirect('admin/user/list/'.$user_type)->with('success','User Delete Successfully!');
+    }
+
+    public function changeStatus($id)
+    {
+
+        $check_status = User::find($id);
+        $user_type = $check_status->user_type;
+        if($check_status->user_status == '1')
+        {
+            $check_status->user_status = '2';
+            $check_status->save();
+            return redirect('admin/user/list/'.$user_type)->with('success','Status Changed Successfully!');
+        }
+        else
+        {
+            $check_status->user_status = '1';
+            $check_status->save();
+            return redirect('admin/user/list/'.$user_type)->with('success','Status Changed Successfully!');
+        }
+
+
+
     }
 
     public function loginByAdmin($id)
