@@ -26,8 +26,8 @@ Route::get('/artist/registration','HomeController@showArtistRegistrationForm');
 Route::get('/artist/registration/{type}','HomeController@showArtistRegistrationForm');
 Route::get('/recruiter/registration','HomeController@showRecruiterRegistrationForm');
 
-Route::post('/register/artist','HomeController@registerArtist');
-Route::post('/register/recruiter','HomeController@registerRecruiter');
+Route::post('/artist/registration','HomeController@registerArtist');
+Route::post('/signup/recruiter','HomeController@registerRecruiter');
 
 Route::get('/artist/listing/{user_type}','HomeController@viewArtistListingPage');
 

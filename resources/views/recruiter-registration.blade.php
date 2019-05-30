@@ -152,7 +152,7 @@
                     <div class="col-sm-12">
                         <div class="form-group text-center">
                             <a id="submit_btn"class="btn custom-btn">
-                                <i id="register_recruiter_btn_spin" style="font-size:17px"></i><span>Verify</span>
+                                <i id="register_recruiter_btn_spin" style="font-size:17px"></i><span>Register</span>
                             </a>
                         </div>
                     </div>
@@ -284,7 +284,7 @@
             $('#register_recruiter_btn_spin').addClass('fa fa-spinner fa-spin');
 
             $.ajax({
-                url: '{{url("/register/recruiter")}}',
+                url: '{{url("/signup/recruiter")}}',
                 method: "POST",
                 dataType: 'json',
                 data: registerData,

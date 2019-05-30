@@ -796,7 +796,7 @@
 
             console.log(registerData);
             $.ajax({
-                url: '{{url("/register/artist")}}',
+                url: '{{url("/artist/registration")}}',
                 method: "POST",
                 dataType: 'json',
                 data: registerData,
