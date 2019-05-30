@@ -302,7 +302,7 @@
 									</p>
 								</div>
 								<div class="hrCatBtn text-center">
-									<button class="btn custom-btn" type="submit"><span>Hire</span></button>
+									<a href="{{url('/artist/detail/'.base64_encode($artist_of_the_day->user_id))}}" class="btn custom-btn" type="button"><span>Hire {{$user_types[$artist_of_the_day->user->user_type]}} </span></a>
 								</div>
 
 							</div>
