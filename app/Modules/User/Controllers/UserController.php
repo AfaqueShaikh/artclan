@@ -83,9 +83,11 @@ class UserController extends Controller
     public function createVideos(Request $request)
     {
        $obj = new \App\Modules\User\Models\UserVideo();
+       $url = explode("https://youtu.be/",$request->video_url);
        $obj->user_id = Auth::user()->id;
        $obj->title = $request->video_title;
-       $obj->video_url = $request->video_url;
+       $obj->video_url =$url[1] ;
+
        $obj->save();
        
        return redirect(url('dashboard'));
@@ -513,7 +515,7 @@ class UserController extends Controller
 
         $email_template = \App\Modules\Emailtemplate\Models\EmailTemplate::where('template_key','contact-us-thanks')->first();
         Mail::send('Emailtemplate::contact-us-thanks',$data, function($message) use ($site_email,$site_title,$request,$email_template) {
-            $message->to('sohelahr@gmail.com')->subject($email_template->subject)->from($site_email->value,$site_title->value);
+            $message->to($request->artist_email)->subject($email_template->subject)->from($site_email->value,$site_title->value);
         });
         return redirect(url('dashboard'))->with('success','Request Submitted Successfully!');;
     }

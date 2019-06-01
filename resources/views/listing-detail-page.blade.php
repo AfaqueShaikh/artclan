@@ -213,8 +213,9 @@
                                     </li>--}}
                                     @if(isset($user_details->userVideos) && count($user_details->userVideos) > 0)
                                         @foreach($user_details->userVideos as $video)
+
                                             <li class="relative">
-                                                <iframe width="204" height="222" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="{{$video->video_url}}"></iframe>
+                                                <iframe width="204" height="222" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src={{'https://www.youtube.com/embed/'.$video->video_url}}></iframe>
                                                 {{--<span class="deleteBtn"><i class="fa fa-trash"></i></span>--}}
                                                 <p class="uplName">{{$video->title}}</p>
                                             </li>

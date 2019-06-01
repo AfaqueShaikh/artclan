@@ -42,7 +42,7 @@
                             <span class="viewCount"><i class="fa fa-share-alt"></i></span>
                         </li>
                         <li data-toggle="modal" data-target="">
-                            <a href="javascript:void(0);"data-toggle="modal" data-target="#contact_artist_model" class="btn btn-danger"> Contact</a>
+                            <a href="javascript:void(0);"data-toggle="modal" data-target="#contact_artist_model" class="btn btn-danger">Enquiry</a>
                         </li>
                     </ul>
                 </div>
@@ -77,10 +77,11 @@
                                 <ul class="listUpload clearfix">
 
                                     @foreach($userData->userVideos as $video)
+
                                         <li class="relative">
                                             <iframe width="204" height="222"
                                                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                                    allowfullscreen src="{{$video->video_url}}"></iframe>
+                                                    allowfullscreen src={{'https://www.youtube.com/embed/'.$video->video_url}}></iframe>
                                             <span class="deleteBtn"><i class="fa fa-trash"></i></span>
                                             <p class="uplName">{{$video->title}}</p>
                                         </li>

@@ -97,7 +97,7 @@ class ArtistContactRequestController extends Controller {
             $data['SITE_EMAIL'] = $site_email->value;
             $email_template =  \App\Modules\Emailtemplate\Models\EmailTemplate::where('template_key','contact-us-reply')->first();
             Mail::send('Emailtemplate::contact-us-reply',$data, function($message) use ($site_email,$site_title,$artist_request,$email_template) {
-                $message->to('sohelahr@gmail.com')->subject($email_template->subject)->from($site_email->value,$site_title->value);
+                $message->to($artist_request->artist_email)->subject($email_template->subject)->from($site_email->value,$site_title->value);
             });
 
             return redirect('/admin/artist-contact-request/list')->with('success','Reply Successfully!');

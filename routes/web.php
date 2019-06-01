@@ -22,6 +22,7 @@ Route::get('admin/logout', function(){
 
 Route::get('/','HomeController@showLandingPage');
 
+
 Route::get('/artist/registration','HomeController@showArtistRegistrationForm');
 Route::get('/artist/registration/{type}','HomeController@showArtistRegistrationForm');
 Route::get('/recruiter/registration','HomeController@showRecruiterRegistrationForm');
@@ -62,6 +63,7 @@ Route::get('/artist/filter','HomeController@artistFilter');
 Route::get("/make/mobile-number-unique","HomeController@makeMobileNumberUnique");
 
 //Paytm Route
+
 Route::get("/paytm/test","HomeController@testPaytm");
 Route::get("/paytm/pay","HomeController@payPaytm");
 Route::post('/come-back','HomeController@comeBack');

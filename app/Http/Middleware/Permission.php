@@ -26,7 +26,7 @@ class Permission
             }
             else
             {
-                return redirect('login');
+                return redirect('/');
             }
         }
         if(!$request->user()->hasPermission($role))
