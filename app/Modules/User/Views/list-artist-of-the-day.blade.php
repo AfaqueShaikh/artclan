@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title')
-    Artist Of The Day
+    Artist Of The Week
 @endsection
 @section('content')
 
 <ul class="breadcrumb">
     <li><a href="{{url('admin/dashboard')}}">{{__('user.Dashboard')}}</a></li>
-    <li><a href="javascript:void(0)">Artist Of The Day</a></li>
+    <li><a href="javascript:void(0)">Artist Of The Week</a></li>
 </ul>
 
 @if(Session::has('success'))
@@ -16,7 +16,7 @@
    <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Artist Of The Day</h2>
+                    <h2>Artist Of The Week</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -32,7 +32,7 @@
                       </thead>
                     </table>
                           
-                          <input type="submit" value="Set Artist Of The Day" id="set_artist_of_day_btn" class="btn btn-primary" disabled>
+                          <input type="submit" value="Set Artist Of The Week" id="set_artist_of_day_btn" class="btn btn-primary" disabled>
                           </form>
 					
 					
@@ -53,9 +53,9 @@ $(document).ready(function () {
                 render: function (data, type, row) {
                     if (type === 'display') {
                         if(row.artist_of_the_day=='1')
-                        return '<input class="artist_check" checked value="'+row.id+'" name="artist[]" type="checkbox" class="check_box">';
+                        return '<input class="artist_check" checked value="'+row.id+'" name="artist[]" type="radio" class="check_box">';
                         else
-                        return '<input class="artist_check"  value="'+row.id+'" name="artist[]" type="checkbox" class="check_box">';
+                        return '<input class="artist_check"  value="'+row.id+'" name="artist[]" type="radio" class="check_box">';
                     }
                     return data;
                 },

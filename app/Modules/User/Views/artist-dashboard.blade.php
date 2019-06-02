@@ -35,12 +35,12 @@
                     <ul class="profilerViews">
                         <li>
                             Profile Viewed
-                            <span class="viewCount"><i class="fa fa-eye"></i></span>
+                            <span class="viewCount"><i class="fa fa-eye"></i> {{$view_profile}}</span>
                         </li>
-                        <li data-toggle="modal" data-target="#shareLink">
+                        {{--<li data-toggle="modal" data-target="#shareLink">
                             Share Portfolio
                             <span class="viewCount"><i class="fa fa-share-alt"></i></span>
-                        </li>
+                        </li>--}}
                         <li data-toggle="modal" data-target="">
                             <a href="javascript:void(0);"data-toggle="modal" data-target="#contact_artist_model" class="btn btn-danger">Enquiry</a>
                         </li>
@@ -572,26 +572,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action='{{url('user/documents/create')}}' enctype="multipart/form-data" method="post">
+                    <form action='{{url('user/documents/create')}}' id="add_document_form" enctype="multipart/form-data" method="post">
                         <div class="form-group">
                             <label>Title</label>
-                            <input type="text" name='title' class="form-control" required="" placeholder="Title">
+                            <input type="text" name='title' id="title" class="form-control" required="" placeholder="Title">
                         </div>
                         <div class="form-group">
                             <label>Add Document</label>
-
+                            <input type="file" id="document" name="document" required="">
                         </div>
+
                         <div class="form-group text-center">
-
-
-                            <input type="file" name="document" required="">
-
-
-                        </div>
-                        <div class="form-group text-center">
-                            <button class="btn custom-btn" type="submit">
-                                <span>Submit</span>
-                            </button>
+                            <input class="btn custom-btn" value="Submit" type="submit">
                         </div>
                     </form>
                 </div>
@@ -1205,6 +1197,39 @@
 
                     artist_requirement: {
                         required: 'Please Enter Your Requirement',
+                    },
+
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
+            jQuery.validator.addMethod("extension", function (value, element, param) {
+                param = typeof param === "string" ? param.replace(/,/g, '|') : "png|jpe?g|gif";
+                return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i"));
+            }, jQuery.format("Please Select PDF Format Only."));
+
+            $('#add_document_form').validate({
+                errorClass: 'text-danger',
+                rules: {
+                    title: {
+                        required: true,
+                    },
+                    document: {
+                        required: true,
+                        extension: "doc|pdf",
+                    },
+
+                },
+                messages: {
+
+                    title:{
+                        required: 'Please Enter Title',
+                    },
+                    document:{
+                        required: 'Please Select Document',
+
                     },
 
                 },

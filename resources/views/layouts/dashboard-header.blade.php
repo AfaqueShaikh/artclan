@@ -99,12 +99,15 @@
 					</li>
 					{{--<li><a href="javascript:void(0);">Blogs</a></li>--}}
 					@if(!Auth::check())
-					<li><a href="javascript:void(0);" data-toggle="modal" data-target="#login">Login</a></li>
-					<li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>
-						@endif
+						<li><a href="javascript:void(0);" data-toggle="modal" data-target="#login">Login</a></li>
+						<li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>
+					@endif
 					@if(Auth::check())
 						<li><a href="{{ url('logout') }}" class="color-red" >Logout</a></li>
-						@endif
+						<li>
+							<a href="javascript:void(0);" class="color-red" >Dashboard</a>
+						</li>
+					@endif
 				</ul> 				
 				<div class="sideNavToggle">	
 					<a href="javascript:void(0);" class="color-red">Menu</a>	

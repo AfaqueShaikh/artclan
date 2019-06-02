@@ -412,7 +412,7 @@
                     </div>--}}
                     <div class="stepFive" id="stepFive" style="display: none;">
 
-                            <h3 class="text-center">Your <span>Location</span></h3>
+                            <h3 class="text-center">Mobile No <span>Verification</span></h3>
                             <ul class="steps clearfix">
                                 <li>
                                     <i class="fa fa-th"></i>

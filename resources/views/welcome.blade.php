@@ -276,7 +276,7 @@
 			<div class="home-heading">
 				<h3 class="text-center">
 				Artist of  
-				<span class="cng-clr">the Day</span>
+				<span class="cng-clr">the Week</span>
 				</h3>
 			</div>
 			<div class="artistGallery categoriFull">

@@ -59,6 +59,8 @@ Route::post('/verify/otp','HomeController@verifyOtp');
 
 Route::get('/artist/filter','HomeController@artistFilter');
 
+Route::post('/contact/artist','HomeController@contactArtist');
+
 
 Route::get("/make/mobile-number-unique","HomeController@makeMobileNumberUnique");
 

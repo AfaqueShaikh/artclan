@@ -156,7 +156,16 @@
         <div class="container">Welcome {{$user_details->name}}</div>
     </section>
     <section class="dashboardSection">
+
         <div class="container">
+            @if(Session::has('success'))
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+            @endif
             <div class="dashPrifilerInfo clearfix">
                 <div class="profilerImage relative">
                     @if(isset($user_details->profile_img))
@@ -178,12 +187,15 @@
                     <ul class="profilerViews">
                         <li>
                             Profile Viewed
-                            <span class="viewCount"><i class="fa fa-eye"></i></span>
+                            <span class="viewCount"><i class="fa fa-eye"></i> {{$view_count}}</span>
                         </li>
-                        <li data-toggle="modal" data-target="#shareLink">
+                        <li data-toggle="modal" data-target="">
+                            <a href="javascript:void(0);"data-toggle="modal" data-target="#contact_artist_model" class="btn btn-danger">Enquiry</a>
+                        </li>
+                        {{--<li data-toggle="modal" data-target="#shareLink">
                             Share Portfolio
                             <span class="viewCount"><i class="fa fa-share-alt"></i></span>
-                        </li>
+                        </li>--}}
 
                     </ul>
                 </div>
@@ -629,8 +641,76 @@
         </div>
     </section>
 
+    <div class="modal" id="contact_artist_model" tabindex="-1" role="" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-md signUpPopUp" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 0px;">
+                    <center><h3>Contact Artist</h3></center>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h3 id="success_otp_heading"> </h3>
+                    <br>
+                    <form id="contact_artist_form" method="POST" action="{{url('/contact/artist')}}">
+
+                        <input type="hidden" id="artist_email" name="artist_email" value="{{$user_details->email}}" class="form-control" placeholder="Email" readonly>
+
+
+                        {{--<div class="form-group">
+
+                            <input type="text" id="artist_name" name="artist_name" value="{{Auth::user()->name}}" class="form-control" placeholder="Name" readonly>
+                        </div>
+                        {{$user_details->name}}
+
+                        <div class="form-group">
+
+                            <input type="text" id="artist_email" name="artist_email" value="{{Auth::user()->email}}" class="form-control" placeholder="Email ID" readonly>
+                        </div>
+                        <div class="form-group">
+
+                            <input type="text" id="artist_city" name="artist_city"  class="form-control" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="artist_mobile_no" name="artist_mobile_no" value="{{Auth::user()->mobile}}" class="form-control" placeholder="Phone number" readonly>
+                        </div>--}}
+                        <div class="form-group">
+                            {{--<input type="text" class="form-control" placeholder="Full Name">--}}
+                            <textarea id="artist_requirement" name="artist_requirement" class="form-control" placeholder="Post Your Requirement"></textarea>
+                        </div>
+                        <div>
+                            <input type="submit" class="btn btn-danger" name="admin_contact_btn" value="Send">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 
 @section('jcontent')
+    <script>
+        $('#contact_artist_form').validate({
+            errorClass: 'text-danger',
+            rules: {
+                artist_requirement: {
+                    required: true,
+                },
+
+            },
+            messages: {
+
+                artist_requirement: {
+                    required: 'Please Enter Your Requirement',
+                },
+
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    </script>
 @endsection

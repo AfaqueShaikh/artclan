@@ -3,8 +3,10 @@
 namespace App\Modules\User\Controllers;
 
 use App\Modules\ArtistContactRequest\Models\ArtistRequest;
+use App\Modules\User\Models\ArtistOfTheDay;
 use App\Modules\User\Models\Genre;
 use App\Modules\User\Models\WritingType;
+use App\ProfileCounts;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -65,13 +67,14 @@ class UserController extends Controller
         
         
         $cities = \App\Modules\District\Models\District::all();
+        $view_profile = ProfileCounts::where('user_id',Auth::user()->id)->count();
         $userPhysicsData = Auth::user()->userPhysics;
         $userWritingType = Auth::user()->userWritingType;
         $userGenre = Auth::user()->userGenre;
 
         
         
-        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities, 'userPhysicsData'=>$userPhysicsData, 'userWritingType' => $userWritingType, 'userGenre' => $userGenre]);
+        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities, 'userPhysicsData'=>$userPhysicsData, 'userWritingType' => $userWritingType, 'userGenre' => $userGenre,'view_profile' =>$view_profile]);
     }
     
     /**
@@ -336,7 +339,7 @@ class UserController extends Controller
     public function setArtistOfTheDay(Request $request, $type)
     {
 
-        
+        $check_availibility = ArtistOfTheDay::where('user_type',$type)->delete();
         //\App\Modules\User\Models\ArtistOfTheDay::truncate();
         foreach($request->artist as $obj)
         {
@@ -517,6 +520,6 @@ class UserController extends Controller
         Mail::send('Emailtemplate::contact-us-thanks',$data, function($message) use ($site_email,$site_title,$request,$email_template) {
             $message->to($request->artist_email)->subject($email_template->subject)->from($site_email->value,$site_title->value);
         });
-        return redirect(url('dashboard'))->with('success','Request Submitted Successfully!');;
+        return redirect(url('dashboard'))->with('success','Request Submitted Successfully!');
     }
 }

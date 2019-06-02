@@ -8,10 +8,13 @@ use App\Modules\District\Models\District;
 use App\Modules\FeaturedPatner\Models\FeaturedPatner;
 use App\Modules\Testimonial\Models\Testimonial;
 use App\Modules\User\Models\ArtistOfTheDay;
+use App\ProfileCounts;
 use App\User;
 use App\VerifyNumber;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -138,8 +141,14 @@ class HomeController extends Controller
         $user_types[12] = "Actor";
         $user_types[13] = "Fashion Model";
         $user_id = base64_decode(request()->segment(3));
+        $increment_profile_count = new ProfileCounts();
+        $increment_profile_count->user_id = $user_id;
+        $increment_profile_count->save();
+
+
         $user_details = User::where('id', $user_id)->first();
-        return view('listing-detail-page', compact('user_details', 'user_types'));
+        $view_count = ProfileCounts::where('user_id',$user_id)->count();
+        return view('listing-detail-page', compact('user_details', 'user_types','view_count'));
     }
 
 
@@ -351,6 +360,25 @@ class HomeController extends Controller
         Auth::loginUsingId($id);
         return redirect('/home');
     }
+
+    public function contactArtist(Request $request)
+    {
+
+        $site_title = \App\Modules\Models\GlobalValue::where('slug','site-title')->first();
+        $site_email = \App\Modules\Models\GlobalValue::where('slug','site-email')->first();
+
+        //$data['USER_NAME'] = $request->name;
+        $data['MESSAGE'] = strip_tags($request->artist_requirement);
+        $data['SITE_TITLE'] = $site_title->value;
+        $data['SITE_EMAIL'] = $site_email->value;
+
+        $email_template = \App\Modules\Emailtemplate\Models\EmailTemplate::where('template_key','enquiry-artist')->first();
+        Mail::send('Emailtemplate::enquiry-artist',$data, function($message) use ($site_email,$site_title,$request,$email_template) {
+            $message->to($request->artist_email)->subject($email_template->subject)->from($site_email->value,$site_title->value);
+        });
+        return Redirect::back()->with('success','Enquiry Sent Successfully!');
+    }
+
 
 
     //paytm function
