@@ -134,6 +134,9 @@ class UserController extends Controller
        Auth::user()->city = $request->city;
        Auth::user()->language = implode(',', $request->language);       
        Auth::user()->about_me = $request->about_me;
+       Auth::user()->facebook = $request->facebook;
+       Auth::user()->twitter = $request->twitter;
+       Auth::user()->instagram = $request->instagram;
        Auth::user()->save();
        return redirect(url('dashboard'));
     }

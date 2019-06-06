@@ -240,6 +240,7 @@ return [
         'Datatables' => 'Yajra\Datatables\Facades\Datatables',
         'Image' => Intervention\Image\Facades\Image::class,
          'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'sendMessageHelper' => App\Helper\sendMessageHelper::class,
     ],
 
 ];

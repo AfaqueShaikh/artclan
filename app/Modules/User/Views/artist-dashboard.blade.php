@@ -150,12 +150,26 @@
                                         <p class="pull-left">{{Auth::user()->name}}</p>
                                     </div>
                                     <div class="col-sm-6 clearfix">
-                                        <label class="headingLable pull-left">Residing City</label>
-                                        <p class="pull-left">{{Auth::user()->city}}</p>
+                                        <label class="headingLable pull-left">Twitter</label>
+                                        <p class="pull-left">@if(isset(Auth::user()->twitter)){{Auth::user()->twitter}} @else - @endif</p>
                                     </div>
+
                                     <div class="col-sm-6 clearfix">
                                         <label class="headingLable pull-left">Language known</label>
                                         <p class="pull-left">{{Auth::user()->language}}</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Facebook</label>
+                                        <p class="pull-left">@if(isset(Auth::user()->facebook)){{Auth::user()->facebook}} @else - @endif</p>
+                                    </div>
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Residing City</label>
+                                        <p class="pull-left">{{Auth::user()->city}}</p>
+                                    </div>
+
+                                    <div class="col-sm-6 clearfix">
+                                        <label class="headingLable pull-left">Instagram</label>
+                                        <p class="pull-left">@if(isset(Auth::user()->instagram)){{Auth::user()->instagram}} @else - @endif</p>
                                     </div>
 
                                 </div>
@@ -436,7 +450,7 @@
                         <ul>
                             <li>
                                 <a href="javascript:void(0);">
-                                    <i class="fa fa-facebook"> Facebook</i>
+                                    <i class="fa fa-facebook"> Facebooks</i>
                                 </a>
                             </li>
                             <li>
@@ -450,11 +464,6 @@
                                 </a>
                             </li>
 
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <i class="fa fa-linkedin"> LinkedIn</i>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                     <label>Copy link to share</label>
@@ -636,6 +645,21 @@
                                         </option>
 
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Facebook Link</label>
+                                    <input type="text" name="facebook" id="facebook" required="" @if(isset(Auth::user()->facebook)) value="{{Auth::user()->facebook}}" @endif
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Twitter Link</label>
+                                    <input type="text" name="twitter" id="twitter" required="" @if(isset(Auth::user()->twitter)) value="{{Auth::user()->twitter}}" @endif
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Instagram Link</label>
+                                    <input type="text" name="instagram" id="instagram" required="" @if(isset(Auth::user()->instagram)) value="{{Auth::user()->instagram}}" @endif
+                                           class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Know Me</label>

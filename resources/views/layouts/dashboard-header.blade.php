@@ -18,7 +18,7 @@
 				<li>
 					<a href="javascript:void(0);">
 						<i class="fa fa-facebook"></i>
-						<div class="iconOverlay">Facebook</div>
+						<div class="iconOverlay">Facebooks</div>
 					</a>
 				</li>
 				<li>
@@ -33,12 +33,12 @@
 						<div class="iconOverlay">Instagram</div>
 					</a>
 				</li>	
-				<li>
+				{{--<li>
 					<a href="javascript:void(0);">
 						<i class="fa fa-linkedin"></i>
 						<div class="iconOverlay">LinkedIn</div>
 					</a>
-				</li>					
+				</li>--}}
 			</ul>
 		</div>
 		<nav class="custome-navbar clearfix">
@@ -159,11 +159,11 @@
 						</a>
 					</li>
 
-					<li>
+					{{--<li>
 						<a href="javascript:void(0);">
 							<i class="fa fa-linkedin"> LinkedIn</i>
 						</a>
-					 </li>
+					 </li>--}}
 				</ul>
 			</div>
 		</div>

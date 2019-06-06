@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\sendMessageHelper;
 use App\Modules\Ads\Models\Ads;
 use App\Modules\BannerImage\Models\BannerImage;
 use App\Modules\District\Models\District;
@@ -77,6 +78,7 @@ class HomeController extends Controller
         ]);
        if(isset($create))
        {
+           $send_message = sendMessageHelper::sendMessage($request->mobile);
            return json_encode(['id' => $create->id , 'message' => 'success']);
        }
 
@@ -167,6 +169,8 @@ class HomeController extends Controller
         }
         return json_encode($location);
     }
+
+
 
     public function showLandingPage(Request $request)
     {
