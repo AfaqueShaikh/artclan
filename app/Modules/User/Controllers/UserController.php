@@ -299,8 +299,17 @@ class UserController extends Controller
     }
 
     public function data($user_type)
-    {   
-        $users = User::where('user_type',$user_type)->orderBy('id','desc')->get();
+    {
+
+        if($user_type == 'all')
+        {
+            $users = User::where('user_type','!=','1')->orderBy('id','desc')->get();
+        }
+        else
+        {
+            $users = User::where('user_type',$user_type)->orderBy('id','desc')->get();
+        }
+
         return Datatables::of($users)
             /*->addColumn('status', function($user) {
                 if($user->user_status == 1)

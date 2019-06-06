@@ -13,5 +13,6 @@ Route::group(['module' => 'Cms', 'middleware' => ['web'], 'namespace' => 'App\Mo
     Route::get('/about-us','CmsController@viewAboutUsPage');
 
     Route::get('/how-it-works','CmsController@viewHowItWorkPage');
+    Route::get('/privacy-policy','CmsController@viewPrivicyAndPolicyPage');
 
 });

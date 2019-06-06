@@ -73,4 +73,10 @@ class CmsController extends Controller
         return view('how-it-works',compact('how_it_works_data'));
     }
 
+    public function viewPrivicyAndPolicyPage()
+    {
+        $privacy_policy_data = Cms::where('slug','privacy-policy')->first();
+        return view('privacy-policy',compact('privacy_policy_data'));
+    }
+
 }

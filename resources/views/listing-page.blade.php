@@ -230,11 +230,11 @@
                                                         <i class="fa fa-instagram"></i>
                                                     </a>
                                                 </li>
-                                                <li>
+                                                {{--<li>
                                                     <a href="javascript:void(0);">
                                                         <i class="fa fa-linkedin"></i>
                                                     </a>
-                                                </li>
+                                                </li>--}}
                                             </ul>
                                         </div>
                                     </div>

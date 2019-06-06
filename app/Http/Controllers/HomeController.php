@@ -78,7 +78,37 @@ class HomeController extends Controller
         ]);
        if(isset($create))
        {
-           $send_message = sendMessageHelper::sendMessage($request->mobile);
+           //$send_message = sendMessageHelper::sendMessage($request->mobile);
+           $message = 'Registraton Successfull Thank you...';
+           $numbers = $request->mobile;
+           $senderId="DEMOOS";
+           $routeId="1";
+           $authKey = "b8729fc9c2f434ea5ffb8252a7868c";
+           $getData = 'mobileNos='.$numbers.'&message='.urlencode($message).'&senderId='.$senderId.'&routeId='.$routeId;
+           $serverUrl="msg.msgclub.net";
+           $url="http://".$serverUrl."/rest/services/sendSMS/sendGroupSms?AUTH_KEY=".$authKey."&".$getData;
+           // init the resource
+           $ch = curl_init();
+           curl_setopt_array($ch, array(
+
+               CURLOPT_URL => $url,
+
+               CURLOPT_RETURNTRANSFER => true,
+
+               CURLOPT_SSL_VERIFYHOST => 0,
+
+               CURLOPT_SSL_VERIFYPEER => 0
+
+           ));
+           $output = curl_exec($ch);
+           //Print error if any
+           if(curl_errno($ch))
+           {
+
+               $error =  curl_error($ch);
+               return json_encode(['id' => $create->id , 'message' => 'success']);
+           }
+           curl_close($ch);
            return json_encode(['id' => $create->id , 'message' => 'success']);
        }
 
@@ -208,11 +238,26 @@ class HomeController extends Controller
 
     }
 
-    public function checkMobileNumber(Request $request)
+    public function checkMobileNumberArtist(Request $request)
     {
         $mobile = $request->mobile_no_verification;
         if ($mobile) {
-            $user_info = User::where('mobile', $mobile)->first();
+            $user_info = User::where('mobile', $mobile)->where('user_type','!=','3')->first();
+            if ($user_info) {
+                return "false";
+            } else {
+                return "true";
+            }
+        }
+    }
+
+    public function checkMobileNumberRecruiter(Request $request)
+    {
+        $mobile = $request->mobile;
+
+        if ($mobile) {
+            $user_info = User::where('mobile', $mobile)->where('user_type','3')->first();
+
             if ($user_info) {
                 return "false";
             } else {
@@ -399,6 +444,13 @@ class HomeController extends Controller
     public function comeBack(Request $request)
     {
         dd($request->all());
+    }
+
+    public function executeCommand()
+    {
+        /*echo exec('php artisan config:cache');
+        echo exec('php artisan config:clear');*/
+        echo exec('composer dump-autoload -o');
     }
 
 

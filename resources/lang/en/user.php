@@ -14,6 +14,7 @@ return [
     */
 
     'Users' => 'Users',
+    'Manage_all' => 'Manage All User',
     'Manage_4' => 'Manage Writers',
     'Manage_5' => 'Manage Painters',
     'Manage_6' => 'Manage Singers',

@@ -19,10 +19,12 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>{{__('user.Manage_'.Request::segment(4))}}</h2>
+                      @if(Request::segment(4) != 'all')
                       <div class="pull-right">
                           <a href="{{url('admin/user/create/'.Request::segment(4))}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> {{__('user.addnew')}}</a>
                           <a href="{{url('admin/user/manage/artist-of-the-day/'.Request::segment(4))}}" class="btn btn-primary"> Manage Artist Of The Week</a>
                       </div>
+                      @endif
                     <div class="clearfix"></div>
 
                   </div>

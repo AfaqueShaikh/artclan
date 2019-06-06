@@ -23,7 +23,7 @@
                 <div class="col-sm-3">
                     <div class="footer-nav">
                         <ul class="clearfix">
-                            <li><a href="javascript:void(0);">Artists</a></li>
+                            <li><a href="{{url('/privacy-policy')}}">Privacy & Policy</a></li>
                             
                         </ul>
                     </div>

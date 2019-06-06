@@ -657,7 +657,7 @@
             mobile_no_verification:{
                 required:true,
                 remote: {
-                    url: javascript_site_path + '/chk-mobile-duplicate',
+                    url: javascript_site_path + '/chk-mobile-duplicate/artist',
                     method: 'get'
                 }
             },

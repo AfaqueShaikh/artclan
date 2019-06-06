@@ -111,6 +111,10 @@ switch ($segment_value)
                         <ul class="nav child_menu" style="@if($segment_parameter == 'users')display: block;@endif">
 
                             @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.users'))
+                                <li class="@if($segment_value === 'user') current-page @endif"><a href="{{url('/admin/user/list/all')}}">Manage All Users</a></li>
+                            @endif
+
+                            @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.users'))
                                 <li class="@if($segment_value === 'user') current-page @endif"><a href="{{url('/admin/user/list/4')}}">Manage Writers</a></li>
                             @endif
                             
