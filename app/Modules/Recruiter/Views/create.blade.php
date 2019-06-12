@@ -1,27 +1,27 @@
 @extends('layouts.admin')
 @section('title')
-{{__('user.Create_'.Request::segment(4))}}
+Create Recruiter
 @endsection
 @section('content')
 <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
 <ul class="breadcrumb">
     <li><a href="{{url('admin/dashboard')}}">Dashboard</a></li>
-    <li><a href="{{url('admin/user/list/'.Request::segment(4))}}">{{__('user.Manage_'.Request::segment(4))}}</a></li>
-    <li><a href="javascript:void(0)">{{__('user.Create_'.Request::segment(4))}}</a></li>
+    <li><a href="{{url('/admin/recruiter/list')}}">Manage Recruiter</a></li>
+    <li><a href="javascript:void(0)">Create Recruiter</a></li>
 </ul>
 <div class="">
 <div class="row">
 <div class="col-md-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>{{__('user.Create_'.Request::segment(4))}}</h2>
+                    <h2>Create Recruiter</h2>
                     
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br>
                       <div class="col-md-6 center-margin">
-                          <form id="admin_create_artist_form" class="form-horizontal form-label-left" action="" method="post" enctype="multipart/form-data">
+                          <form id="admin_create_recruiter_form" class="form-horizontal form-label-left" action="" method="post" enctype="multipart/form-data">
                               {{ csrf_field() }}
                               <div class="form-group">
                                   <label>Name</label>
@@ -35,6 +35,13 @@
                                   <input class="form-control" type="email" id="email" name="email">
                                   @if ($errors->has('email'))
                                       <span><strong class="text-danger">{{ $errors->first('email') }}</strong></span>
+                                  @endif
+                              </div>
+                              <div class="form-group">
+                                  <label>Company Name</label>
+                                  <input class="form-control" type="text" id="company_name" name="company_name">
+                                  @if ($errors->has('company_name'))
+                                      <span><strong class="text-danger">{{ $errors->first('company_name') }}</strong></span>
                                   @endif
                               </div>
                               <div class="form-group">
@@ -65,24 +72,10 @@
                                       <span><strong class="text-danger">{{ $errors->first('city') }}</strong></span>
                                   @endif
                               </div>
-                              <div class="form-group">
-                                  <label>State</label>
-                                  <input class="form-control" type="text" id="state" name="state">
-                                  @if ($errors->has('state'))
-                                      <span><strong class="text-danger">{{ $errors->first('state') }}</strong></span>
-                                  @endif
-                              </div>
-                              <div class="form-group">
-                                  <label>Address</label>
-                                  <textarea class="form-control" id="address" name="address"></textarea>
-                                  @if ($errors->has('address'))
-                                      <span><strong class="text-danger">{{ $errors->first('address') }}</strong></span>
-                                  @endif
-                              </div>
-                              
+
                               <div class="form-group">
                                   <label>User Type</label>
-                                  <input type="text" class="form-control" name="user_type" value="{{Request::segment(4)}}" readonly="">
+                                  <input type="text" class="form-control" name="user_type" value="3" readonly="">
                                   @if ($errors->has('user_type'))
                                       <span><strong class="text-danger">{{ $errors->first('user_type') }}</strong></span>
                                   @endif
@@ -116,7 +109,7 @@
         <script>
             $(function () {
                 var javascript_site_path = '{{url('/')}}';
-                $('#admin_create_artist_form').validate({
+                $('#admin_create_recruiter_form').validate({
 
                     errorClass:'text-danger',
                     rules:{
@@ -129,16 +122,17 @@
                         email:{
                             required:true,
                         },
+                        company_name:{
+                            required:true,
+                        },
                         mobile:{
                             required:true,
                             remote: {
-                                url: javascript_site_path + '/chk-mobile-no/artist',
+                                url: javascript_site_path + '/chk-mobile-duplicate/recruiter',
                                 method: 'get'
                             }
                         },
-                        state:{
-                            required:true,
-                        },
+
                         password:{
                             required:true,
                         },
@@ -146,9 +140,7 @@
                             required:true,
                             equalTo: "#password",
                         },
-                        address:{
-                            required:true,
-                        },
+
 
                     } ,
                     messages:{
@@ -161,29 +153,26 @@
                         email:{
                             required:'Please Enter Your Email Id',
                         },
+                        company_name:{
+                            required:'Please Enter Your Company Name',
+                        },
                         mobile:{
                             required:'Please Enter Your Mobile No',
                             remote:"Mobile Number Already Exits",
                         },
-                        state:{
-                            required:'Please Enter State',
-                        },
+
                         password:{
                             required:'Please Enter Password',
                         },
                         password_confirmation:{
                             required:'Please Confirm Password',
                             equalTo:'Confirm Password Should Be Same As Password',
-                        },
-                        address:{
-                            required:'Please Enter Address',
                         }
+
                     },
                     submitHandler:function(form)
                     {
-
                         form.submit();
-
                     }
 
                 });

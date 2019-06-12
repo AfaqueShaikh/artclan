@@ -123,8 +123,15 @@
 				<img src="{{url('public/image/close.png')}}" alt="">
 			</a>
 			<div class="sidenavLogo">
+
 				@if(isset(Auth::user()->profile_img))
-					<a href="javascript:void(0);"><img class="profile-img" src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" ></a>
+					@if(Auth::user()->user_type != '3')
+						<a href="javascript:void(0);"><img class="profile-img" src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" ></a>
+
+					@else
+						<a href="javascript:void(0);"><img class="profile-img" src="{{url('storage/app/public/recruiter_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" ></a>
+
+					@endif
 				@else
 					<a href="javascript:void(0);"><img class="profile-img" src="{{url('public/image/noimagefound.png')}}" alt="Weizmann Forex" ></a>
 				@endif
@@ -169,5 +176,11 @@
 		</div>
 	</header>  
 <section class="dashboardWelcome">
-		<div class="container">Welcome {{Auth::User()->name}}</div>
+		<div class="container">
+			Welcome {{Auth::User()->name}}
+			{{--<span class="circlechart pull-right" data-percentage="{{Auth::User()->profile_completed}}">
+				Profile Completed
+			</span>--}}
+		</div>
+
 	</section>

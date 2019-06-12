@@ -16,6 +16,7 @@
     <link href="{{url('public/css/animated.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/main.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/responsive.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/css/progresscircle.css')}}" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -36,6 +37,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script src="{{url('public/js/validation.js')}}"></script>
 <script src="{{url('public/js/jquery.validate.js')}}"></script>
+<script src="{{url('public/js/progresscircle.js')}}"></script>
 <script type="text/javascript">
     $(function () {
         var filterList = {
@@ -137,12 +139,21 @@
     <div class="modal-dialog modal-md signUpPopUp" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 0px;">
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
 					<img src="{{url('public/image/close.png')}}"/></span>
                 </button>
+
             </div>
 
             <div class="modal-body">
+                @if(Session::has('error'))
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger alert-block">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+                @endif
                 <form id="login_form" action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-12">
@@ -171,6 +182,23 @@
                                             </span>
                                     @endif
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group{{ $errors->has('login_as') ? ' has-error' : '' }}">
+                                    <label class="name-label">Login As</label>
+                                    <select class="form-control" name="login_as" id="login_as">
+                                        <option value="artist" selected>Artist</option>
+                                        <option value="recruiter">Recruiter</option>
+                                    </select>
+                                    @if ($errors->has('login_as'))
+                                        <span class="help-block">
+                                                    <strong>{{ $errors->first('login_as') }}</strong>
+                                            </span>
+                                    @endif
+                                </div>
+                                {{ csrf_field() }}
                             </div>
                         </div>
                         <div class="row">

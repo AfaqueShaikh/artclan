@@ -94,7 +94,7 @@ $(document).ready(function(){
 		        }
 		    }
 		});
-		$('#clientSay').owlCarousel({
+		$('#clientSay,#AdvertisingBlock').owlCarousel({
 	        //center: true,
                 autoplay:true,
                 smartSpeed: 1000,

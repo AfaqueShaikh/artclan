@@ -106,6 +106,12 @@ switch ($segment_value)
                       <a href="{{url('/admin/module/list')}}"><i class="fa fa-lock"></i> Manage Module </a>
                   </li>
                     @endif
+
+                    @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.users'))
+                        <li>
+                            <a href="{{url('/admin/recruiter/list')}}"><i class="fa fa-envelope"></i> Manage Recruiter </a>
+                        </li>
+                    @endif
                     
                     <li class="@if($segment_parameter == 'users') active @endif"><a><i class="fa fa-users"></i> Manage Users <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="@if($segment_parameter == 'users')display: block;@endif">
@@ -179,6 +185,12 @@ switch ($segment_value)
                     @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.emailtemplate'))
                         <li>
                             <a href="{{url('/admin/artist/list')}}"><i class="fa fa-envelope"></i> Manage Artist Category </a>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.emailtemplate'))
+                        <li>
+                            <a href="{{url('/admin/artist-recruiter/list')}}"><i class="fa fa-envelope"></i> Manage Recruiter Account Request </a>
                         </li>
                     @endif
 

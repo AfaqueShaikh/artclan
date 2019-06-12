@@ -97,6 +97,11 @@
                                         <label class="name-label">Select Category</label>
                                         <select class="form-control" name="category" id="category">
                                             <option> -- Select Category --</option>
+                                            {{--@foreach($categories as $category)
+                                                <option @if(Request::segment(3) == $category->category_type) selected @endif value="{{$category->category_type}}">{{$category->category_name}}</option>
+                                            @endforeach
+                                            <option name="other" value="Other">Other</option>--}}
+
                                             <option @if(Request::segment(3) == 4) selected @endif value="4">Writer</option>
                                             <option @if(Request::segment(3) == 5) selected @endif value="5">Painter</option>
                                             <option @if(Request::segment(3) == 6) selected @endif value="6">Singer</option>
@@ -117,6 +122,22 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{--<div id="new_category_div" class="row" style="display: none;">
+                                <div class="col-sm-12">
+                                    <div class="form-group {{ $errors->has('new_category') ? ' has-error' : '' }}">
+                                        <label class="name-label">Enter Your Category</label>
+                                        <div class="relative">
+                                            <input type="new_category" class="form-control new_category" name="new_category" id="new_category" placeholder="Category Name">
+                                            @if ($errors->has('new_category'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('new_category') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>--}}
 
                             <div class="row">
                                 <div class="col-sm-12">
@@ -527,6 +548,18 @@
     var javascript_site_path = '{{url('/')}}';
     $(function () {
 
+        /*$('#category').change(function () {
+            console.log($(this).val())
+            if($(this).val() == 'Other')
+            {
+                $('#new_category_div').show();
+            }
+            else
+            {
+                $('#new_category_div').hide();
+            }
+        })*/
+
 
 
        $('#date_of_birth').datepicker({
@@ -734,11 +767,16 @@
         {
             registerData.name = $('#name').val();
             registerData.email = $('#email').val();
+            /*if($('#new_category').val() != '')
+            {
+                registerData.new_category = $('#new_category').val();
+            }*/
             /*registerData.mobile = $('#mobile').val();*/
             registerData.category = $('#category').val();
             registerData.password = $('#password').val();
             registerData.gender = $("input[name='gender']:checked").val();
             registerData.age = $("input[name='age']:checked").val();
+            //console.log(registerData);
             $('#stepFirst').hide();
             $('#stepThree').show();
         }

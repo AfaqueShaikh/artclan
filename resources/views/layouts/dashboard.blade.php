@@ -16,6 +16,8 @@
     <link href="{{url('public/css/animated.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/main.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('public/css/responsive.css')}}" rel="stylesheet" type="text/css" />
+	<link href="{{url('public/css/progresscircle.css')}}" rel="stylesheet" type="text/css" />
+
 </head>
 <body class="dashboardPage">
 
@@ -36,6 +38,8 @@
 <script src="{{url('public/js/jquery.validate.js')}}"></script>
 
 <script src="{{url('public/js/custom.js')}}"></script>
+<script src="{{url('public/js/progresscircle.js')}}"></script>
+
 </body>
 <!-- Contact Us Modal -->
 <div class="modal" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

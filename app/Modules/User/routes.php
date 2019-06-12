@@ -12,9 +12,13 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::post('/admin/user/update/{id}', 'UserController@update')->middleware('permission:update.users');
     Route::delete('/admin/user/delete/{id}', 'UserController@delete')->middleware('permission:delete.users');
     Route::post('/change/user/status/{id}','UserController@changeStatus')->middleware('permission:delete.users');
+
+    Route::get('/chk-mobile-no/artist','UserController@checkMobileNumber');
     
 
     Route::get('login/by/admin/{id}','UserController@loginByAdmin');
+
+    Route::get('/recruiter/login-by/artist/{id}','UserController@recruiterLoginByArtist');
 
     //frontend code
     
@@ -32,4 +36,6 @@ Route::group(['module' => 'User', 'middleware' => ['web'], 'namespace' => 'App\M
     Route::post('/user/writing-type/create','UserController@createWritingType');
     Route::post('/user/genre/create','UserController@createGenre');
     Route::post('/contact/admin','UserController@contactAdmin');
+
+    Route::get('/request/for/recruiter-account','UserController@requestForRecruiterAccount');
 });

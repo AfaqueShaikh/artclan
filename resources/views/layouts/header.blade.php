@@ -99,11 +99,16 @@
                 </li>
 <!--                <li><a href="javascript:void(0);"><strong class="bigft">Blogs</strong></a></li>-->
                 @if(!Auth::check())
-                    <li><a href="javascript:void(0);"data-toggle="modal" data-target="#login">Login</a></li>
+                    <li><a id="login_btn" href="javascript:void(0);"data-toggle="modal" data-target="#login">Login</a></li>
                     <li><a href="javascript:void(0);" class="color-red" data-toggle="modal" data-target="#signup">Sign up</a></li>
                 @endif
                 @if(Auth::check())
-                    <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                    @if(Auth::user()->user_type != 3)
+                        <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                    @else
+                        <li><a href="{{url('/recruiter/dashboard')}}">Dashboard</a></li>
+                    @endif
+
                 @endif
             </ul>
             <div class="sideNavToggle">
@@ -121,10 +126,18 @@
         </a>
         <div class="sidenavLogo">
             @if(Auth::check())
-                @if(isset(Auth::user()->profile_img))
-                    <a href="{{url('/dashboard')}}"><img class="profile-img" src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" ></a>
+                @if(Auth::user()->user_type != 3)
+                    @if(isset(Auth::user()->profile_img))
+                        <a href="{{url('/dashboard')}}"><img class="profile-img" src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" ></a>
+                    @else
+                        <a href="{{url('/dashboard')}}"><img class="profile-img" src="{{url('public/image/noimagefound.png')}}" alt="Weizmann Forex" ></a>
+                    @endif
                 @else
-                    <a href="{{url('/dashboard')}}"><img class="profile-img" src="{{url('public/image/noimagefound.png')}}" alt="Weizmann Forex" ></a>
+                    @if(isset(Auth::user()->profile_img))
+                        <a href="{{url('/recruiter/dashboard')}}"><img class="profile-img" src="{{url('storage/app/public/recruiter_profile/'.Auth::user()->profile_img)}}" alt="Weizmann Forex" ></a>
+                    @else
+                        <a href="{{url('/recruiter/dashboard')}}"><img class="profile-img" src="{{url('public/image/noimagefound.png')}}" alt="Weizmann Forex" ></a>
+                    @endif
                 @endif
             @else
                 <a href="javascript:void(0);"><img class="profile-img" src="{{url('public/image/logo.jpeg')}}"> <!-- Logo <span>Here</span> --></a>

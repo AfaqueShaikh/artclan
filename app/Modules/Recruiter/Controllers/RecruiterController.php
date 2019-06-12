@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\User\Controllers;
+namespace App\Modules\Recruiter\Controllers;
 
 use App\Modules\ArtistContactRequest\Models\ArtistRequest;
 use App\Modules\User\Models\ArtistOfTheDay;
@@ -26,7 +26,7 @@ use App\Modules\ContactUs\Models\EmailTemplate;
 use App\Modules\ContactUs\Models\GlobalValue;
 
 
-class UserController extends Controller
+class RecruiterController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -50,37 +50,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard()
+    public function recruiterDashboard()
     {
-
-         
-         
         $userData = Auth::user();
-        $user_types[1] = "admin"; 
-        $user_types[2] = "sub_admin"; 
-        $user_types[3] = "user"; 
-        $user_types[4] = "writer"; 
-        $user_types[5] = "painter"; 
-        $user_types[6] = "singer"; 
-        $user_types[7] = "dancer"; 
-        $user_types[8] = "costume_designer"; 
-        $user_types[9] = "makeup_artist"; 
-        $user_types[10] = "Photographer"; 
-        $user_types[11] = "Film Maker"; 
-        $user_types[12] = "Actor"; 
-        $user_types[13] = "Fashion Model";
-        
-        
-        
-        $cities = \App\Modules\District\Models\District::all();
+
+        $user_types[3] = "Recruiter";
+        /*$cities = \App\Modules\District\Models\District::all();
         $view_profile = ProfileCounts::where('user_id',Auth::user()->id)->count();
         $userPhysicsData = Auth::user()->userPhysics;
         $userWritingType = Auth::user()->userWritingType;
-        $userGenre = Auth::user()->userGenre;
+        $userGenre = Auth::user()->userGenre;*/
 
         
         
-        return view('User::artist-dashboard',['userData'=>$userData, 'user_types'=>$user_types, 'cities'=>$cities, 'userPhysicsData'=>$userPhysicsData, 'userWritingType' => $userWritingType, 'userGenre' => $userGenre,'view_profile' =>$view_profile]);
+        return view('Recruiter::recruiter-dashboard',['userData'=>$userData, 'user_types'=>$user_types]);
     }
     
     /**
@@ -89,6 +72,21 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function recruiterEditProfile(Request $request)
+    {
+        $edit_information = User::find(Auth::user()->id);
+        $edit_information->name = $request->name;
+        $edit_information->company_name = $request->company_name;
+        $edit_information->city = $request->city;
+        $edit_information->state = $request->state;
+        $edit_information->address = $request->address;
+        $edit_information->save();
+        return redirect(url('/recruiter/dashboard'));
+
+
+    }
+
     public function createVideos(Request $request)
     {
        $obj = new \App\Modules\User\Models\UserVideo();
@@ -139,11 +137,11 @@ class UserController extends Controller
        
        return redirect(url('dashboard'));
     }
-    public function updateProfilePicture(Request $request)
+    public function updateRecruiterProfilePic(Request $request)
     {
-        $extension = $request->file('photo')->getClientOriginalExtension();
+        $extension = $request->file('recruiter_photo')->getClientOriginalExtension();
         $new_file_name = str_replace(".", "-", microtime(true)) . "." . $extension;
-        Storage::put('public/user_profile/' . $new_file_name, file_get_contents($request->file('photo')->getRealPath()));
+        Storage::put('public/recruiter_profile/' . $new_file_name, file_get_contents($request->file('recruiter_photo')->getRealPath()));
         Auth::user()->profile_img = $new_file_name;
 
         /*profile percent code here
@@ -156,7 +154,7 @@ class UserController extends Controller
 
 
        
-       return redirect(url('dashboard'));
+       return redirect(url('/recruiter/dashboard'));
     }
     
     public function updateAboutMe(Request $request)
@@ -406,9 +404,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listUser()
+    public function listRecruiter()
     {
-        return view('User::list');
+        return view('Recruiter::list');
     }
     
      public function listArtistOfTheDay($user_type)
@@ -416,18 +414,11 @@ class UserController extends Controller
         return view('User::list-artist-of-the-day');
     }
 
-    public function data($user_type)
+    public function data()
     {
 
-        if($user_type == 'all')
-        {
-            $users = User::where('user_type','!=','1')->orderBy('id','desc')->get();
-        }
-        else
-        {
-            $users = User::where('user_type',$user_type)->orderBy('id','desc')->get();
-        }
 
+        $users = User::where('user_type','3')->orderBy('id','desc')->get();
         return Datatables::of($users)
             /*->addColumn('status', function($user) {
                 if($user->user_status == 1)
@@ -486,18 +477,18 @@ class UserController extends Controller
     {
         if($request->method()=="GET")
         {
-            return view('User::create');
+            return view('Recruiter::create');
         }
         else
         {
             $validator = Validator::make($request->all(), [
-                'email' => 'required|email|unique:users',
+                'email' => 'required',
                 'name' => 'required',
-                'mobile' => 'required|numeric|min:10|unique:users',
+                'mobile' => 'required',
                 'password' => 'required|min:6|confirmed',
                 'city' => 'required',
-                'state' => 'required',
-                'address' => 'required',
+                'company_name' => 'required',
+
             ]);
             if ($validator->fails()) {
                 return redirect()->back()
@@ -510,14 +501,12 @@ class UserController extends Controller
             $user->mobile = $request->mobile;
             $user->password = bcrypt($request->password);
             $user->city = $request->city;
-            $user->state = $request->state;
-            $user->address = $request->address;
+            $user->company_name = $request->company_name;
             $user->user_status = $request->status;
-            $user->login_as = 'artist';
             $user->user_type = $request->user_type;
-
+            $user->login_as = 'recruiter';
             $user->save();
-            return redirect('admin/user/list/'.$request->user_type)->with('success','User Added Successfully!');
+            return redirect('/admin/recruiter/list')->with('success','Recruiter Added Successfully!');
         }
     }
 
@@ -527,18 +516,18 @@ class UserController extends Controller
         if($request->method()=="GET")
         {
             
-            return view('User::update',['user'=>$user]);
+            return view('Recruiter::update',['user'=>$user]);
         }
         else
         {
             $validator = Validator::make($request->all(), [
-                'email' => 'unique:users',
+                //'email' => 'required',
                 'name' => 'required',
-                'mobile' => 'unique:users',
-                'password' => 'confirmed',
+                //'mobile' => 'required',
+                //'password' => 'confirmed',
                 'city' => 'required',
-                'state' => 'required',
-                'address' => 'required',
+                'company_name' => 'required',
+
             ]);
             if ($validator->fails()) {
                 return redirect()->back()
@@ -560,21 +549,25 @@ class UserController extends Controller
 
             $user->name = $request->name;
             $user->city = $request->city;
-            $user->state = $request->state;
-            $user->address = $request->address;
+            $user->company_name = $request->company_name;
+
             $user->user_status = $request->status;
-            $user->login_as = 'artist';
+            $user->login_as = 'recruiter';
 
             $user->save();
-            return redirect('admin/user/list/'.$request->user_type)->with('success','User Updated Successfully!');
+            return redirect('/admin/recruiter/list')->with('success','Recruiter Updated Successfully!');
         }
     }
 
     public function checkMobileNumber(Request $request)
     {
         $mobile = $request->mobile;
+
+
         if ($mobile) {
-            $user_info = User::where('mobile', $mobile)->where('user_type','!=','3')->first();
+            $user_info = User::where('mobile', $mobile)->where('user_type','3')->where('id','<>',$request->id)->first();
+
+
             if ($user_info) {
                 return "false";
             } else {
@@ -587,11 +580,9 @@ class UserController extends Controller
     {
         
         $delete_user = User::find($id);
-        
-        $user_type = $delete_user->user_type;
         $delete_user->delete();
         
-        return redirect('admin/user/list/'.$user_type)->with('success','User Delete Successfully!');
+        return redirect('/admin/recruiter/list')->with('success','Recruiter Delete Successfully!');
     }
 
     public function changeStatus($id)
@@ -599,38 +590,30 @@ class UserController extends Controller
 
         $check_status = User::find($id);
         $user_type = $check_status->user_type;
-        if($check_status->user_status == '1')
-        {
-            $check_status->user_status = '2';
-            $check_status->save();
-            return redirect('admin/user/list/'.$user_type)->with('success','Status Changed Successfully!');
-        }
-        else
+        if($check_status->user_status == '0')
         {
             $check_status->user_status = '1';
             $check_status->save();
-            return redirect('admin/user/list/'.$user_type)->with('success','Status Changed Successfully!');
+            return redirect('/admin/recruiter/list')->with('success','Status Changed Successfully!');
+        }
+        else
+        {
+            $check_status->user_status = '0';
+            $check_status->save();
+            return redirect('/admin/recruiter/list')->with('success','Status Changed Successfully!');
         }
 
 
 
     }
 
-    public function loginByAdmin($id)
+    public function recruiterLoginByAdmin($id)
     {
         $id = base64_decode($id);
         Auth::logout();
         Auth::loginUsingId($id);
-        return redirect('/home');
+        return redirect('/recruiter/dashboard');
 
-    }
-
-    public function recruiterLoginByArtist($id)
-    {
-        $id = base64_decode($id);
-        Auth::logout();
-        Auth::loginUsingId($id);
-        return redirect('/home');
     }
 
     public function contactAdmin(Request $request)

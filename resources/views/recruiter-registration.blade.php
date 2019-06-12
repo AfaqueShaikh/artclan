@@ -137,8 +137,8 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group input-group {{ $errors->has('mobile') ? ' has-error' : '' }}">
-                            <span class="input-group-addon" id="basic-addon1">+91</span>
+                        <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+                            {{--<label class="name-label">Mobile Number</label>--}}
                             <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile No" aria-describedby="basic-addon1">
                             @if ($errors->has('mobile'))
                                 <span class="help-block">
@@ -147,7 +147,14 @@
                             @endif
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <button type="submit" id="recruiter_verify_number" class="btn btn-danger"><i id="recruiter_verify_btn_spin" style="font-size:17px"></i>Verify Number</button>
+                            <a href="javascript:void(0);" id="change_recruiter_mobile_number" style="display: none" name="change_recruiter_mobile_number" class="btn btn-danger">Change Mobile Number</a>
+                        </div>
+                    </div>
                 </div>
+            </form>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group text-center">
@@ -157,7 +164,30 @@
                         </div>
                     </div>
                 </div>
-            </form>
+
+        </div>
+    </div>
+
+    <div class="modal" id="enter_otp_model" tabindex="-1" role="" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-md signUpPopUp" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h3 id="success_otp_heading"> </h3>
+                    <br>
+                    <form id="recruiter_otp_verify_form">
+                        <input type="hidden" class="form-control" name="mobile_number" id="mobile_number" readonly>
+                        <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP">
+                    </form>
+                    <br>
+                    <button id="btn_verify_otp" onclick="verifyRecruiterOtp();" class="btn btn-danger">Verify OTP</button>
+
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -176,6 +206,9 @@
     var registerData = {};
     var javascript_site_path = '{{url('/')}}';
     $(function () {
+
+        $('#submit_btn').attr('disabled',true);
+
         var filterList = {
             init: function () {
                 // MixItUp plugin
@@ -264,9 +297,137 @@
             city:{
                 required:'Please Enter City',
             }
+        },
+        submitHandler:function (form) {
+
+            $('#mobile').attr('readonly',true);
+            $('#recruiter_verify_number').attr('disabled',true);
+            $('#recruiter_verify_btn_spin').addClass('fa fa-spinner fa-spin');
+            var number = $('#mobile').val();
+            $.ajax({
+                url: '{{url("/verify/number")}}',
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    number: number,
+                },
+                success: function (result) {
+                    console.log(result.number);
+                    if(result.message == 'success')
+                    {
+                        $('#recruiter_verify_btn_spin').removeClass('fa fa-spinner fa-spin');
+                        $('#success_otp_heading').text('We have sent an OTP on your mobile number please enter OTP to proceed Thank you!!!');
+                        /*$('#otp_display').text(result.generated_otp);*/
+                        $('#mobile_number').val(result.number);
+                        $('#enter_otp_model').modal("show");
+                    }
+                    else
+                    {
+                        Swal.fire({
+                            type: 'warning',
+                            title: "Something went wrong",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+
+                    /*Swal.fire({
+                        title: 'Enter OTP To Verify Number',
+                        input: 'text',
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'Verify OTP',
+                        showLoaderOnConfirm: true,
+                    }).then(function() {
+                        alert();
+                    })*/
+                }
+            });
+
         }
 
     });
+
+    $('#recruiter_otp_verify_form').validate({
+        errorClass: 'text-danger',
+        rules:{
+            otp:{
+                required:true,
+                number:true,
+            }
+        },
+        messages:{
+            otp:{
+                required:'Enter OTP',
+                number:'Invalid OTP Format'
+            }
+        }
+
+    });
+
+    function verifyRecruiterOtp()
+    {
+        if($('#recruiter_otp_verify_form').valid())
+        {
+            $.ajax({
+                url: '{{url("/verify/otp")}}',
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    mobile_number: $('#mobile_number').val(),
+                    otp: $('#otp').val(),
+                },
+                success: function (result) {
+                    console.log(result);
+                    if(result.icon == 'success')
+                    {
+                        $('#mobile').attr('readonly',true);
+                        $('#recruiter_verify_number').attr('disabled',true);
+                        $('#recruiter_verify_number').text('Verified');
+                        $('#otp_display').text('');
+                        $('#mobile_number').val('');
+                        $('#otp').val('');
+                        $('#enter_otp_model').modal("hide");
+                        $('#submit_btn').attr('disabled',false);
+                        $('#change_recruiter_mobile_number').show();
+
+                    }
+                    else
+                    {
+                        $('#mobile').attr('readonly',false);
+                        $('#recruiter_verify_number').attr('disabled',false);
+                        $('#mobile').val('');
+                        $('#otp_display').text('');
+                        $('#mobile_number').val('');
+                        $('#otp').val('');
+                        $('#enter_otp_model').modal("hide");
+                    }
+                    Swal.fire({
+                        type: result.icon,
+                        title: result.message,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+
+
+
+                }
+            });
+        }
+    }
+
+    $('#change_recruiter_mobile_number').click(function () {
+        $('#mobile').attr('readonly',false);
+        $('#recruiter_verify_number').attr('disabled',false);
+        $('#mobile').val('');
+        $('#otp_display').text('');
+        $('#mobile_number').val('');
+        $('#otp').val('');
+        $('#submit_btn').attr('disabled',true);
+        $('#recruiter_verify_number').text('Send OTP');
+    })
 
     $('#submit_btn').click(function () {
         if($('#recruiter_registration_form').valid())

@@ -18,8 +18,26 @@
         </div>
     </section>
 
+	@if(Session::has('error'))
+		@if ($message = Session::get('error'))
+			<div style="display: none" id="accout_not_verified_error" class="alert alert-danger alert-block">
+				<strong>{{ $message }}</strong>
+			</div>
+		@endif
+	@endif
+
+	@if(Session::has('errors'))
+		@if ($message = Session::get('errors'))
+			<div style="display: none" id="invalid_crediantial_error" class="alert alert-danger alert-block">
+				<strong>{{ $message }}</strong>
+			</div>
+		@endif
+	@endif
+
 
     <!---------Platinum artist-------->
+
+	
     
 <section class="platinumArtist">
 <!--			<div class="home-heading">
@@ -213,10 +231,14 @@
 
 
 				</div>
-				<div class="artTestRight bgImageSec"  style="background-image:url('img/featureBg.jpg');">
-					@foreach($advertisements as $advertisement)
-						<a class="addText" target="_blank" href="{{$advertisement->ads_url}}"><img height="250px" width="250px" src="{{url('storage/app/public/ads_images/'.$advertisement->image)}}"></a>
-					@endforeach
+				<div class="artTestRight bgImageSec">
+					<div id="AdvertisingBlock" class="owl-carousel">
+						@foreach($advertisements as $advertisement)
+							<div class="item">
+								<a target="_blank" href="{{$advertisement->ads_url}}"><img height="250px" width="250px" src="{{url('storage/app/public/ads_images/'.$advertisement->image)}}"></a>
+							</div>
+								@endforeach
+					</div>
 				</div>
 
 			</div>
@@ -298,6 +320,7 @@
 										</a>
 									@endif
 									<p class="artDetailsCat">
+
 										{{$user_types[$artist_of_the_day->user->user_type]}}
 									</p>
 								</div>
@@ -344,9 +367,15 @@
 @section('jcontent')
     <script>
         $(function () {
-
-
-        })
+			if($('#accout_not_verified_error').length)
+            {
+                $('#login_btn').click();
+            }
+            if($('#invalid_crediantial_error').length)
+			{
+                $('#login_btn').click();
+			}
+		});
         $('#login_form').validate({
 
             errorClass:'text-danger',

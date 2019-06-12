@@ -13,17 +13,10 @@
                     </div>
                 @endif
             @endif
-                @if(Auth::user()->user_status == 1)
-
-                        <div class="alert alert-danger alert-block">
-                            {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
-                            <strong>Please Complete Your Payment To Go LIVE...</strong>
-                        </div>
-                @endif
             <div class="dashPrifilerInfo clearfix">
                 <div class="profilerImage relative">
                     @if(isset(Auth::user()->profile_img))
-                        <img src="{{url('storage/app/public/user_profile/'.Auth::user()->profile_img)}}" height="570">
+                        <img src="{{url('storage/app/public/recruiter_profile/'.Auth::user()->profile_img)}}" height="570">
                     @else
                         <img src="{{url('public/image/noimagefound.png')}}" height="570">
                     @endif
@@ -37,38 +30,42 @@
 
                 <div class="profilerInformation">
                     <div class="profilerName">
-                        <h3>{{$userData->name}}</h3>
-                        <p>{{$user_types[$userData->user_type]}} / {{$userData->city}}</p>
+
+                            <span><h3>{{$userData->company_name}}</h3></span>
+                            <span>{{$user_types[$userData->user_type]}}</span>
+                            <span class="pull-right"><a  data-toggle="modal" data-target="#editRecruiterProfile" class="btn btn-default"><i
+                                            class="fa fa-plus"></i> Edit</a></span>
                     </div>
+
                     <ul class="profilerViews">
-                        <li>
+                        {{--<li>
                             Profile Viewed
                             <span class="viewCount"><i class="fa fa-eye"></i> {{$view_profile}}</span>
-                        </li>
+                        </li>--}}
                         {{--<li data-toggle="modal" data-target="#shareLink">
                             Share Portfolio
                             <span class="viewCount"><i class="fa fa-share-alt"></i></span>
                         </li>--}}
-                        <li data-toggle="modal" data-target="">
+                       {{-- <li data-toggle="modal" data-target="">
                             <a href="javascript:void(0);"data-toggle="modal" data-target="#contact_artist_model" class="btn btn-danger">Enquiry</a>
                             @if($userData->applied_for_recruiter_account == 'No')
                                 <a href="{{url('/request/for/recruiter-account')}}" class="btn btn-info">Request For Recruiter Account</a>
                             @elseif($userData->applied_for_recruiter_account == 'Applied/Pending')
                                 <a href="javascript:void(0);" class="btn btn-info">Request Pending</a>
                             @elseif($userData->applied_for_recruiter_account == 'Applied/Approved')
-                                <a href="{{url('/recruiter/login-by/artist/'.base64_encode(Auth::user()->artist_recruiter_account_id))}}" class="btn btn-success">Go To Recruiter Dashboard</a>
+                                <a href="javascript:void(0);" class="btn btn-success">Go To Recruiter Dashboard</a>
                             @elseif($userData->applied_for_recruiter_account == 'Applied/Rejected')
                                 <a href="javascript:void(0);" class="btn btn-danger">Request Rejected</a>
                             @endif
 
-                        </li>
+                        </li>--}}
 
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-    <section class="personLifeSchedule">
+    {{--<section class="personLifeSchedule">
         <div class="container">
             <div class="searchByTag">
                 <p class="tagHead">Tags</p>
@@ -450,12 +447,88 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--}}
 @endsection
 
 
 @section('modal_section')
-    <div class="modal" id="shareLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal" id="editRecruiterProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-md signUpPopUp" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="recruiter_profile_form" action='{{url('recruiter/edit/profile')}}' method="post">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name='name' id="name" class="form-control" required=""
+                                   placeholder="Enter Name" value="{{isset(Auth::user()->name)?Auth::user()->name:""}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" name='company_name' id="company_name" required="" class="form-control"
+                                   placeholder="Enter Company Name" value="{{isset(Auth::user()->company_name)?Auth::user()->company_name:""}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" name='address' id="address" required="" class="form-control"
+                                   placeholder="Enter Address" value="{{isset(Auth::user()->address)?Auth::user()->address:""}}">
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" name='city' id="city" required="" class="form-control"
+                                   placeholder="Enter City" value="{{isset(Auth::user()->city)?Auth::user()->city:""}}">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" name='state' id="state" required="" class="form-control"
+                                   placeholder="Enter State" value="{{isset(Auth::user()->state)?Auth::user()->state:""}}">
+                        </div>
+                        <div class="form-group text-center">
+                            <button class="btn custom-btn" type="submit">
+                                <span>Submit</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="uploadProfilePicture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-md signUpPopUp" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 0px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">
+					<img src="{{url('public/image/close.png')}}"/></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="recruiter_profile_pic" action='{{url('recruiter/profile-picture/update')}}' enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                            <label>Add Profile Picture</label>
+
+                        </div>
+                        <div class="form-group text-center">
+
+                            <input type="file" name="recruiter_photo" id="recruiter_photo" >
+
+                            <button class="btn custom-btn" type="submit">
+                                <span>Submit</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--<div class="modal" id="shareLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-md signUpPopUp" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom: 0px;">
@@ -561,34 +634,7 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="uploadProfilePicture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-md signUpPopUp" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="border-bottom: 0px;">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">
-					<img src="{{url('public/image/close.png')}}"/></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action='{{url('user/profile-picture/update')}}' enctype="multipart/form-data" method="post">
-                        <div class="form-group">
-                            <label>Add Profile Picture</label>
 
-                        </div>
-                        <div class="form-group text-center">
-
-                            <input type="file" name="photo" required="">
-
-                            <button class="btn custom-btn" type="submit">
-                                <span>Submit</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <!---------document video-------->
     <div class="modal" id="uploadDocument" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-md signUpPopUp" role="document">
@@ -845,7 +891,7 @@
 
                                 <div class="form-group">
                                     <label>Height</label><span style="color: red"> (In cm)</span>
-                                    {{--<input name="height"   value="{{isset($userPhysicsData->height)?$userPhysicsData->height:""}}" class="form-control" >--}}
+                                    --}}{{--<input name="height"   value="{{isset($userPhysicsData->height)?$userPhysicsData->height:""}}" class="form-control" >--}}{{--
                                     <select class="form-control" id="height" name="height">
                                         <option value="">-- Select Height --</option>
                                         <option value="152.40 Cm" @if(isset($userPhysicsData->height)) @if($userPhysicsData->height == '152.40 Cm') selected  @endif @endif>152.40 Cm</option>
@@ -902,8 +948,8 @@
                                 @endif
                                 <div class="form-group">
                                     <label>Hair Type </label>
-                                    {{--<input name="hair_type" class="form-control"
-                                           value="{{isset($userPhysicsData->hair_type)?$userPhysicsData->hair_type:""}}">--}}
+                                    --}}{{--<input name="hair_type" class="form-control"
+                                           value="{{isset($userPhysicsData->hair_type)?$userPhysicsData->hair_type:""}}">--}}{{--
                                     <select class="form-control" id="hair_type" name="hair_type">
                                         <option value="">-- Select Hair Type --</option>
                                         <option value="Straight" @if(isset($userPhysicsData->hair_type)) @if($userPhysicsData->hair_type == 'Straight') selected  @endif @endif>Straight</option>
@@ -914,8 +960,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Hair Length </label>
-                                    {{--<input name="hair_length" class="form-control"
-                                           value="{{isset($userPhysicsData->hair_length)?$userPhysicsData->hair_length:""}}">--}}
+                                    --}}{{--<input name="hair_length" class="form-control"
+                                           value="{{isset($userPhysicsData->hair_length)?$userPhysicsData->hair_length:""}}">--}}{{--
                                     <select class="form-control" id="hair_length" name="hair_length">
                                         <option value="">-- Select Hair Lenght --</option>
                                         <option value="Long" @if(isset($userPhysicsData->hair_length)) @if($userPhysicsData->hair_length == 'Long') selected  @endif @endif>Long</option>
@@ -928,8 +974,8 @@
 
                                 <div class="form-group">
                                     <label>Complexion </label>
-                                    {{--<input name="complexion" class="form-control"
-                                           value="{{isset($userPhysicsData->complexion)?$userPhysicsData->complexion:""}}">--}}
+                                    --}}{{--<input name="complexion" class="form-control"
+                                           value="{{isset($userPhysicsData->complexion)?$userPhysicsData->complexion:""}}">--}}{{--
                                     <select class="form-control" id="complexion" name="complexion">
                                         <option value="">-- Select Complexion --</option>
                                         <option value="Fair" @if(isset($userPhysicsData->complexion)) @if($userPhysicsData->complexion == 'Fair') selected  @endif @endif>Fair</option>
@@ -1162,7 +1208,7 @@
                             <input type="text" id="artist_mobile_no" name="artist_mobile_no" value="{{Auth::user()->mobile}}" class="form-control" placeholder="Phone number" readonly>
                         </div>
                         <div class="form-group">
-                            {{--<input type="text" class="form-control" placeholder="Full Name">--}}
+                            --}}{{--<input type="text" class="form-control" placeholder="Full Name">--}}{{--
                             <textarea id="artist_requirement" name="artist_requirement" class="form-control" placeholder="Post Your Requirement"></textarea>
                         </div>
                         <div>
@@ -1172,7 +1218,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
 @endsection
 @section('jcontent')
     <script>
@@ -1180,50 +1226,46 @@
 
             /*js code to show profile complete circle with count*/
             /*$('.circlechart').circlechart();*/
-            $('#physical_attribute_form').validate({
+            $('#recruiter_profile_form').validate({
                 errorClass: 'text-danger',
                 rules: {
-                    height: {
+                    name: {
                         required: true,
 
                     },
-                    weight: {
-                        digits: true,
+                    company_name: {
+                        required: true,
                     },
-                    waist: {
-                        digits: true,
+                    city: {
+                        required: true,
                     },
-                    hips: {
-                        digits: true,
+                    state: {
+                        required: true,
                     },
-                    chest: {
-                        digits: true,
+                    address: {
+                        required: true,
                     },
-                    biceps: {
-                        digits: true,
-                    },
+
 
                 },
                 messages: {
-                    height: {
-                        required: "Enter Height",
+                    name: {
+                        required: "Enter Name",
 
                     },
-                    weight: {
-                        digits: 'Value Should Be Numeric',
+                    company_name: {
+                        required: 'Enter Company Name',
                     },
-                    waist: {
-                        digits: 'Value Should Be Numeric',
+                    city: {
+                        required: 'Enter City',
                     },
-                    hips: {
-                        digits: 'Value Should Be Numeric',
+                    state: {
+                        required: 'Enter State',
                     },
-                    chest: {
-                        digits: 'Value Should Be Numeric',
+                    address: {
+                        required: 'Enter Address',
                     },
-                    biceps: {
-                        digits: 'Value Should Be Numeric',
-                    },
+
 
                 },
                 submitHandler: function (form) {
@@ -1231,18 +1273,18 @@
                 }
             });
 
-            $('#contact_admin_form').validate({
+            $('#recruiter_profile_pic').validate({
                 errorClass: 'text-danger',
                 rules: {
-                    artist_requirement: {
+                    recruiter_photo: {
                         required: true,
                     },
 
                 },
                 messages: {
 
-                    artist_requirement: {
-                        required: 'Please Enter Your Requirement',
+                    recruiter_photo: {
+                        required: 'Please Select Image',
                     },
 
                 },

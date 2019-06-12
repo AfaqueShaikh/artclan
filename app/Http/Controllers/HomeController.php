@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Helper\sendMessageHelper;
 use App\Modules\Ads\Models\Ads;
 use App\Modules\BannerImage\Models\BannerImage;
@@ -39,14 +40,34 @@ class HomeController extends Controller
         //dd("here");
 
 
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1)
+        {
             return redirect('admin/dashboard');
-        } else {
-            if (Auth::user()->user_type != 3 && !Auth::user()->user_type != 1) {
-
-
+        }
+        else
+        {
+            if (Auth::user()->user_type != 3 && Auth::user()->user_type != 1)
+            {
                 return redirect('/dashboard');
-            } else {
+            }
+            elseif (Auth::user()->user_type == 3)
+            {
+                if(Auth::user()->user_status == '0')
+                {
+                    Auth::logout();
+                    return redirect('/')->with('error', 'Your account is not activated yet. Please contact admin');
+
+                }
+                else
+                {
+                    return redirect('/recruiter/dashboard');
+                }
+
+
+            }
+            else
+            {
+
                 return redirect('/')->with('error', 'Something went wrong');
             }
         }
@@ -55,7 +76,8 @@ class HomeController extends Controller
 
     public function showArtistRegistrationForm($type = null)
     {
-        return view('artist-registration', ['type' => $type]);
+        //$categories = Category::all();
+        return view('artist-registration', ['type' => $type ]);
     }
 
     public function showRecruiterRegistrationForm()
@@ -63,8 +85,32 @@ class HomeController extends Controller
         return view('recruiter-registration');
     }
 
+    public function dem()
+    {
+        return view('demo-loder');
+       /* $get_higgest_user_type = Category::max('category_type');
+        $create_new_user_type = $get_higgest_user_type + 1 ;
+        dd($create_new_user_type);*/
+    }
+
     public function registerArtist(Request $request)
     {
+        /*$user_type = '';
+        if($request->category == 'Other')
+        {
+            $get_higgest_user_type = Category::max('category_type');
+            $create_new_user_type = $get_higgest_user_type + 1 ;
+            $create_new_category = new Category();
+            $create_new_category->category_name = $request->new_category;
+            $create_new_category->category_type = $create_new_user_type;
+            $create_new_category->save();
+            $user_type = $create_new_user_type;
+
+        }
+        else
+        {
+            $user_type = $request->category;
+        }*/
        $create = User::create([
             'date_of_birth' => $request->date_of_birth,
             'language' => $request->language,
@@ -72,6 +118,8 @@ class HomeController extends Controller
             'email' => $request->email,
             'user_type' => $request->category,
             'user_status' => '1',
+            /*'profile_completed' => 10,*/
+           'login_as' => 'artist',
             'name' => $request->name,
             'gender' => $request->gender,
             'password' => bcrypt($request->password),
@@ -120,7 +168,7 @@ class HomeController extends Controller
 
     public function registerRecruiter(Request $request)
     {
-        return User::create([
+        $create_recruiter =  User::create([
             'represent' => $request->represent,
             'looking_for' => $request->i_am_looking,
             'company_name' => $request->company_name,
@@ -128,11 +176,47 @@ class HomeController extends Controller
             'mobile' => $request->mobile,
             'email' => $request->email,
             'user_type' => '3',
-            'user_status' => '1',
+            'user_status' => '0',
+            'login_as' => 'recruiter',
             'name' => $request->name,
             'password' => bcrypt($request->password),
         ]);
-        return json_encode('Success');
+        if(isset($create_recruiter))
+        {
+            //$send_message = sendMessageHelper::sendMessage($request->mobile);
+            $message = 'Registraton Successfull Thank you...';
+            $numbers = $request->mobile;
+            $senderId="DEMOOS";
+            $routeId="1";
+            $authKey = "b8729fc9c2f434ea5ffb8252a7868c";
+            $getData = 'mobileNos='.$numbers.'&message='.urlencode($message).'&senderId='.$senderId.'&routeId='.$routeId;
+            $serverUrl="msg.msgclub.net";
+            $url="http://".$serverUrl."/rest/services/sendSMS/sendGroupSms?AUTH_KEY=".$authKey."&".$getData;
+            // init the resource
+            $ch = curl_init();
+            curl_setopt_array($ch, array(
+
+                CURLOPT_URL => $url,
+
+                CURLOPT_RETURNTRANSFER => true,
+
+                CURLOPT_SSL_VERIFYHOST => 0,
+
+                CURLOPT_SSL_VERIFYPEER => 0
+
+            ));
+            $output = curl_exec($ch);
+            //Print error if any
+            if(curl_errno($ch))
+            {
+
+                $error =  curl_error($ch);
+                return json_encode(['id' => $create_recruiter->id , 'message' => 'success']);
+            }
+            curl_close($ch);
+            return json_encode(['id' => $create_recruiter->id , 'message' => 'success']);
+        }
+
 
     }
 
@@ -217,11 +301,14 @@ class HomeController extends Controller
         $user_types[11] = "Film Maker";
         $user_types[12] = "Actor";
         $user_types[13] = "Fashion Model";
+
+
         $banner_images = BannerImage::all();
         $advertisements = Ads::all();
         $featured_partners = FeaturedPatner::all();
         $testimonials = Testimonial::all();
         $artists_of_the_day = ArtistOfTheDay::all();
+
         return view('welcome', compact('banner_images', 'advertisements', 'featured_partners', 'testimonials','artists_of_the_day','user_types'));
     }
 
