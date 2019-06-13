@@ -37,6 +37,7 @@
                         <th>{{__('user.Email')}}</th>
                         <th>{{__('user.Mobile')}}</th>
                         <th>{{__('user.Status')}}</th>
+                            <th>Payment Status</th>
                             <th>Login</th>
                         <th>{{__('user.Update')}}</th>
                         <th>{{__('user.Delete')}}</th>
@@ -81,6 +82,25 @@ $(document).ready(function () {
                 className: "dt-body-center",
                 orderable: false,
             },
+
+            {data: "payment_status",
+                render: function (data, type, row) {
+                    if (type === 'display') {
+                        if(row.payment_status == 'Un Paid')
+                        {
+                            return '<a href="javascript:void(0);" type="button" class="btn btn-danger btn-xs"> Un Paid</a>';
+                        }
+                        else
+                        {
+                            return '<a href="javascript:void(0);" type="button" class="btn btn-success btn-xs"> Paid</a>';
+                        }
+                    }
+                    return data;
+                },
+                className: "dt-body-center",
+                orderable: false,
+            },
+
             {data: "login",
                 render: function (data, type, row) {
                     if (type === 'display') {

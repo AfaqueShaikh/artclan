@@ -69,8 +69,8 @@ Route::get('execute/command','HomeController@executeCommand');
 
 //Paytm Route
 
-Route::get("/paytm/test","HomeController@testPaytm");
-Route::get("/paytm/pay","HomeController@payPaytm");
+//Route::get("/paytm/test","HomeController@testPaytm");
+Route::post("/paytm/pay","HomeController@payPaytm");
 Route::post('/come-back','HomeController@comeBack');
 
 Route::get('/demo','HomeController@dem');

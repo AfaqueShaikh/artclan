@@ -8,8 +8,10 @@ use App\Modules\Ads\Models\Ads;
 use App\Modules\BannerImage\Models\BannerImage;
 use App\Modules\District\Models\District;
 use App\Modules\FeaturedPatner\Models\FeaturedPatner;
+use App\Modules\PaymentDetail\Models\PaymentDetail;
 use App\Modules\Testimonial\Models\Testimonial;
 use App\Modules\User\Models\ArtistOfTheDay;
+
 use App\ProfileCounts;
 use App\User;
 use App\VerifyNumber;
@@ -530,7 +532,37 @@ class HomeController extends Controller
 
     public function comeBack(Request $request)
     {
-        dd($request->all());
+        $payment_response = new PaymentDetail();
+        $payment_response->user_id = Auth::user()->id;
+        $payment_response->payment_id = $request["ORDERID"];
+        $payment_response->merchant_mid = $request["MID" ];
+        $payment_response->txn_id = $request["TXNID"];
+        $payment_response->txn_amount = $request["TXNAMOUNT"];
+        $payment_response->payment_mode = $request["PAYMENTMODE"];
+        $payment_response->currency = $request["CURRENCY"];
+        $payment_response->txn_date = $request["TXNDATE"];
+        $payment_response->status = $request["STATUS"];
+        $payment_response->response_code = $request["RESPCODE"];
+        $payment_response->response_message = $request["RESPMSG"];
+        $payment_response->gateway_name = $request["GATEWAYNAME"];
+        $payment_response->bank_txn_id = $request["BANKTXNID"];
+        $payment_response->bank_name = $request["BANKNAME"];
+        $payment_response->check_sum_hash = $request["CHECKSUMHASH"];
+        $payment_response->save();
+        if($request["STATUS"] == 'TXN_SUCCESS')
+        {
+            $change_user_payment_status = User::where('id',Auth::user()->id)->first();
+            if(isset($change_user_payment_status))
+            {
+                $change_user_payment_status->payment_status = 'Paid';
+                if($change_user_payment_status->save())
+                {
+                   return redirect('/dashboard');
+                }
+
+            }
+        }
+
     }
 
     public function executeCommand()

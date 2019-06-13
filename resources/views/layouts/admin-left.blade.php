@@ -112,6 +112,12 @@ switch ($segment_value)
                             <a href="{{url('/admin/recruiter/list')}}"><i class="fa fa-envelope"></i> Manage Recruiter </a>
                         </li>
                     @endif
+
+                    @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view.users'))
+                        <li>
+                            <a href="{{url('/admin/payment/list')}}"><i class="fa fa-envelope"></i> View Payment </a>
+                        </li>
+                    @endif
                     
                     <li class="@if($segment_parameter == 'users') active @endif"><a><i class="fa fa-users"></i> Manage Users <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="@if($segment_parameter == 'users')display: block;@endif">

@@ -14,11 +14,27 @@
                 @endif
             @endif
                 @if(Auth::user()->user_status == 1)
-
+                    @if(Auth::user()->payment_status == 'Un Paid')
                         <div class="alert alert-danger alert-block">
                             {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
-                            <strong>Please Complete Your Payment To Go LIVE...</strong>
+                            <span><strong>Please Complete Your Payment To Go LIVE !!! </strong> </span>  <form method="post" action="{{url('/paytm/pay')}}"><input type="submit" class="btn btn-success btn-xs" value="Click Here To Make Payment"></form>
                         </div>
+                    @endif
+
+                    @if(Auth::user()->payment_status == 'Paid')
+                            <div class="alert alert-success alert-block">
+                                {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
+                                <span><strong>Payment Done Successfully , Your Profile Will Be Live Once Verified By Admin !!! </strong> </span>
+                            </div>
+                        @endif
+                @endif
+                @if(Auth::user()->user_status == 2)
+                    @if(Auth::user()->payment_status == 'Paid')
+                        <div class="alert alert-success alert-block">
+                            {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
+                            <span><strong>Your Profile Is Live Now !!! </strong> </span>
+                        </div>
+                    @endif
                 @endif
             <div class="dashPrifilerInfo clearfix">
                 <div class="profilerImage relative">
